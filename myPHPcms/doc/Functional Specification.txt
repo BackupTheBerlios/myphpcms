@@ -50,10 +50,9 @@ offers:
 	* Template module
 	* Access logging module
 	* User sign-up and authentication module
-	* News publication module
 	* Installation scripts
 	* Site admininstration module
-	* Core Content Management System functions
+	* Core Content Management System functions (news, stories, reviews)
 
 Additional modules will allow the expansion of the sites capabilities to
 include (but not be limited to):
@@ -61,7 +60,6 @@ include (but not be limited to):
 	* User comments on stories, articles, reviews etc
 	* User forums
 	* Links management module
-	* Reviews module
 	* User Polls module
 	* Download manager module
 	* Site search module
@@ -172,19 +170,24 @@ also required.
 * once completed, user will be given advice on securing their site
   installation  
   
-7.4	Core CMS module
+7.4	CMS module
 
 * Registered site users can opt-in as writers
 * Story commissions can be listed to writers only
-* Commissioned stories can marked as taken
-* Writers can work on story on-line using web-form.  Images can be
+* Commissioned stories can be marked as taken
+* News, features etc contributed directly (not comissioned)
+* Category type selected by author when submitting
+* Authors can work on story on-line using web-form.  Images can be
   uploaded and are kept with the story.
-* Editor can review stories once writer has released it
+* Editor can review stories once author has released it for review.
+* Editor can re-assign sumission to different area ie news->feature
+* Reviewers notified via email
 * Editor can preview story as it would appear when published
 * Writer profiles available to editor
 * If a story needs further work, writer should be notified via email
 * If approved by editor story can be scheduled for publication
 * On final sign-off editor decides key-words for search function
+* Revision history of document available at all times
 * Editor can also identify similar stories
 * Multiple stories can be queued for publication 
 * Multiple editors can be defined: editor, deputy editor and section
@@ -215,7 +218,8 @@ also required.
 * Users can view th threads of conversations in the forum
 * Users can view the relationship between articles
 * Administrators can delete posts and threads (if required)
-* Administrators can create topica areas
+* Administrators can move posts to different forums
+* Administrators can create topic areas
 * Users are notified by email when replies to there posts are posted
 * Users can upload small images of themselves to accompany their posts
 * Administrators must approve these images before they can be used
@@ -254,25 +258,7 @@ also required.
   popular, top referers, top exit pages, top search queries etc
 * System can handle multiple sites
 
-7.9	News publication module
-
-* must allow posting of news by registered users
-* email notification to editors that story waiting
-* once approved story is posted
-* publication date can be set to automate posting
-* links to comments section to allow comments to be posted by users
-* only safe HTML is allowed - unsafe HTML will be removed
-* System can handle multiple sites
-
-<NOT COMPLETE>
-
-7.10	Reviews publication module
-
-* as for the news system
-
-<NOT COMPLETE>
-
-7.11	Templating module
+7.9	Templating module
 
 * templates can be edited, deleted or modified from web-browser
 * browser allows previewing of templates
@@ -280,10 +266,12 @@ also required.
   without hitting the database
 * age of templates can be set
 * template system can cope with templates for multiple sites
+* templates can be created in HTML like language.  Common HTML creation
+  tools could be used
 
 <NOT COMPLETE>
 
-7.12	User registration and authentication module
+7.10	User registration and authentication module
 
 * Users should be able to register a username and password
 * Restrictions on username and password should be enforced
@@ -299,8 +287,9 @@ also required.
 * Users should be able to reset or apply for new passwords if they
   forget their current one.
 * System can handle multiple sites
+* Users fall into 1 of 3 categories: visitor, contributor, editor
 
-7.13	Polls module
+7.11	Polls module
 
 * Administrator can enter questions and maximum of 5 possible answers.
 * Administrator can set when poll will be active and when it will close
@@ -310,7 +299,7 @@ also required.
 * Users can view results of previous polls
 * System can handle multiple sites
 
-7.14	Page caching module
+7.12	Page caching module
 
 * Caching should be selectable on a page by page basis.  The age of the
   cached version should be selectable too.
@@ -329,7 +318,7 @@ also required.
 * Caching system should be able to handle multiple sites
 * Individual sites are cached into different directories
   
-7.15	Download manager module
+7.13	Download manager module
 
 * manages and allows downloads by registered users only
 * keep track of who requested what and when
@@ -338,7 +327,7 @@ also required.
 
 <NOT COMPLETE>
 
-7.16	Site search module
+7.14	Site search module
 
 * allows searching of site by keywords
 * keyword database created on article/story/review/feature basis by
@@ -347,7 +336,7 @@ also required.
 
 <NOT COMPLETE>
 
-7.17	Events module
+7.15	Events module
 
 * Registered users can post events into the calender
 * Events can be stored under pre-set categories
@@ -360,7 +349,7 @@ also required.
 * Users can search based on categories or time period
 * System can handle multiple sites
 
-7.18	Mailing list manager module
+7.16	Mailing list manager module
 
 * Administrators should be able to set up and modify announcement only
   mailing lists
@@ -382,16 +371,20 @@ also required.
   and administrators
 * System can handle multiple sites
 
-7.19	Banner advert manager module
+7.17	Banner advert manager module
 
-* system to allow scheduling of banner adds
-* tracks impressions and click-throughs
-* automatically emails client with their statistics
-* clients can buy and number of impressions.  When close to running out
-  send email reminder
-* System can handle multiple sites
-
-<NOT COMPLETE>
+* manage multiple clients
+* each client should have their own login
+* manage multiple banners per client
+* banners cane be of any size
+* view daily, overall and summary statistics
+* send statistics to clients via email
+* use HTML, GIF, JPEG and PNG-banners
+* show random, pre-defined or HTML/image banners
+* activiate and de-activiate individual banners
+* system can handle multiple sites
+* as clients approach number of purchased impressions they are sent
+  email reminder to renew
 
 8.0	PERFORMANCE
 
