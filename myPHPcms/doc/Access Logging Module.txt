@@ -95,7 +95,7 @@ retrieval of a specific viewers path from entry to exit.
 The system should be capable of recording any external links that users
 select that take them out of the site.
 
-3.1.8 Reporting options
+3.1.8	Reporting options
 
 The system should be capable of providing accurate information in an 
 easy to use but flexible way.  Data should be viewable over different
@@ -112,113 +112,234 @@ This section describes how the requirements detailed above will be met.
 
 3.2.1	General consideration
 
-Re-write explaing how these objectives are acheived.
+The Access Logging system consists of a number of scripts that collect
+the data from the users web-browser.  These can used directly on pages
+that are dynamically generated as the scripts can be include'd into the
+script source code.  For static pages a GIF image file points to an
+'image' file on a server that can execute PHP.  This image file is
+actually a PHP script which logs the same data as the dedicated scripts
+and then returns the real GIF image that the browser expects to see.
 
-* Must be able to detect all common browsers
-* Must be able to detect search engine spiders
-* Should be usable from PHP and HTML pages (to allow caching)
-* Should email unknown user agent strings to site admin
-* System can handle multiple channels
+This system can be used on multiple sites by setting a variable that
+identifies a unique site or channel.  This variable is passed directly
+to the database in the case of the dynamic page logger or can be 
+encoded in the image URL if used on static pages.
+
+The speed of this system has been optimised in order to make it as fast
+as possible so that it's use does not spoil the user experience of the
+site.  Where this system is used on dynamically generated pages the
+speed will be governed purely by the time taken to communicate with the
+database server.  Static pages will take as there are three steps 
+involved in each transaction:
+
+	1. the web server must contact and request the GIF image from
+	   the server running the logging system
+	   
+	2. the server running the logging system must then enter the
+	   information into the database which may or may not be on the
+	   same physical machine
+	   
+	3. the GIF image must then be returned to the browser that
+	   requested it.
+	   
+Items 1 and 2 are beyond the control of the logging system but item 3
+can, by making the GIF image as small as possible (1 pixel by 1 pixel),
+reduce the amount of data transferred.
 
 3.2.2	Browser and version
 
-Re-write explaining how these objecties are acheived.
+All web browsers identify themselves to web servers through the use of
+a browser User Agent string that can be parsed to obtain information on
+the browser vendor, version number, operating system and platform.
+
+Search engine spiders also provide a User Agent string but this usually
+only identifies the search engine.  However, this is sufficient to 
+indicate that the site has been searched and may well be indexed soon.
+
+As new browsers are released the database of User Agents need to be kept
+up to date and this burden is eased by the storage of any User Agent 
+that cannot be identified.  Optionally this unknown User Agent can be
+emailed to the master site administrator.
+
+The code that identifies the browser is contained with lib_browser.php
+This code is separate so that the definition can be updated easily 
+without impacting the operation of the rest of the system.  The 
+definitions are not stored in a database in order to reduce the load
+on the database.
 
 3.2.3	Browser platform
 
-Re-write explaing how these objecties are acheived.
-
-* Should be able to determine platform
+By parsing the Browser User Agent string the browser platform can be 
+determined.
 
 3.2.4	Operating system
 
-Re-write explaing how these objectives are acheived.
-
-* Should be able to determine the operating system
+By parsing the Browser User Agent string the operating system that the 
+browser runs on can be determined.
 
 3.2.5	Page loading time
 
-Re-write explaing how these objectives are acheived.
+It is desirable to know how long particular pages take to load and this
+can be achieved by the logging system whether the pages are static or
+dynamically generated.
 
-* Would be desireable for the logging system to record the amount of time
-  taken for a page to be accessed each time it is accessed
+Static pages require the use of two GIF images start.php and finish.php
+which are located at the very top and very bottom of the page to be
+monitored.  These are linked within the web server using PHP sessions
+so that the server can determine that the two scripts relate to the 
+same page.
+
+Dynamic pages are dealt with in a similar way but through the use of
+two PHP scripts inc_start.php and inc_finish.php which perform exactly
+the same functions as start.php and finish.php.
+
+When the page is initially requested, either inc_start.php or start.php
+insert the page name, assorted browser and referrer information and a
+page time of zero.  A PHP session is then started in which various
+variables are registered that are specific to the page being requested.
+When the page completes loading, either inc_finish.php or finish.php
+look for the page and browser information and then computes the total
+page load time.  This is then inserted into the database by an UPDATE
+statement.
+
+If for any reason the page loading is cancelled, then the page time is
+left as zero, allowing those pages that were cancelled to be easily 
+identified by querying the database.
 
 3.2.6	User tracking
 
+Whenever a web browser requests a page that calls the logging system a
+cryptographically unique session identifier is generated that remains
+associated with the browser for the lifetime of the browser window.  
+This means that the sequence of pages displayed by the server can be
+related to a particular browser thus allowing the movement history of
+a particular user to the stored in the database.
+
 3.2.7	Exit pages
 
-When the user leaves the site it can be desireable to know where they 
+When the user leaves the site it can be desirable to know where they 
 are going.  This can be useful in the context of tracking whether users
 click on a banner or a link to another website.  To allow this is to be
-monitored the following script can be used:
+monitored the following wrapper can be used around the start HTML href
+tag:
 
-  <a href="logging/redir.php?e=http://www.phpbuilder.com">PHP Builder</a>
+  <a href="logging/redir.php?c=site_id&s=PageName
+	&e=http://www.phpbuilder.com">PHP Builder</a>
 
 This inserts the URL of the link that the user has clicked on together 
-with other data that can be gleaned from the execution of the script.  
-The target URL is then opened in the same window as the request was 
-made.
+with other data that can be gleaned from the execution of the script
+(browser, operating, system, platform, session ID etc).  The target URL
+is then opened in the same window as the request was made.
 
 3.2.8	Reporting options
 
-Once the data is contained within the database it can be queried to 
-generate the following information:
+Having collected all of the data an easy to use method of interrogating
+the database is required.  There are a fairly limited number of queries
+that the master site or channel administrator is likely to want to run
+and these are listed below:
 
-     * hourly requests
-     * browser types
-     * most requested pages
-     * least requested pages
-     * total page views since logging began
-     * top referrers
-     * top hosts requesting pages
-     * top search strings
-     * browser operating systems
-     * top site entry pages
-     * top site exit pages
+	* number of hourly requests
+	* browser information
+	* most commonly requested pages
+	* least commonly requested pages
+	* total number of page impressions
+	* most common referrers
+	* most common hosts
+	* most common searches
+	* most common operating system
+	* most common channel entry pages
+	* most common exit pages
+	* number of unique visitors
+	* fastest loading pages
+	* slowest loading pages
+	* most commonly cancelled pages
+	* number of pages viewed by visitors
+	* path through site of specified visitor
 
-It is suggested that this script be placed in a location that is only 
-available to the site administrator such as $site_root/admin.
+Almost all of these queries can be run over different time periods in
+order to allow historical tracking of users to be performed.  Allowed
+time periods are: 'today', 'yesterday', 'thisweek', 'thismonth', 
+'thisquarter' and 'thisyear'.
 
-All of these functions support the specification of the site_id to be
-investigated and (optionally) a maximum number of results that should 
-be returned.  All results (with the exception of total page views since
-logging began) can have the timescale over which the statistics should 
-be reported defined by setting the $timescale to one of the following:
-'today', 'yesterday', 'thisweek', 'thismonth', 'thisquarter', 
-'thisyear'.
+As the web site gets older more and more data will be returned from 
+these queries so the number of items returned can be customised.  All 
+queries can be run for a specific channel or for the whole site.
 
-Reports need to be created using lib_html.php
-
+All reports will be generated using lib_html.php and will be produced
+as temporary templates with the templating system.
 
 3.3	Usage
-
-Update to reflect new version
 
 The logging system can be applied to either PHP pages or HTML pages.  
 Any requests made to the webserver will result in the following 
 information being stored.
 
+	* day
+	* hour
+	* session_id
+	* site_id
+	* user_id (where applicable)
+	* browser
+	* ver
+	* platform
+	* time
+	* page
+	* page_time
+	* ip_address
+	* referrer
+	* exit_page (where applicable)
+
+This data can be gathered from either dynamically generated pages or
+static HTML pages as described in the following sections.
+
 3.3.1	Dynamically generated PHP pages
 
-Any request made to the webserver can be made to generate an SQL query
-to log details of the request in the database.  If the file being 
-requested is a PHP script then this can be achieved by including the 
-following line somewhere in the script:
+The loading of a dynamically generated page can be captured by 
+include'ing the following code fragment at the very start of the 
+document creation script:
 
-     include("$site_root/libs/inc_logger.php");
+	include("$site_root/libs/inc_start.php");
+
+The completion of the script loading can be captured by include'ing the
+following fragement of code at the very end of the document creation
+script:
+
+	include("$site_root/libs/inc_finish.php");
+
+The following variables need to be defined for the correct operation of
+the logging system:
+
+	$site_id = integer to uniquely identify the site.
 
 3.3.2	Static HTML pages
 
-If, however, the page requested is purely an HTML page or it resides on
-a server that does not allow the use of PHP then the following 'GIF' 
-can be displayed on the page:
+Accesses to static HTML pages can be captured in a similar way through
+the use of a GIF image called by two scripts.
 
-   <img src="gif11.php?site_id=0&page=index.html" width='1' height='1'>
+In order to capture the start of the page loading process the following
+HTML code fragment must be included as close to the top of the page as
+possible:
+	
+	<img src="start.php?c=0&s=index.html" width='1' height='1'>
+	
+The completion of the page loading process can be captured by including
+the following HTML fragement as close to the bottom of the page as is
+possible:
 
+	<img src="finish.php?c=0&s=index.html" width='1' height='1'>
+
+The variables that must be defined and passed within the URL are:
+
+	c = integer to uniquely identify the site
+	s = name of page (no spaces)
+	
+Once both of the scripts have executed a GIF file is passed straight
+through to the browser.
 
 4.0	DATABASE DESIGN
 
-SQL data is defined in logging.sql
+The structure of the SQL tables required by the logging system are 
+defined in the file logging.sql
 
 4.1	Table: myPHPcms_logging_log
 
@@ -433,6 +554,40 @@ administrators have access to.
 	perhaps an advert.  The number of rows returned is set by 
 	$max_num.
 
+7.2.11	function unique_visitors($link_id, $site_id, $timescale)
+
+	Determines the number of unique visitors to the specified 
+	channel over the timescale given.
+
+7.2.12	function fastest_pages($link_id, $site_id, $timescale, $max_num)
+
+	Lists the fastest loading pages for the channel specified over
+	the time period specified.  The maximumm number of results 
+	returned can be limited.
+
+7.2.13	function slowest_pages($link_id, $site_id, $timescale, $max_num)
+
+	Lists the slowest loading pages for the channel specified over
+	the time period specified.  The maximumm number of results 
+	returned can be limited.
+
+7.2.14	function cancelled_pages($link_id, $site_id, $timescale, $max_num)
+
+	List the most frequently cancelled pages for the channel 
+	specified over the time period given.  The maximum number of
+	results can be limited.
+
+7.2.15	function session_pages($link_id, $site_id, $timescale, $max_num)
+
+	Determines the number of pages that each visitor viewed for the
+	specified channel over the time period stated.  The maximum
+	number of results can be limited.
+
+7.2.16	function session_path($link_id, $site_id, $session_id)
+
+	Determines the pages that were viewed by a specified session for
+	for the given channel.
+
 7.2	lib_statistics.php
 
 This is the query library for the administration module for the access
@@ -445,8 +600,9 @@ master site and channel administrators have access to it.
 	channel over the timescale provided.    Corrects the times
 	returned for the server time difference.
 
-	SELECT hour,count(*) as hourly_requests FROM logging_log WHERE 
-	site_id='$site_id' $sub_sql GROUP BY hour
+	SELECT hour,count(*) as hourly_requests FROM 
+	myPHPcms_logging_log WHERE site_id='$site_id' $sub_sql GROUP 
+	BY hour
 
 7.2.2	function browser_types($link_id, $site_id, $timescale)
 
@@ -454,15 +610,13 @@ master site and channel administrators have access to it.
 	specified over the timescale provided.
 
 	SELECT browser, ver, platform, count(*) AS num_browsers FROM 
-	logging_log WHERE site_id='$site_id' $sub_sql GROUP BY browser,
-	ver, platform ORDER BY num_browsers DESC
+	myPHPcms_logging_log WHERE site_id='$site_id' $sub_sql GROUP 
+	BY browser, ver, platform ORDER BY num_browsers DESC
 
 7.2.3	function browser_unknown($link_id, $site_id, $timescale)
 
 	Determine and list any unidentified browsers for the specified
 	channel over the timescale specified.
-	
-	NOT YET COMPLETE.
 
 7.2.4	function top_pages($link_id, $site_id, $timescale, $max_num)
 
@@ -471,9 +625,9 @@ master site and channel administrators have access to it.
 	descending order to show the most popular.  The maximum number
 	returned can be controlled.
 
-	SELECT page,count(*) AS top_pages FROM logging_log WHERE site_id
-	='$site_id' $sub_sql GROUP BY page ORDER BY top_pages DESC LIMIT 
-	$max_num
+	SELECT page,count(*) AS top_pages FROM myPHPcms_logging_log 
+	WHERE site_id ='$site_id' $sub_sql GROUP BY page ORDER BY 
+	top_pages DESC LIMIT $max_num
 
 7.2.5	function bottom_pages($link_id, $site_id, $timescale, $max_num)
 
@@ -482,9 +636,9 @@ master site and channel administrators have access to it.
 	ascending order to show the least popular.  The maximum number
 	returned can be controlled.
 
-	SELECT page,count(*) AS bot_pages FROM logging_log WHERE site_id
-	='$site_id' $sub_sql GROUP BY page ORDER BY bot_pages ASC LIMIT 
-	$max_num
+	SELECT page,count(*) AS bot_pages FROM myPHPcms_logging_log 
+	WHERE site_id ='$site_id' $sub_sql GROUP BY page ORDER BY 
+	bot_pages ASC LIMIT $max_num
 
 7.2.6	function total_page_views($link_id, $site_id)
 
@@ -494,12 +648,13 @@ master site and channel administrators have access to it.
   	This function requires two calls to the database.  Firstly to 
   	get the total number of pages:
 
-	SELECT COUNT(*) FROM logging_log WHERE site_id='$site_id';";
+	SELECT COUNT(*) FROM myPHPcms_logging_log WHERE site_id=
+	'$site_id';";
 	
 	and secondly to determine when logging for this site began:
 	
-	SELECT FROM_UNIXTIME(MIN(time),'%D %M %Y') FROM logging_log 
-	WHERE site_id='$site_id'
+	SELECT FROM_UNIXTIME(MIN(time),'%D %M %Y') FROM 
+	myPHPcms_logging_log WHERE site_id='$site_id'
 
 7.2.7	function top_referrers($link_id, $site_id, $timescale, $max_num)
 
@@ -508,11 +663,12 @@ master site and channel administrators have access to it.
 	the most common.  The maximum number of values returned can be
 	controlled.
 
-	SELECT referrer,count(*) AS ref_count FROM logging_log WHERE 
-	referrer!='' AND referrer LIKE 'http://%' AND referrer!='unknown'
-	AND referrer NOT LIKE 'http://www.singletrack-mind.org.uk%' 
-	AND site_id='$site_id' $sub_sql GROUP BY referrer ORDER BY 
-	ref_count DESC LIMIT $max_num
+	SELECT referrer,count(*) AS ref_count FROM myPHPcms_logging_log
+	WHERE referrer!='' AND referrer LIKE 'http://%' AND 
+	referrer!='unknown' AND referrer NOT LIKE 
+	'http://www.singletrack-mind.org.uk%' AND site_id='$site_id' 
+	$sub_sql GROUP BY referrer ORDER BY ref_count DESC LIMIT 
+	$max_num
 
 7.2.8	function top_hosts($link_id, $site_id, $timescale, $max_num)
 
@@ -521,9 +677,10 @@ master site and channel administrators have access to it.
 	order so that the most common can be identified.  The maximum
 	number of values returned can be controlled.
 
-	SELECT ip_address,count(*) AS top_hosts FROM logging_log WHERE
-	ip_address!='unknown' AND site_id='$site_id' $sub_sql GROUP BY
-	ip_address ORDER BY top_hosts DESC LIMIT $max_num
+	SELECT ip_address,count(*) AS top_hosts FROM 
+	myPHPcms_logging_log WHERE ip_address!='unknown' AND site_id=
+	'$site_id' $sub_sql GROUP BY ip_address ORDER BY top_hosts DESC
+	LIMIT $max_num
 
 7.2.9	function searches($link_id, $site_id, $timescale, $max_num)
 
@@ -533,10 +690,11 @@ master site and channel administrators have access to it.
 	together these results to show the most common search requests.
 	The maximum number that is returned can be controlled.
 
-	SELECT referrer,count(*) AS top_searches FROM logging_log WHERE 
-	referrer LIKE '%search%' OR referrer LIKE '%query%' OR referrer 
-	LIKE '%keywords%' OR referrer LIKE '%q=%' $sub_sql GROUP BY 
-	referrer ORDER BY top_searches DESC LIMIT $max_num
+	SELECT referrer,count(*) AS top_searches FROM 
+	myPHPcms_logging_log WHERE referrer LIKE '%search%' OR referrer
+	LIKE '%query%' OR referrer LIKE '%keywords%' OR referrer LIKE 
+	'%q=%' $sub_sql GROUP BY referrer ORDER BY top_searches DESC 
+	LIMIT $max_num
 
 7.2.10	function operating_sys($link_id, $site_id, $timescale, $max_num)
 
@@ -548,15 +706,15 @@ master site and channel administrators have access to it.
 	This function requires two database queries.  The first 
 	determines the number of requests for each platform type:
 	
-	SELECT platform, count(*) AS platform_count FROM logging_log 
-	WHERE site_id='$site_id' $sub_sql GROUP BY platform ORDER BY 
-	platform_count DESC LIMIT $max_num
+	SELECT platform, count(*) AS platform_count FROM 
+	myPHPcms_logging_log WHERE site_id='$site_id' $sub_sql GROUP 
+	BY platform ORDER BY platform_count DESC LIMIT $max_num
 	
 	Whilst the second determines the total number of page requests
 	in the time specified.  The percentages can then be determined:
 	
-	SELECT COUNT(*) FROM logging_log WHERE site_id='$site_id' 
-	$sub_sql
+	SELECT COUNT(*) FROM myPHPcms_logging_log WHERE site_id=
+	'$site_id' $sub_sql
 
 7.2.11	function top_entry($link_id, $site_id, $timescale, $max_num)
 
@@ -566,10 +724,10 @@ master site and channel administrators have access to it.
 	are then grouped and sorted in descending order.  The maximum
 	number of results returned can be controlled.
 
-	SELECT page,referrer,COUNT(*) AS top_entry FROM logging_log 
-	WHERE site_id='$site_id' AND referrer NOT LIKE 
-	'http://www.singletrack-mind.org.uk' $sub_sql GROUP BY page 
-	ORDER by top_entry DESC LIMIT $max_num
+	SELECT page,referrer,COUNT(*) AS top_entry FROM 
+	myPHPcms_logging_log WHERE site_id='$site_id' AND referrer NOT
+	LIKE 'http://www.singletrack-mind.org.uk' $sub_sql GROUP BY
+	page ORDER by top_entry DESC LIMIT $max_num
 
 7.2.12	function top_exit($link_id, $site_id, $timescale, $max_num)
 
@@ -577,49 +735,50 @@ master site and channel administrators have access to it.
 	script.  These are grouped and are sorted in descending order.
 	The maximum number of results returned can be controlled.
 
-	SELECT exit_page,COUNT(*) AS totals FROM logging_log WHERE 
-	site_id='$site_id' AND exit_page LIKE 'http://%' $sub_sql 
-	GROUP BY exit_page ORDER BY totals DESC LIMIT $max_num
+	SELECT exit_page,COUNT(*) AS totals FROM 
+	myPHPcms_logging_log WHERE site_id='$site_id' AND exit_page 
+	LIKE 'http://%' $sub_sql GROUP BY exit_page ORDER BY totals 
+	DESC LIMIT $max_num
 
 7.2.13	function unique_visitors($link_id, $site_id, $timescale)
 
 	Determines the total number of unique session ID's for the
 	channel specified over the period specified.
 	
-	SELECT COUNT(DISTINCT session_id) FROM logging_log WHERE 
-	site_id='$site_id' $sub_sql
+	SELECT COUNT(DISTINCT session_id) FROM myPHPcms_logging_log
+	WHERE site_id='$site_id' $sub_sql
 
 7.2.14	function fastest_pages($link_id, $site_id, $timescale, $max_num)
 
 	Determine the fastest loading pages for the given channel_id
 	over the timescale specified.
 	
-	SELECT page, page_time FROM logging_log WHERE site_id='$site_id'
-	AND page_time!='0' GROUP BY page ORDER BY page_time ASC LIMIT
-	$max_num
+	SELECT page, page_time FROM myPHPcms_logging_log WHERE site_id=
+	'$site_id' AND page_time!='0' GROUP BY page ORDER BY page_time 
+	ASC LIMIT $max_num
 
 7.2.15	function slowest_pages($link_id, $site_id, $timescale, $max_num)
 
 	Determine the fastest loading pages for the given channel_id
 	over the timescale specified.
 	
-	SELECT page, page_time FROM logging_log WHERE site_id='$site_id'
-	AND page_time!='0' $sub_sql GROUP BY page ORDER BY page_time 
-	DESC LIMIT $max_num
+	SELECT page, page_time FROM myPHPcms_logging_log WHERE site_id=
+	'$site_id' AND page_time!='0' $sub_sql GROUP BY page ORDER BY 
+	page_time DESC LIMIT $max_num
 
 7.2.16	function cancelled_pages($link_id, $site_id, $timescale, $max_num)
 
-	SELECT page,count(*) AS result FROM logging_log WHERE site_id=
-	'$site_id' AND page_time='0' $sub_sql GROUP BY page ORDER BY 
-	result DESC LIMIT $max_num
+	SELECT page,count(*) AS result FROM myPHPcms_logging_log WHERE 
+	site_id='$site_id' AND page_time='0' $sub_sql GROUP BY page ORDER
+	BY result DESC LIMIT $max_num
 
-7.2.17	function session_rank($link_id, $site_id, $timescale, $max_num)
+7.2.17	function session_pages($link_id, $site_id, $timescale, $max_num)
 
 	Determines the number of pages viewed by each unique visitor
 	over the specified timescale.
 	
-	SELECT session_id,count(*) AS result FROM logging_log WHERE
-	site_id='$site_id' AND page_time!='0' $sub_sql GROUP BY
+	SELECT session_id,count(*) AS result FROM myPHPcms_logging_log
+	WHERE site_id='$site_id' AND page_time!='0' $sub_sql GROUP BY
 	session_id ORDER BY result DESC LIMIT $max_num
 
 7.2.18	function session_path($link_id, $site_id, $session_id)
@@ -627,8 +786,8 @@ master site and channel administrators have access to it.
 	List the pages viewed by the specified visitor in the order
 	that they viewed them complete with loading time.
 
-	SELECT page,page_time FROM logging_log WHERE session_id=
-	'$session_id' AND page_time!='0' $sub_sql
+	SELECT page,page_time FROM myPHPcms_logging_log WHERE 
+	session_id='$session_id' AND page_time!='0' $sub_sql
 	
 7.2.19	function today()
 
@@ -675,8 +834,8 @@ master site and channel administrators have access to it.
 
 	Function to retrieve hostname from database if it's previously
 	been resolved otherwise obtains the hostname by reverse DNS 
-	lookup.  Results are stored in a table (logging_cache) for use
-	in subsequent queries.
+	lookup.  Results are stored in a table (myPHPcms_logging_cache)
+	for use in subsequent queries.
 
 7.3	inc_logger.php
 
