@@ -183,7 +183,14 @@ Blah blah !
 
 4.5	User comments module
 
-Blah blah !
+When the user clicks on the link to submit a news story the cookie that
+indicates that they are a registered user should be checked.  If it 
+cannot be found it would suggest that they are not a member or that the 
+cookie has been deleted so they should be offered the option to register
+or sign-up.  Once logged in they are shown a form into which they can 
+enter the story headline and the body of the story.  At any time they can
+preview the page as it will eventually appear.  Once submitted the story 
+content and information (date, time, author) are entered into the database.
 
 4.6	User forums module
 
