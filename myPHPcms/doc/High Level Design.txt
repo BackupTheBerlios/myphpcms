@@ -109,11 +109,11 @@ Blah blah !
 * Users can register themselves by only site admin can promote users to
   author, editor etc roles
 
-4.3	Site administration module
+4.3	Channel administration module
 
 Blah blah !
 
-4.4	Channel administration module
+4.4	Diagnostics module
 
 Blah blah !
 
@@ -149,42 +149,6 @@ a flag.  If found then this will be interpreted as a properly
 configured installation and so an upgrade will be assumed.  Otherwise a
 new installation will assumed.
 
-The steps that the installation script carries out are:
-
-1.  Check for presence of a flag indicating that myPHPcms has already
-    been installed.  If found call the upgrade script otherwise call
-    the setup.php.
-    
-2.  Setup.php will display a form to allow gather the database host 
-    name and the database username and password.  The password will
-    be requested twice for verification.  Once submitted these values
-    will be written to a text file called db.cfg
-    
-3.  The page will then reload and will attempt to connect to the
-    database server.  If no connection can be established the form
-    to gather the database username, hostname and address will be
-    redisplayed so that the user can correct them.
-    
-4.  If the connection can be established then the administrator
-    sign-up and login screen should be displayed so that the overall
-    site administrator can enter their username and password and have
-    their account activiated via email.
-    
-5.  Once the user is signed in the administration directory is 
-    protected via Apache's .htaccess and .htpasswd files.
-
-Files:	install.php	- script called by user to install myPHP.  
-			  Checks to see if an existing installation is
-			  present.  If so calls upgrade.php else calls
-			  setup.php
-	setup.php	- Sets up new installation from scratch.
-	upgrade.php	- Upgrades existing installation.
-	db.cfg		- Text file containing database settings.
-	lib_setup.php	- Setup library contained within the admin/libs
-			  directory.  This will provide all of the
-			  functionality for the setup library.
-			  
-Needs:	access to the user sign-up and login functions
 
 4.6	CMS module
 
@@ -224,8 +188,59 @@ the users browser.
 
 4.7	Access logging module
 
-Blah blah !
+The design requirements for the Access Logging module specified in the
+Functiional Specification document can be divided into three main 
+sections.  These are (1) data gathering, (2) data processing and 
+reporting and (3) other administration tasks.
 
+4.7.1	Data gathering
+
+The logging system must be capable of collecting data from both static
+HTML pages as well as dynamic PHP pages.  This would allow the system 
+to be applied to purely static HTML sites as well as dynamically 
+created sites and also the hybrid - a dynamically generated cache of
+static HTML pages.
+
+These two scenarios require fundamentally different approaches to 
+obtaining the data that we need.  Pages that are created dynamically 
+from a database can simply log access to themselves by recording the 
+fact into a table within the database.  Once the information to be 
+logged has been determine this is quick and easy to do.
+
+Purely static HTML pages are much more difficult to deal with since it
+is likely that the server on which they are hosted may not be capable 
+of executing server-side scripting langauges.  As a result a rather
+ingenious solution needs to be developed.
+
+The solution chosen is to use a GIF image that is in fact a PHP script
+that is hosted on a server that can execute PHP scripts.  This GIF 
+image is called by the HTML file allowing access to the HTTP enviroment
+variables which can then be logged in the database by the PHP script.
+Once the data has been collected a transparent 1 pixel wide by 1 pixel 
+high GIF image is returned to the browser.  To prevent caching of the
+image which would defeat this technique a random value is attached to a
+variable which is sent in the URL that requests the GIF.
+
+GIF or script placed at top of file shows that file was accessed but no
+way of knowing if user waited for page to load or if they clicked cancel.
+Could add second call at bottom of page - easy in PHP, could even time
+page creation but not so easy in HTML.  How to do ?
+
+Browser version, platform and OS identification -> lib for easy upgrade
+Hard-coded identification rather than db search to speed up execution
+Unknown UA emails to admin for identification and updating of libs
+
+4.7.2	Data processing and reporting
+
+Database queried by admin whenever statistics required to use latest results
+Comprehensive reporting options and timescales available
+Caching of reverse DNS lookups allows faster queries second time around
+
+4.7.3	Other administration tasks
+
+Channel_id is logged on each access so allowing data to be processed on channel
+by channel basis by channel admins.  Master site admin can look at all
+data.
 4.8	Templating module
 
 To minimise the number of templates for a given number of pages any 
@@ -239,7 +254,7 @@ comprise it.
 * Templates for admin engine have channel_id=0
 * All public channel_id start at 1
 
-4.9	User registration and authentication module
+4.9	User sign-up and log-in module
 
 Since the username is the users email address this will need to be
 validated.  This could be performed by a regular expression match on
