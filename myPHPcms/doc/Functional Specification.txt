@@ -173,13 +173,14 @@ An outline of the directory structure is shown below:
 
 	$site_root	contains the bulk of the scripts for the site
     	|
-    	+-admin		contains configuration & administrator scripts
-    		+-libs	contains admin-only libraries
-    	+-doc		contains usage and design documentation
-    	+-libs		contains the actual script libraries
-    	+-sql		contains the fragments of SQL necessary to 
-    			 build the tables for the various modules
-    	+-tests		contains test scripts to test the modules
+    	+-admin			contains configuration & administrator scripts
+    		+-libs		contains admin-only libraries
+    		+-templates	contains admin-only template definitions
+    	+-doc			contains usage and design documentation
+    	+-libs			contains the actual script libraries for users
+    	+-sql			contains the fragments of SQL necessary to 
+    			 	build the tables for the various modules
+    	+-tests			contains test scripts to test the modules
 
 As the whole of myPHPcms will be run off of a database, the lack of a
 database due to perhaps a server outage must be handled gracefully.
@@ -199,6 +200,8 @@ database due to perhaps a server outage must be handled gracefully.
 * Code is correctly indented
 * HTML library supports common HTML tags
 * HTML library will support Cascading Style Sheets
+* Code produced should be browser neutral and should validate using any
+  commonly available HTML validator.
 
 7.2	Site administration module
 
@@ -207,10 +210,12 @@ database due to perhaps a server outage must be handled gracefully.
 * Administration scripts for individual modules added by each module
   installation script
 * Administration scripts for each installed module are added to the
-  admininsration screen automatically
+  admininstration screen automatically
 * Multiple sites can be handled
 * Each site administrator has limited control over their own site
 * Main administrator has total control
+* Each site emails are prefixed by brief descriptor eg MTB-Wales or STM
+* Set configuration option, eg Require approval of user images
 
 7.3	Database installation script
 
@@ -227,13 +232,13 @@ database due to perhaps a server outage must be handled gracefully.
 
 * Workflow model: template designer->author->editor->moerator->user
 * Registered site users can opt-in as writers
-* Requests for story commissions can be listed to writers only
+* Requests for story commissions can be listed to registered writers only
 * Commissioned stories can be marked as taken
 * News, features etc contributed directly (not comissioned)
 * Category type selected by author when submitting
 * Authors can work on story on-line using web-form.  Images can be
   uploaded and are kept with the story.
-* Multiple ownership (up to 4 authors0 allows co-authoring
+* Multiple ownership (up to 4 authors) allows co-authoring
 * Editor can review stories once author has released it for review.
 * Editor can re-assign submission to different area ie news->feature
 * Reviewers notified via email
@@ -249,14 +254,15 @@ database due to perhaps a server outage must be handled gracefully.
   editors
 * Editor comments to writer are stored separately
 * Version information for story is also stored
+* Images etc are stored in gallery directory for each site_id.  Database
+  stores filename, size, type and description
 * Writer profile available with story when published
 * System can handle multiple sites
 * Should allow users to select printable version of a document/story
 * Should allow long documents to be split over several pages
-* Document life can be defined
+* Document life can be defined (permanent, expires or repeats)
 * Actions to take if docuent reaches end of life can be selected eg 
   archive, delete, email for update
-* Multimedia content stored in central directory with database meta data
 
 7.5	User comments module
 
@@ -276,14 +282,13 @@ database due to perhaps a server outage must be handled gracefully.
 * Users can start new threads by posting a new article
 * Users can post articles in reply to existing articles
 * Users can view articles that have been posted
-* Users can view th threads of conversations in the forum
+* Users can view the threads of conversations in the forum
 * Users can view the relationship between articles
 * Administrators can delete posts and threads (if required)
 * Administrators can move posts to different forums
 * Administrators can create topic areas
 * Users are notified by email when replies to there posts are posted
-* Users can upload small images of themselves to accompany their posts
-* Administrators must approve these images before they can be used
+* Users can use the small images of themselves to accompany their posts
 * Each thread shows the number of posts, number of views and date/time
   of last post
 * Forum threads can be searched by poster or keyword
@@ -341,9 +346,10 @@ database due to perhaps a server outage must be handled gracefully.
 
 * Administrators can create/edit/delete templates
 * Templates are specific to different sites
+* Site 0 is reserved for top-level administration templates only
 * Read-only admin and default templates
 * All modifications can be completed from a web-browser
-* Templates can be previewed before going live on site
+* New or modified templates can be previewed before going live on site
 * Template definitions stored in session file to avoid MySQL queries
   to retrieve them for every page load
 * Templates can be defined as permanent or time-decaying
@@ -366,40 +372,70 @@ database due to perhaps a server outage must be handled gracefully.
 * Users should be able to update their passwords.
 * Users should be able to reset or apply for new passwords if they
   forget their current one.
+* Users should be able to submit small images of themselves hich will
+  be used to identify them in articles and forum postings.  These
+  images will be les than 3KB and will be named after the unique user
+  id eg 3142.gif
+* Administrators must approve these images before they can be used.  An
+  email will be automatically sent (lthough this can be turned of in the
+  admin module).
+* Users will be able to provide brief biographic details about 
+  themselves including: sex, DOB, homepage, location.
 * System can handle multiple sites
 * Users fall into 1 of 3 categories: visitor, contributor, editor
 
 7.11	Polls module
 
-* Administrator can enter questions and maximum of 5 possible answers.
+* Administrator can enter single question and up to 5 possible answers.
 * Administrator can set when poll will be active and when it will close
-* Users can vote on each poll once per day only
-* Multiple voting prevented by use of cookie - IP logging would not work
-  since IP addresses of ISP's would be forwarded onto database
-* Users can view current results of poll
-* Users can view results of previous polls
-* System can handle multiple sites
+* Only registered users can vote in the polls
+* If unregistered user attempts to vote they are directed to login page
+* Users can vote on each poll once per day only - user_id and timestamp
+  is stored.
+* All users can view current results of poll
+* All users can view results of previous polls
 * Results can be viewed as graphs or as tables of numbers
-* Once voter has voted (optionall) they can be shown the results so far
+* Graphical representation should be through use of multiple instances
+  of a small GIF image rather than using the PHP GD library as not all
+  servers may support this.
+* Once voter has voted (optional) they can be shown the results so far
+* Results should present total number of votes cast and breakdown by 
+  number of votes together with precentages rounded to 2 decimal places.
+  Should also state when poll was opened and how much time remains 
+  before the poll closes.
+* Script should not be tripped up by "divison by zero" errors as a 
+  result of no votes being cast.
+* System can handle multiple sites
 
 7.12	Page caching module
 
-* Caching should be selectable on a page by page basis.  The age of the
-  cached version should be selectable too.
+* The page caching system should be an integral part of the templating
+  system and should not be created as a standalone feature although it
+  can be turned on and off for individual pages.
+* Caching should be selectable on a page by page basis.  The site as seen
+  by a non-logged user should be cached as the minimum.  The age of the
+  cached version before it expires should be selectable too.
 * If a page is set to be cached and it is requested the cache directory
-  should be checked for a cached copy
+  should be checked for a cached copy to avoid unnecessary database calls
 * If a cached copy is NOT found then all of the HTML code for the page
   should be written to a file which should then be served to the browser.
-  Any HTML links in the page should be retained so that the original PHP
-  script is called.  This would allow the deletion of the cached version
-  (perhaps because the template is too old) and its recreation would be
-  handled gracefully.
+  This file code shoudl also be written to a text file and placed in the
+  appropriate place within the directory structure.  Any HTML links in 
+  the page should be retained so that the original PHP script is called.
+  This would allow the deletion of the cached version (perhaps because 
+  the template is too old) and its recreation would be handled gracefully.
 * Subsequent requests for that page should be directed to the cached
-  version
+  version unless the page has expired in which case the cahced file 
+  should be rebuilt.
+* Updates to the page should be reflected in the cached version
 * A folder directory structure should be used so that search engines can
   index the site as HTML pages
+* Code produced should be browser neutral and should validate using any
+  commonly available HTML validator.
 * Caching system should be able to handle multiple sites
 * Individual sites are cached into different directories
+* Cached pages should contain the appropriate code to log the page access
+  within the logging system.
   
 7.13	Download manager module
 
@@ -421,15 +457,22 @@ database due to perhaps a server outage must be handled gracefully.
 7.15	Events module
 
 * Registered users can post events into the calender
+* Email address of event organiser/enterer is recorded when event is
+  logged.
+* All users can view contents of calender
 * Events can be stored under pre-set categories
-* Users can create new categories if required (requires admin approval)
-* Calender is visible to all users.  Shown in 'desk calender' style.
-* Day with event is shown by hyperlinked day number
+* Only administrator can create/modify/delete categories
+* Calender is shown in 'desk calender' style.
+* Day with event is shown by hyperlinked day number.
 * Users can click on event to get more information
 * Once event is over poster should be automatically asked for report
 * What's On box should show upcoming events
 * Users can search based on categories or time period
 * System can handle multiple sites
+* Navigation should be based on "page-turning" metaphor so that the
+  current month is displayed with arrows to previous and next months
+* Must be able to handle different server/browser timezones otherwise
+  users will be confused by script reporting US time
 
 7.16	Mailing list manager module
 
@@ -439,14 +482,21 @@ database due to perhaps a server outage must be handled gracefully.
   all the subscribers of a single mailing list
 * Administrators should be able to create the newsletters on-line
 * Newsletters should be previewable before sending
-* Newsletter sending should be schedulable
+* Newsletter sending should be schedulable so that the newletter can
+  be prepared off-line and sent a few days later.
 * Users should be able to subscribe to each mailing list of interest
 * Users should be able to unsubscribe from mailing lists that they are
-  subscribed to
+  subscribed to quickly.
+* The email address that the newsletter was sent to should be included
+  at the bottom of the email
+* Administrator should be able to define standard headers and footers
+  for use in newsletters
 * Users should be able to store their preferences for text or HTML 
   emails
-* Users should not be able to send mail to the list
-* Users shold not be able to see one anothers email addresses
+* Users should not be able to send mail to the list although if they do
+  they will get a polite reply directing them to use the forums on the
+  site !
+* Users should not be able to see one anothers email addresses
 * Users and administrators should be able to view inforamtion about the
   mailing lists
 * Past newsletters should be archived and should be viewable by users
@@ -470,6 +520,8 @@ database due to perhaps a server outage must be handled gracefully.
 * banners can be stored locally or remotely
 * banners can be set to expire either within given perio (min 1 day) or
   after certain number of impressions
+* should be able to serve ads even if database is down through use of
+  caching
   
 7.18	User rating system
 
