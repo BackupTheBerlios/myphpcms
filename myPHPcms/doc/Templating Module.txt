@@ -1,0 +1,43 @@
+myPHPcms Detailed Design document - Template module
+===================================================
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+Blah blah !
+
+1.0	SCOPE
+
+Blah blah !
+
+2.0	REFERENCE DOCUMENTATION
+
+myPHPcms Functional Specification
+myPHPcms High Level Design document
+Any other web references that may be of use
+
+3.0	OVERVIEW
+
+Blah blah !
+
+4.0	DATABASE DESIGN
+
+Blah blah !
+
+5.0	SOFTWARE COMPONENTS
+
+Blah blah !
+
+6.0	DEPENDENCIES
+
+Blah blah !
+
+7.0	REFERENCE
+
+Blah blah !
+
+8.0	EXAMPLE
+
+Blah blah !
