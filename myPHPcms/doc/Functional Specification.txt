@@ -320,6 +320,7 @@ database due to perhaps a server outage must be handled gracefully.
 	* files per day (average and maximum)
 	* pages per day (average and maximum)
 	* visits per day (average and maximum)
+	* path through site (based on PHP session - dynamic sites only)
 	* all statistics displayed as top X of Y where X can be defined
 	  and Y is the total number in that category since logging 
 	  began
