@@ -160,6 +160,8 @@ also required.
 * Writer profiles available to editor
 * If a story needs further work, writer should be notified via email
 * If approved by editor story can be scheduled for publication
+* On final sign-off editor decides key-words for search function
+* Editor can also identify similar stories
 * Multiple stories can be queued for publication 
 * Multiple editors can be defined: editor, deputy editor and section
   editors
@@ -175,10 +177,22 @@ also required.
 
 7.6	User forums module
 
-* registered users only can start threads
-* registered users only can reply to these threads
-* thread can searched by poster, date, time, or keyword
-* threads show author, title, replies, views, 
+* Anyone can read the contents of the forum but only registered users
+  can contribute to the disucssion
+* Users can start new threads by posting a new article
+* Users can post articles in reply to existing articles
+* Users can view articles that have been posted
+* Users can view th threads of conversations in teh forum
+* Users can view the relationship between articles
+* Administrators can delete posts and threads (if required)
+* Administrators can create topica areas
+* Users are notified by email when replies to there posts are posted
+* Users can upload small images of themselves to accompany their posts
+* Administrators must approve these images before they can be used
+* Each thread shows the number of posts, number of views and date/time
+  of last post
+* Forum threads can be searched by poster or keyword
+
 
 7.7	Links manager module
 
@@ -266,13 +280,24 @@ also required.
 
 7.18	Mailing list manager module
 
-* broadcast only mailing list manager
-* users can opt-in or out from web-page or via email
-* users can select whether to recieve HTML or text emails
-* newsletters created within web-browser, previewed and then scheduled
-  for sending
-* must be capable of handling multiple lists
-* archive of sent messages should be made available via web page
+* Administrators should be able to set up and modify announcement only
+  mailing lists
+* Administrators should be able to send text and HTML newsletters to
+  all the subscribers of a single mailing list
+* Administrators should be able to create the newsletters on-line
+* Newsletters should be previewable before sending
+* Newsletter sending should be schedulable
+* Users should be able to subscribe to each mailing list of interest
+* Users should be able to unsubscribe from mailing lists that they are
+  subscribed to
+* Users should be able to store their preferences for text or HTML 
+  emails
+* Users should not be able to send mail to the list
+* Users shold not be able to see one anothers email addresses
+* Users and administrators should be able to view inforamtion about the
+  mailing lists
+* Past newsletters should be archived and should be viewable by users
+  and administrators
 
 7.19	Banner advert manager module
 
