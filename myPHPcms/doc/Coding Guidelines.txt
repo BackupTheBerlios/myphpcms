@@ -78,6 +78,7 @@ unless someone points out a better way of doing things !
    * Administration library files must be prefixed with adlib_
    * Administration modules must be prefxied with admin_
    * Admin-related library must be prefixed with lib_admin_
+   * Test scripts must be prefixed with test_
 
 3.5	SQL formatting
 
