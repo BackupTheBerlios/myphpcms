@@ -1,0 +1,100 @@
+myPHPcms Detailed Design document - Installation script
+=======================================================
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+This document describes in detail the Installation Script Module.  It
+provides information on the design of the module, the database design,
+the individual scripts, any dependencies that these scripts may have 
+and provides detailed references for each function in each file or 
+library.
+
+1.0	SCOPE
+
+Blah blah !
+
+
+2.0	REFERENCE DOCUMENTATION
+
+myPHPcms Functional Specification
+myPHPcms High Level Design document
+
+
+3.0	OVERVIEW
+
+The steps that the installation script carries out are:
+
+1.  Check for presence of a flag indicating that myPHPcms has already
+    been installed.  If found call the upgrade script otherwise call
+    the setup.php.
+    
+2.  Setup.php will display a form to allow gather the database host 
+    name and the database username and password.  The password will
+    be requested twice for verification.  Once submitted these values
+    will be written to a text file called db.cfg
+    
+3.  The page will then reload and will attempt to connect to the
+    database server.  If no connection can be established the form
+    to gather the database username, hostname and address will be
+    redisplayed so that the user can correct them.
+    
+4.  If the connection can be established then the administrator
+    sign-up and login screen should be displayed so that the overall
+    site administrator can enter their username and password and have
+    their account activiated via email.
+    
+5.  Once the user is signed in the administration directory is 
+    protected via Apache's .htaccess and .htpasswd files.
+
+
+4.0	DATABASE DESIGN
+
+Blah blah !
+
+
+5.0	SOFTWARE COMPONENTS
+
+The installation script consists of three files:
+
+$SITE_ROOT/admin/install.php
+
+	Script called by user to install myPHP.  Checks to see if an 
+	existing installation is present.  If so calls upgrade.php 
+	else calls setup.php
+
+$SITE_ROOT/admin/setup.php
+
+	Sets up new installation from scratch.
+
+$SITE_ROOT/admin/upgrade.php
+
+	Upgrades existing installation.
+	
+$SITE_ROOT/admin/db.cfg
+
+	Text file containing database settings.
+
+$SITE_ROOT/admin/libs/lib_setup.php
+	
+	Setup library contained within the admin/libs directory.  This
+	will provide all of the functionality for the setup library.
+
+
+6.0	DEPENDENCIES
+
+This module needs access to the user sign-up and login functions.
+
+
+7.0	REFERENCE
+
+Blah blah !
+
+
+8.0	EXAMPLE
+
+Include an example of the module usage here if applicable.
+
+<ENDS>
