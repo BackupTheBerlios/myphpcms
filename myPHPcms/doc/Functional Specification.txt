@@ -1,8 +1,8 @@
 myPHPcms Functional Specification
 =================================
 
-Version 0.2
------------
+Version 0.21
+------------
 
 Author: Phil Lee
 
@@ -158,10 +158,13 @@ main development tree.
 
 7.0	SOFTWARE ENVIRONMENT
 
-The following is a list of software modules that are either included 
-within myPHPcms by default or which may be installed separately.  In
-general a module will consist of a number of files each of which will
-carry out a specific task.  
+myPHPcms should be modular to allow the addition (and removal) of
+features as required.  This should be as painless for the user to
+do as possible.
+
+In order to modularise the code a clear directory structure should
+be used into which the scripts and their associated libraries are
+installed.
 
 Functions that are common across several files should be contained 
 within a uniquely named library.  All libraries should be installed 
@@ -172,24 +175,8 @@ names should be unique in order to prevent files from different modules
 over-writing files in already in the directory.  
 
 Administration files should be placed in the admin directory whilst any
-administration-related libraries should be placed in the admin/libs
-directory.
-
-An outline of the directory structure is shown below:
-
-	$site_root		contains the bulk of the scripts for the
-	|			site
-    	|
-    	+-admin			contains configuration & administrator
-				scripts
-    		+-libs		contains admin-only libraries
-    		+-templates	contains admin-only template definitions
-    	+-doc			contains usage and design documentation
-    	+-libs			contains the actual script libraries for
-				users
-    	+-sql			contains the fragments of SQL necessary to 
-				build the tables for the various modules
-    	+-tests			contains test scripts to test the modules
+administration-related libraries should be placed in the administration
+library directory.
 
 As the whole of myPHPcms will be run off of a database, the lack of a
 database due to perhaps a server outage must be handled gracefully.
