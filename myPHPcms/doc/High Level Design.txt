@@ -192,9 +192,9 @@ the users browser.
 4.7	Access logging module
 
 The design requirements for the Access Logging module specified in the
-Functiional Specification document can be divided into three main 
-sections.  These are (1) data gathering, (2) data processing and 
-reporting and (3) other administration tasks.
+Functional Specification document can be divided into two main areas.
+These are (1) data gathering and (2) data processing and reporting.
+Both are described in more detail in this section.
 
 4.7.1	Data gathering
 
@@ -212,40 +212,87 @@ logged has been determine this is quick and easy to do.
 
 Purely static HTML pages are much more difficult to deal with since it
 is likely that the server on which they are hosted may not be capable 
-of executing server-side scripting langauges.  As a result a rather
+of executing server-side scripting languages.  As a result a rather
 ingenious solution needs to be developed.
 
 The solution chosen is to use a GIF image that is in fact a PHP script
 that is hosted on a server that can execute PHP scripts.  This GIF 
 image is called by the HTML file allowing access to the HTTP enviroment
 variables which can then be logged in the database by the PHP script.
-Once the data has been collected a transparent 1 pixel wide by 1 pixel 
-high GIF image is returned to the browser.  To prevent caching of the
-image which would defeat this technique a random value is attached to a
-variable which is sent in the URL that requests the GIF.  This will be 
-carried by using Javascript.
+Once the data has been collected a transparent GIF image 1 pixel wide 
+by 1 pixel high is returned to the browser.  To prevent caching of the
+image (which would defeat this technique) a random value is attached to 
+a variable which is sent in the URL that requests the GIF.  This will 
+be carried out using Javascript.
 
-GIF or script placed at top of file shows that file was accessed but no
-way of knowing if user waited for page to load or if they clicked cancel.
-Could add second call at bottom of page - easy in PHP, could even time
-page creation but not so easy in HTML.  How to do ?
+Knowing which pages the user requested is useful but of even more use
+is knowing the route through the website that the user takes.  In 
+theory this information can be deduced from the IP address of user and
+the page referrers.  However this is risky because if two users from
+the same ISP browse the site simultaneously then their IP address will
+appear to be the same.  As a result the logging system will confuse
+their movements through the site.
 
-Browser version, platform and OS identification -> lib for easy upgrade
-Hard-coded identification rather than db search to speed up execution
-Unknown UA emails to admin for identification and updating of libs
+A far better method would be to track the individual web-browsers and 
+this can be done through the use of PHP sessions.  Any PHP script can
+start a session so technically there is no reason why the pseudo-GIF 
+image, which is in fact a PHP script, cannot be configured to start a
+session and then place that into the database.
+
+Knowing the the users are visiting the site and are navigating their 
+way around it is useful but the final piece in the jigsaw would to find
+out how long the pages take to load.  For the pure PHP pages this could 
+be carried out by a total of two database INSERTS - one at the very top 
+of the page and one at the very end.  By obtaining timestamps and 
+calculating the difference the overall page load time could be 
+determined.  The only drawback is that this would require two database
+INSERTS.  An additional benefit of this approach is that cancelled 
+pages could be detected because the second timestamp would not be 
+present.
+
+The same information should be available for HTML pages as well.  This
+may require the use of two separate GIF files linked together by a 
+common session identifier and page name.  This needs further 
+investigation.
+
+Having determine the pages that the users view, their viewing habits 
+and amount of tolerance to slow loading pages, their preference for web
+browsers should also be detected.  This can be done by obtaining the
+browsers user agent and then parsing this.  Any user agents that
+cannot be identified should be emailed to the master site administrator
+for identification and upgrading of the system.  Since new browsers are 
+released fairly frequently the browser detection code should be 
+contained in a separate library so that it may be upgraded without 
+having to take the entire system down.  
+
+The user agents could be stored in a database but in order to minimise
+the load on the database the decision has been taken to hard-code the
+detection routine.
 
 4.7.2	Data processing and reporting
 
-Database queried by admin whenever statistics required to use latest results
-Comprehensive reporting options and timescales available
-Caching of reverse DNS lookups allows faster queries second time around.
-Creation of output should be through lib_html.php only
+Unlike some logging systems, this one will only query the database when
+requested to by the channel or master administrator.  This allows the
+latest results to be used and prevents decisions being made on out of
+date data.
 
-4.7.3	Other administration tasks
+In order to provide maximum flexibility all queries will be able to be
+run over various time periods ranging from 'this day' to 'this week' to
+'this year'.
 
-Channel_id is logged on each access so allowing data to be processed on channel
-by channel basis by channel admins.  Master site admin can look at all
-data.
+Where external data is required for analysis, for example where the host
+name is resolved via a reverse DNS lookup, then this data will be cached
+in order to speed up subsequent queries.
+
+Possible queries that could be run against the database range from the 
+very simple such as "total number of page views since start of logging"
+to "show the path through the site of user number 3 today".  Exactly 
+how these queries will be constructed, processed and reported can be
+found in the Access Logging Detailed Design document.
+
+All output from the access logging module will be created as a local
+template in the templating system through the use of the HTML library.
+
 4.8	Templating module
 
 To minimise the number of templates for a given number of pages any 
