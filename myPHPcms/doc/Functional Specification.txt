@@ -1,38 +1,44 @@
 myPHPcms Functional Specification
 =================================
 
-Version 0.1
+Version 0.2
 -----------
 
 Author: Phil Lee
 
 EXECUTIVE SUMMARY
 
-This Functional Specification specifies the functionality in the 
-project myPHPcms which is a PHP/MySQL based content management system.
-It has been designed from the outset to make the best of the hardware
-that it runs on and to be easy to set-up and administer.
+This Functional Specification specifies the functionality required in
+the project myPHPcms which is a PHP/MySQL based content management 
+system (CMS).  It has been designed from the outset to make the best 
+of the hardware that it runs on and to be easy to set-up and 
+administer.
 
 myPHPcms has been designed to allow the easy creation of feature-rich
-dynamic websites.  It recognises that not all web-masters want all of
-the features that are available in the full package.  It does this by
-being split into core functionality and additional modules that extend
-the site capabilities.
+dynamic websites by allowing webmasters to install only the modules
+that they want in addition to the core system modules.  Additional
+modules can be installed at any time.
 
 The core functionality consists of a templating system , an HTML 
 library for the generation of HTML on-the-fly, a caching module, a
 browser detection system, an automated installation procedure, a
-user sign-up and authentication module, and a news submission/display
-module.
+user sign-up and authentication module, site and channel administration
+tools and the core CMS system.
 
 The use of a templating system and an HTML library means that the 
-logical code and presentation code (HTML) are entirely separated.  
-Caching of the most frequently requested pages will result in a 
-speed increase through the reduction in database requests.
+logical code and presentation code are entirely separated.  Caching 
+of the most frequently requested pages will result in a speed increase
+through the reduction in database requests.
 
 Additional modules will be available to allow the webmaster to offer
 forums, news and reviews, user comments, mailing lists and user
 management capabilities.
+
+myPHPcms will be written so that multiple channels can be delivered 
+from the same server.  A top level administrator will have control over
+the creation of sub-sites or channels.  Individual channels will be
+administered by separate administrators appointed by the top-level
+administrator.
 
 
 1.0	SCOPE
@@ -51,10 +57,10 @@ offers:
 	* Access logging module
 	* User sign-up and login module
 	* Installation scripts
-	* Site admininstration module
+	* Site administration module for overall site and channels
 	* Core Content Management System functions (news, stories, reviews)
 
-Additional modules will allow the expansion of the sites capabilities to
+Additional modules will allow the expansion of the channel capabilities to
 include (but not be limited to):
 	
 	* User comments on stories, articles, reviews etc
@@ -73,7 +79,7 @@ require database access and will comprise several scripts, some of
 which will allow the administration of the module to a selected group
 of users.  The installation of the relavent database tables and the
 location of the scripts into the correct directories will all be taken
-care of automatically.
+care of automatically by an install script.
 
 Some Content Management Ssystems mix the logical code with the code
 that handles the presentation of the site to the user which makes
@@ -101,10 +107,10 @@ specifications contained in Section 7 of this document.
 
 3.0	HARDWARE REQUIREMENTS
 
-The hardware requirements are modest - any server capable of running
-Apache, MySQL and PHP simultaneously should be able to run myPHPcms.  
-However, in order to improve the user experience, the fastest hardware
-available should be used.
+The hardware requirements are modest - any server capable of running 
+recent versions of Apache, MySQL and PHP simultaneously should be able 
+to run myPHPcms.  However, in order to improve the user experience, 
+the fastest hardware available should be used.
 
 
 4.0	SOFTWARE REQUIREMENTS
@@ -113,23 +119,24 @@ Any recent version of Linux (2.2.14 or higher) can be used.  Recent
 versions of Apache (1.3.17 or higher) and MySQL (3.23.27 or higher) are
 also required.
 
-All code will be developed on a machine that has been compiled with a
-standard installation of Apache, PHP and MySQL - no additional modules
-or extra compilation switches will be used.  This will allow myPHPcms 
-to be installed on as many machines as possible.
+All code will be developed on a machine that has a standard 
+installation of Apache, PHP and MySQL - no additional modules or extra
+compilation switches will be used.  This will allow myPHPcms to be 
+installed on as many machines as possible.
 
 
 5.0	GENERAL REQUIREMENTS AND ASSUMPTIONS
 
 myPHPcms requires the following:
 
+   * Adequate disk space to install the scripts that comprise myPHPcms
+   * Web browser access to the directory where the administration 
+     scripts are located to allow the creation of the appropriate 
+     configuration files.
    * Access to database server running MySQL (either the same machine
      or on another accessible networked machine)
    * Permission to allow creation and access a database and tables on
      this machine
-   * Adequate disk space to install the scripts that comprise myPHPcms
-   * No detailed knowledge of MySQL or PHP is required to set-up myPHPcms
-     the software as an INSTALL script is provided.
 
 
 6.0	SECURITY ISSUES
@@ -141,9 +148,8 @@ allow it to be implemented on as many servers as possible.
 In order to achieve this level all known exploits must be prevented.  
 This will require knowledge of the various exploits and the means to 
 their prevention.  A list of measures that must be taken to avoid 
-introducing potential exploits into the code can be found in the High 
-Level Design document.  A more detailed list can be found in the Coding
-Standards document.
+introducing potential exploits into the code can be found in the Coding
+Guidelines document.
 
 Any code that is written by external authors MUST adhere to the coding
 standards otherwise the contributed code will not be accepted into the
@@ -162,8 +168,8 @@ within a uniquely named library.  All libraries should be installed
 into the main libs directory.
 
 Other scripts should be installed in the top level directory and their 
-names should be unique in order to files from different modules over-
-writing files in already in the directory.  
+names should be unique in order to prevent files from different modules
+over-writing files in already in the directory.  
 
 Administration files should be placed in the admin directory whilst any
 administration-related libraries should be placed in the admin/libs
@@ -171,15 +177,18 @@ directory.
 
 An outline of the directory structure is shown below:
 
-	$site_root	contains the bulk of the scripts for the site
+	$site_root		contains the bulk of the scripts for the
+	|			site
     	|
-    	+-admin			contains configuration & administrator scripts
+    	+-admin			contains configuration & administrator
+				scripts
     		+-libs		contains admin-only libraries
     		+-templates	contains admin-only template definitions
     	+-doc			contains usage and design documentation
-    	+-libs			contains the actual script libraries for users
+    	+-libs			contains the actual script libraries for
+				users
     	+-sql			contains the fragments of SQL necessary to 
-    			 	build the tables for the various modules
+				build the tables for the various modules
     	+-tests			contains test scripts to test the modules
 
 As the whole of myPHPcms will be run off of a database, the lack of a
@@ -189,15 +198,15 @@ database due to perhaps a server outage must be handled gracefully.
 
 * Separates HTML from PHP by replacing HTML with series of calls to a
   library that creates the HTML (so no HTML appears anywhere in code).
-* Dynamically generated html can be applied to local templates so that
+* Dynamically generated HTML can be applied to local templates so that
   same template within webpage can have different contents according to
-  logic within site.
-* Site administrator needs simple tool to convert from raw HTML to the
-  calls necessary to contruct the HTML by the library
+  logic within channel.
+* Channel administrator needs simple tool to convert from raw HTML to 
+  the calls necessary to contruct the HTML by the library
 * Form based HTML editor allows cut and paste of HTML from eg 
   Dreamweaver which is then converted into PHP calls and is displayed
   in another form page
-* Code is correctly indented
+* Code is correctly indented (formatted)
 * HTML library supports common HTML tags
 * HTML library will support Cascading Style Sheets
 * Code produced should be browser neutral and should validate using any
@@ -205,40 +214,50 @@ database due to perhaps a server outage must be handled gracefully.
 
 7.2	Site administration module
 
-* Administration scripts stored in protected directory
-* Only administrator can run the scripts
+* Administration scripts stored in protected directory using the .htaccess
+  and .htpasswd files
+* Only channel administrators can run the scripts
 * Administration scripts for individual modules added by each module
   installation script
-* Administration scripts for each installed module are added to the
-  admininstration screen automatically
-* Multiple sites can be handled
-* Each site administrator has limited control over their own site
-* Main administrator has total control
-* Each site emails are prefixed by brief descriptor eg MTB-Wales or STM
-* Set configuration option, eg Require approval of user images
+* Links to the administration scripts for each installed module are 
+  added to the admininstration screen automatically
+* Multiple channels can be handled
+* Each channel administrator has full control over their own channel
+* Main administrator has control only to create skeleton new channels
+* Each channels emails are prefixed by brief descriptor eg MTB-Wales or STM
+* Channel configuration options, eg Require approval of user images, 
+  are stored separately for each channel
+* Channel administrator can get basic information about channel eg 
+  number of registered users, number of story views, total number of 
+  articles stored etc
+* Channel administrator can disable certain users if required on their
+  channel only
 
-7.3	Database installation script
+7.3	Overall installation script
 
 * Installation procedure requires unpacking of archive into a suitable
   directory on the web-server
-* A configuration file will need to be edited to set database hostname,
-  database name, database user and password.
-* Pointing a web-browser to the setup script will take these values and
-  will creates the necessary tables (as per phpWebSite)
-* once completed, user will be given advice on securing their site
+* Pointing a web-browser to the setup script will take display a form 
+  that allows the database server, name, username and password to be
+  entered.  These will be written to the configuration file.  The top
+  level administrators name username and password can then be entered
+  and validated via email.  The admin scripts will then be password
+  protected by .htaccess and .htpasswd files.
+* The scripts will then create the database tables necessary for the
+  functioning of the site.
+* Once completed, user will be given advice on securing their site
   installation  
   
 7.4	CMS module
 
-* Workflow model: template designer->author->editor->moerator->user
-* Registered site users can opt-in as writers
+* Workflow model: template designer->author->editor->moderator->user
+* Registered channel users can opt-in as writers
 * Requests for story commissions can be listed to registered writers only
 * Commissioned stories can be marked as taken
-* News, features etc contributed directly (not comissioned)
+* News, reviews etc contributed directly (not comissioned)
 * Category type selected by author when submitting
-* Authors can work on story on-line using web-form.  Images can be
-  uploaded and are kept with the story.
-* Multiple ownership (up to 4 authors) allows co-authoring
+* Authors can work on story on-line using web-form.
+* Multiple ownership allows co-authoring
 * Editor can review stories once author has released it for review.
 * Editor can re-assign submission to different area ie news->feature
 * Reviewers notified via email
@@ -248,21 +267,29 @@ database due to perhaps a server outage must be handled gracefully.
 * If approved by editor story can be scheduled for publication
 * On final sign-off editor decides key-words for search function
 * Revision history of document available at all times
-* Editor can also identify similar stories
+* Documents can be checked out for editing by single author at a time
+* Editor can also identify similar stories when approving for 
+  publication
 * Multiple stories can be queued for publication 
 * Multiple editors can be defined: editor, deputy editor and section
   editors
 * Editor comments to writer are stored separately
-* Version information for story is also stored
-* Images etc are stored in gallery directory for each site_id.  Database
+* Revision information for story is also stored
+* Images etc are stored in gallery directory for each channel.  Database
   stores filename, size, type and description
 * Writer profile available with story when published
-* System can handle multiple sites
+* System can handle multiple channels
 * Should allow users to select printable version of a document/story
 * Should allow long documents to be split over several pages
 * Document life can be defined (permanent, expires or repeats)
-* Actions to take if docuent reaches end of life can be selected eg 
+* Actions to take if document reaches end of life can be selected eg 
   archive, delete, email for update
+* No knowledge of HTML required to enter content into templates
+* Contributed pages may have the following states: new, saved, waiting for
+  approval, approved, declined, expired, published, page expired, page
+  deleted
+* Whenever registered user logs in who has a role eg editor, moderator etc
+  their outstanding tasks are listed
 
 7.5	User comments module
 
@@ -271,9 +298,9 @@ database due to perhaps a server outage must be handled gracefully.
 * Responses must be displayed in threaded manner
 * Number of posts, time/date of last post, number of views are displayed
   next to comment heading
-* username and IP address of user that posted is stored in database
-* Administrators can deleted comments if required
-* System can handle multiple sites
+* Username and IP address of user that posted is stored in database
+* Administrators can delete comments if required
+* System can handle multiple channels
 
 7.6	User forums module
 
@@ -292,7 +319,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Each thread shows the number of posts, number of views and date/time
   of last post
 * Forum threads can be searched by poster or keyword
-* System can handle multiple sites
+* System can handle multiple channels
 
 7.7	Links manager module
 
@@ -307,7 +334,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Links not displayed in database unless admin has approved it
 * Number of visits to given link is stored
 * Users can look at the most popular links
-* System can handle multiple sites
+* System can handle multiple channels
 
 7.8	Access logging module
 
@@ -315,7 +342,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Must be able to detect search engine spiders
 * Should be able to determine platform
 * Should be able to determine the operating system
-* Should be usuable from PHP and html pages (to allow caching)
+* Should be usable from PHP and HTML pages (to allow caching)
 * Should be able to email unknown user agent strings to site admin
 * Users should not be aware of its presence
 * Administrator should be able to look at results over different time 
@@ -323,9 +350,9 @@ database due to perhaps a server outage must be handled gracefully.
   month, this quarter, this year, last year
 * Reporting function should provide the following information:
 	* total files requested
-	* total hits on site
+	* total hits on channel
 	* total pages served
-	* total visits to site
+	* total visits to channel
 	* total unique sites that have visited
 	* total unique URL's served
 	* total unique referers
@@ -340,16 +367,18 @@ database due to perhaps a server outage must be handled gracefully.
 	  began
 * Administrator should be able to see which pages are most popular, least
   popular, top referers, top exit pages, top search queries etc
-* System can handle multiple sites
+* System can handle multiple channel
 
 7.9	Templating module
 
 * Administrators can create/edit/delete templates
-* Templates are specific to different sites
-* Site 0 is reserved for top-level administration templates only
+* Templates are specific to different channels
+* Channel id=0 is reserved for top-level administration templates only
+* First hosted channel will have channel_id=1, second 2 etc
 * Read-only admin and default templates
 * All modifications can be completed from a web-browser
-* New or modified templates can be previewed before going live on site
+* New or modified templates can be previewed before going live on 
+  channel
 * Template definitions stored in session file to avoid MySQL queries
   to retrieve them for every page load
 * Templates can be defined as permanent or time-decaying
@@ -360,34 +389,40 @@ database due to perhaps a server outage must be handled gracefully.
 7.10	User sign-up and login module
 
 * Users should be able to register a username and password
-* Restrictions on username and password should be enforced
+* Process should be register-> confirm via email -> login -> logout
+* Username should be email address
+* Username (email address) should be checked or correct format
+* Restrictions on password should be enforced
 * Passwords will be stored in the database in an encrypted form for 
   security
 * User should be able to log with the details that they registered with
-* Users should be able to log out when they have inished using the 
-  site.  If possible users should be automatically logged out after a
-  pre-defined period of inactivity.
-* Site needs to check if user is logged in and restrict access to parts
-  of the site for authorised users only.
+* Users should be able to log out when they have finished using the 
+  channel.  If possible users should be automatically logged out after 
+  a pre-defined period of inactivity.
+* Channel needs to check if user is logged in and restrict access to 
+  parts of the channel for authorised users only.
 * Users should be able to update their passwords.
 * Users should be able to reset or apply for new passwords if they
   forget their current one.
-* Users should be able to submit small images of themselves hich will
+* Users should be able to submit small images of themselves which will
   be used to identify them in articles and forum postings.  These
-  images will be les than 3KB and will be named after the unique user
+  images will be less than 3KB and will be named after the unique user
   id eg 3142.gif
 * Administrators must approve these images before they can be used.  An
-  email will be automatically sent (lthough this can be turned of in the
-  admin module).
+  email will be automatically sent (although this can be turned off in
+  the admin module).
 * Users will be able to provide brief biographic details about 
   themselves including: sex, DOB, homepage, location.
 * System can handle multiple sites
-* Users fall into 1 of 3 categories: visitor, contributor, editor
+* Users fall into 1 of 3 groups: visitor, contributor, editor.  Appointed
+  by overall channel admin.
 
 7.11	Polls module
 
-* Administrator can enter single question and up to 5 possible answers.
-* Administrator can set when poll will be active and when it will close
+* Channel administrator can enter single question and up to 5 possible 
+  answers.
+* Channel administrator can set when poll will be active and when it 
+  will close
 * Only registered users can vote in the polls
 * If unregistered user attempts to vote they are directed to login page
 * Users can vote on each poll once per day only - user_id and timestamp
@@ -405,27 +440,26 @@ database due to perhaps a server outage must be handled gracefully.
   before the poll closes.
 * Script should not be tripped up by "divison by zero" errors as a 
   result of no votes being cast.
-* System can handle multiple sites
+* System can handle multiple channels
 
 7.12	Page caching module
 
 * The page caching system should be an integral part of the templating
   system and should not be created as a standalone feature although it
   can be turned on and off for individual pages.
-* Caching should be selectable on a page by page basis.  The site as seen
-  by a non-logged user should be cached as the minimum.  The age of the
+* Caching should be selectable on a page by page basis.  The age of the
   cached version before it expires should be selectable too.
 * If a page is set to be cached and it is requested the cache directory
   should be checked for a cached copy to avoid unnecessary database calls
 * If a cached copy is NOT found then all of the HTML code for the page
   should be written to a file which should then be served to the browser.
-  This file code shoudl also be written to a text file and placed in the
+  This file code should also be written to a text file and placed in the
   appropriate place within the directory structure.  Any HTML links in 
   the page should be retained so that the original PHP script is called.
   This would allow the deletion of the cached version (perhaps because 
   the template is too old) and its recreation would be handled gracefully.
 * Subsequent requests for that page should be directed to the cached
-  version unless the page has expired in which case the cahced file 
+  version unless the page has expired in which case the cached file 
   should be rebuilt.
 * Updates to the page should be reflected in the cached version
 * A folder directory structure should be used so that search engines can
@@ -436,6 +470,13 @@ database due to perhaps a server outage must be handled gracefully.
 * Individual sites are cached into different directories
 * Cached pages should contain the appropriate code to log the page access
   within the logging system.
+* Might be an idea to store cached files produced by a script in a 
+  directory named after the script that produced the cached file.
+* To prevent images and multimedia elements not working these should
+  be hard-coded using absolute paths.  Alternative might be to use
+  <BASE HREF="http://www.mtb-wales.com"> tag in cached file.
+* To prevent two visitors reusing the same cached file at the same 
+  time use flock().
   
 7.13	Download manager module
 
@@ -445,14 +486,16 @@ database due to perhaps a server outage must be handled gracefully.
 * Registered users can download these files
 * Database keeps track of total downloads, time/date of last download
 * Reports most popular download
-* System can handle multiple sites
+* System can handle multiple channels
 
-7.14	Site search module
+7.14	Channel search module
 
-* Users can search site by keywords
+* Users can search channel by keywords
 * Administrators generate keywords when article/story/review/
   feature approved for publication
-* System can handle multiple sites
+* System can handle multiple channels
+* List of common words (noise words) not included in database
+* Should also store all searches for analysis by channel admin
 
 7.15	Events module
 
@@ -461,14 +504,14 @@ database due to perhaps a server outage must be handled gracefully.
   logged.
 * All users can view contents of calender
 * Events can be stored under pre-set categories
-* Only administrator can create/modify/delete categories
+* Only channel administrator can create/modify/delete categories
 * Calender is shown in 'desk calender' style.
 * Day with event is shown by hyperlinked day number.
 * Users can click on event to get more information
 * Once event is over poster should be automatically asked for report
 * What's On box should show upcoming events
 * Users can search based on categories or time period
-* System can handle multiple sites
+* System can handle multiple channels
 * Navigation should be based on "page-turning" metaphor so that the
   current month is displayed with arrows to previous and next months
 * Must be able to handle different server/browser timezones otherwise
@@ -476,11 +519,12 @@ database due to perhaps a server outage must be handled gracefully.
 
 7.16	Mailing list manager module
 
-* Administrators should be able to set up and modify announcement only
-  mailing lists
-* Administrators should be able to send text and HTML newsletters to
-  all the subscribers of a single mailing list
-* Administrators should be able to create the newsletters on-line
+* Channel administrators should be able to set up and modify 
+  announcement only mailing lists
+* Channel administrators should be able to send text and HTML 
+  newsletters to all the subscribers of a single mailing list
+* Channel administrators should be able to create the newsletters on-
+  line
 * Newsletters should be previewable before sending
 * Newsletter sending should be schedulable so that the newletter can
   be prepared off-line and sent a few days later.
@@ -489,39 +533,40 @@ database due to perhaps a server outage must be handled gracefully.
   subscribed to quickly.
 * The email address that the newsletter was sent to should be included
   at the bottom of the email
-* Administrator should be able to define standard headers and footers
-  for use in newsletters
+* Channel administrator should be able to define standard headers and 
+  footers for use in newsletters
 * Users should be able to store their preferences for text or HTML 
   emails
 * Users should not be able to send mail to the list although if they do
   they will get a polite reply directing them to use the forums on the
-  site !
+  channel !
 * Users should not be able to see one anothers email addresses
 * Users and administrators should be able to view inforamtion about the
   mailing lists
 * Past newsletters should be archived and should be viewable by users
   and administrators
-* System can handle multiple sites
+* System can handle multiple channels
 
 7.17	Banner advert manager module
 
-* manage multiple clients
-* each client should have their own login
-* manage multiple banners per client
-* banners cane be of any size
-* view daily, overall and summary statistics
-* send statistics to clients via email
-* use HTML, GIF, JPEG and PNG-banners
-* show random, pre-defined or HTML/image banners
-* activiate and de-activiate individual banners
-* system can handle multiple sites
-* as clients approach number of purchased impressions they are sent
+* Manage multiple clients
+* Each client should have their own login
+* Manage multiple banners per client
+* Banners cane be of any size
+* View daily, overall and summary statistics
+* Send statistics to clients via email
+* Use HTML, GIF, JPEG and PNG-banners
+* Show random, pre-defined or HTML/image banners
+* Activiate and de-activiate individual banners
+* System can handle multiple sites
+* As clients approach number of purchased impressions they are sent
   email reminder to renew
-* banners can be stored locally or remotely
-* banners can be set to expire either within given perio (min 1 day) or
+* Banners can be stored locally or remotely
+* Banners can be set to expire either within given perio (min 1 day) or
   after certain number of impressions
-* should be able to serve ads even if database is down through use of
+* Should be able to serve ads even if database is down through use of
   caching
+* Should be able to handle multiple channels
   
 7.18	User rating system
 
@@ -530,10 +575,11 @@ database due to perhaps a server outage must be handled gracefully.
 * Displays number of users that have rated the page and the average 
   rating that they have given it
 * Graphical and textual summary
+* Should be able to handle multiple channels
 
 8.0	PERFORMANCE
 
-* Overall site designed to minimise number of database hits
+* Overall application designed to minimise number of database hits
 * Almost all content is generated and stored statically unless it is
   needed on a regular basis
 * Achieved by combination of templating and caching system
