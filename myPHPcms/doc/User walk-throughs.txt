@@ -1,0 +1,75 @@
+myPHPcms Usage Scenarios
+========================
+
+Version 0.1
+-----------
+
+Author: Phil Lee
+
+EXECUTIVE SUMMARY
+
+This document describes typical usage patterns that will need to be
+handled by the various modules of myPHPcms.  This document has been
+put together in order to develop the capabilities and interactions
+between the various modules.
+
+1.0	Master administrator activities
+
+1.1	Installation and creation of master administrator
+
+This scenario walks through the set up of the site from the initial
+unpacking of the script archive to setting up the master site 
+administrator as a user.  It assumes a totally clean installation.  In
+other words there is no pre-existing installation of myPHPcms on the
+server.
+
+  1	Download latest version of script archive.
+  2	Extract files in archive into root directory of web server
+  3	Edit the config.php file to enter the location of the site
+	root, database username, password and host and text phrase
+	for generating security hashes.  The site domain name is
+	also required.
+  4	In web browser click on http://localhost/admin/master/setup.php
+  5	This attempts to connect to database specified
+  6	User completes form indicating their email address, real name
+	and choice of password (twice)
+  7	The password is checked for consistency and is then encrypted
+	using an md5() hash of the password and the secret phrase
+  8	This information (email address, real name, password and 
+  	security hash) is then entered into the database.  The user is
+  	marked as inactive.
+  9	An email containing an activation URL pointing to 
+	http://www.domain-name.com/admin/master_confirm.php is then 
+	sent to the user.
+ 10	Once clicked in the users email client this passes the
+	activation hash to the confirmation script.
+ 11	This script checks for entries matching the hash and if found
+	sets the user with that hash to be active.
+ 12	The script then invites the user to go to the main 
+ 	administration page by displaying the URL 
+ 	http://localhost/admin/login.php
+
+1.1	Master administrator log on
+
+1.2	Master administrator creating channel
+
+1.3	Master administrator creating sub-master administrator
+
+2.0	Channel administrator
+
+3.0	Non-logged in visitor
+
+4.0	Logged in visitor
+
+5.0	Channel editor
+
+6.0	Channel moderator
+
+7.0	Channel contributor
+
+8.0	Advertiser
+
+
+
+	
+	
