@@ -27,7 +27,12 @@ Blah blah !
 
 3.2	Site administration module
 
-Blah blah !
+* Default user is overall site admin called 'god'.  No password by
+  default
+* All user data stored in user table
+* User profiles eg editor etc stored in another table
+* Users can register themselves by only site admin can prmote users to
+  author, editor etc roles
 
 3.3	Database installation script
 
@@ -55,7 +60,8 @@ Blah blah !
 
 3.9	Templating module
 
-Blah blah !
+* Templates for admin engine have site-id=0
+* All public site-ids start at 1
 
 3.10	User registration and authentication module
 

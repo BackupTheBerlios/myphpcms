@@ -49,7 +49,7 @@ offers:
 	* Caching module
 	* Template module
 	* Access logging module
-	* User sign-up and authentication module
+	* User sign-up and login module
 	* Installation scripts
 	* Site admininstration module
 	* Core Content Management System functions (news, stories, reviews)
@@ -161,6 +161,9 @@ An outline of the directory structure is shown below:
     			 build the tables for the various modules
     	+-tests		contains test scripts to test the modules
 
+As the whole of myPHPcms will be run off of a database, the lack of a
+database due to perhaps a server outage must be handled gracefully.
+
 7.1	HTML library
 
 * Separates HTML from PHP by replacing HTML with series of calls to a
@@ -202,15 +205,17 @@ An outline of the directory structure is shown below:
   
 7.4	CMS module
 
+* Workflow model: template designer->author->editor->moerator->user
 * Registered site users can opt-in as writers
-* Story commissions can be listed to writers only
+* Requests for story commissions can be listed to writers only
 * Commissioned stories can be marked as taken
 * News, features etc contributed directly (not comissioned)
 * Category type selected by author when submitting
 * Authors can work on story on-line using web-form.  Images can be
   uploaded and are kept with the story.
+* Multiple ownership (up to 4 authors0 allows co-authoring
 * Editor can review stories once author has released it for review.
-* Editor can re-assign sumission to different area ie news->feature
+* Editor can re-assign submission to different area ie news->feature
 * Reviewers notified via email
 * Editor can preview story as it would appear when published
 * Writer profiles available to editor
@@ -228,6 +233,10 @@ An outline of the directory structure is shown below:
 * System can handle multiple sites
 * Should allow users to select printable version of a document/story
 * Should allow long documents to be split over several pages
+* Document life can be defined
+* Actions to take if docuent reaches end of life can be selected eg 
+  archive, delete, email for update
+* Multimedia content stored in central directory with database meta data
 
 7.5	User comments module
 
@@ -305,7 +314,7 @@ An outline of the directory structure is shown below:
 * Templates variables contained with HTML like tags so that WYSIWYG
   HTML editors can create them
 
-7.10	User registration and authentication module
+7.10	User sign-up and login module
 
 * Users should be able to register a username and password
 * Restrictions on username and password should be enforced
@@ -435,10 +444,10 @@ An outline of the directory structure is shown below:
 
 8.0	PERFORMANCE
 
-* Moderately detailed description of templating and caching system
 * Overall site designed to minimise number of database hits
 * Almost all content is generated and stored statically unless it is
   needed on a regular basis
+* Achieved by combination of templating and caching system
   
 9.0	DOCUMENTATION
 
