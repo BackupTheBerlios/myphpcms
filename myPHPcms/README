@@ -1,0 +1,25 @@
+This directory is the top-level directory for myPHPcms and contains 
+the bulk of the scripts that run the site.
+
+This directory contains the following files and directories:
+
+Files
+
+* index.php		The main file that calls others to construct the 
+			page.
+* error.php 		Page that is displayed to the user whenever an 
+			error occurs.  Typically this might be when the
+			database is unavailable.
+* README		This file.
+				
+Directories
+
+* admin			Contains scripts for the administration function
+* doc			Contains all design documents and help files
+* libs			Contains libraries for the running of the site
+* logging		Contains scripts to gather visitor statistics
+* sql			Contains fragments of sql that build tables for
+			database
+* tools			Contains test scripts to verify function of site
+
+<ENDS>
