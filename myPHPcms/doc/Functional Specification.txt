@@ -1,8 +1,8 @@
 myPHPcms Functional Specification
 =================================
 
-Version 0.22
-------------
+Version 0.3
+-----------
 
 Author: Phil Lee
 
@@ -57,7 +57,9 @@ offers:
 	* User sign-up and login module
 	* Installation scripts
 	* Site administration module
+	* Channel administration module
 	* Core Content Management System functions (news, stories, reviews)
+	* Diagnostics module
 
 Additional modules will allow the expansion of the channel capabilities to
 include (but not be limited to):
@@ -200,6 +202,16 @@ database due to perhaps a server outage must be handled gracefully.
 
 7.2	Site administration module
 
+* Master administrator only has rights to administer publication 
+  channels
+* Channels can be added
+* Channels can be suspended
+* Channels can be deleted
+* Master administrator can get logging information and statistics on
+  channels
+
+7.3	Channel administration module
+
 * Administration scripts stored in protected directory using the .htaccess
   and .htpasswd files
 * Only channel administrators can run the scripts
@@ -209,7 +221,6 @@ database due to perhaps a server outage must be handled gracefully.
   added to the admininstration screen automatically
 * Multiple channels can be handled
 * Each channel administrator has full control over their own channel
-* Main administrator has control only to create skeleton new channels
 * Each channels emails are prefixed by brief descriptor eg MTB-Wales or STM
 * Channel configuration options, eg Require approval of user images, 
   are stored separately for each channel
@@ -219,7 +230,14 @@ database due to perhaps a server outage must be handled gracefully.
 * Channel administrator can disable certain users if required on their
   channel only
 
-7.3	Overall installation script
+
+7.4	Diagnostics module
+
+* Logs all channel activity to individual log files
+* Logs error messages
+* Channel administrators can view error messages
+
+7.5	Overall installation script
 
 * Installation procedure requires unpacking of archive into a suitable
   directory on the web-server
@@ -234,7 +252,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Once completed, user will be given advice on securing their site
   installation  
   
-7.4	CMS module
+7.6	CMS module
 
 * Workflow model: template designer->author->editor->moderator->user
 * Registered channel users can opt-in as writers
@@ -277,7 +295,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Whenever registered user logs in who has a role eg editor, moderator etc
   their outstanding tasks are listed
 
-7.5	User comments module
+7.7	User comments module
 
 * Users can create comments against news items, stories, reviews etc
 * Only registered user can enter comments
@@ -288,7 +306,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Administrators can delete comments if required
 * System can handle multiple channels
 
-7.6	User forums module
+7.8	User forums module
 
 * Anyone can read the contents of the forum but only registered users
   can contribute to the disucssion
@@ -307,7 +325,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Forum threads can be searched by poster or keyword
 * System can handle multiple channels
 
-7.7	Links manager module
+7.9	Links manager module
 
 * Users can search for URL's by category
 * Users can search for URL descriptions by keyword
@@ -322,7 +340,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Users can look at the most popular links
 * System can handle multiple channels
 
-7.8	Access logging module
+7.10	Access logging module
 
 * Must be able to detect all common browsers
 * Must be able to detect search engine spiders
@@ -355,7 +373,7 @@ database due to perhaps a server outage must be handled gracefully.
   popular, top referers, top exit pages, top search queries etc
 * System can handle multiple channel
 
-7.9	Templating module
+7.11	Templating module
 
 * Administrators can create/edit/delete templates
 * Templates are specific to different channels
@@ -372,7 +390,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Templates variables contained with HTML like tags so that WYSIWYG
   HTML editors can create them
 
-7.10	User sign-up and login module
+7.12	User sign-up and login module
 
 * Users should be able to register a username and password
 * Process should be register-> confirm via email -> login -> logout
@@ -405,7 +423,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Users fall into 1 of 3 groups: visitor, contributor, editor.  Appointed
   by overall channel admin.
 
-7.11	Polls module
+7.13	Polls module
 
 * Channel administrator can enter single question and up to 5 possible 
   answers.
@@ -430,7 +448,7 @@ database due to perhaps a server outage must be handled gracefully.
   result of no votes being cast.
 * System can handle multiple channels
 
-7.12	Page caching module
+7.14	Page caching module
 
 * The page caching system should be an integral part of the templating
   system and should not be created as a standalone feature although it
@@ -466,7 +484,7 @@ database due to perhaps a server outage must be handled gracefully.
 * To prevent two visitors reusing the same cached file at the same 
   time use flock().
   
-7.13	Download manager module
+7.15	Download manager module
 
 * Administrators can place files into a library area ready for download
 * Files can have a description associated with them
@@ -476,7 +494,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Reports most popular download
 * System can handle multiple channels
 
-7.14	Channel search module
+7.16	Channel search module
 
 * Users can search channel by keywords
 * Administrators generate keywords when article/story/review/
@@ -485,7 +503,7 @@ database due to perhaps a server outage must be handled gracefully.
 * List of common words (noise words) not included in database
 * Should also store all searches for analysis by channel admin
 
-7.15	Events module
+7.17	Events module
 
 * Registered users can post events into the calender
 * Email address of event organiser/enterer is recorded when event is
@@ -505,7 +523,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Must be able to handle different server/browser timezones otherwise
   users will be confused by script reporting US time
 
-7.16	Mailing list manager module
+7.18	Mailing list manager module
 
 * Channel administrators should be able to set up and modify 
   announcement only mailing lists
@@ -535,7 +553,7 @@ database due to perhaps a server outage must be handled gracefully.
   and administrators
 * System can handle multiple channels
 
-7.17	Banner advert manager module
+7.19	Banner advert manager module
 
 * Manage multiple clients
 * Each client should have their own login
@@ -556,7 +574,7 @@ database due to perhaps a server outage must be handled gracefully.
   caching
 * Should be able to handle multiple channels
   
-7.18	User rating system
+7.20	User rating system
 
 * Allows users to rate a page on it's usefulness to them
 * Administrator can set scale (0->n)
