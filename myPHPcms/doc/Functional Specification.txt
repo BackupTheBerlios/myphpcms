@@ -66,6 +66,7 @@ include (but not be limited to):
 	* Events module
 	* Mailing list manager module
 	* Banner advert manager module
+	* User article reviews
 
 All of the above features will be available as a modules.  Most will
 require database access and will comprise several scripts, some of
@@ -130,6 +131,35 @@ also required.
 
 
 7.0	SOFTWARE ENVIRONMENT
+
+The following is a list of software modules that are either included 
+within myPHPcms by default or which may be installed separately.  In
+general a module will consist of a number of files each of which will
+carry out a specific task.  
+
+Functions that are common across several files should be contained 
+within a uniquely named library.  All libraries should be installed 
+into the main libs directory.
+
+Other scripts should be installed in the top level directory and their 
+names should be unique in order to files from different modules over-
+writing files in already in the directory.  
+
+Administration files should be placed in the admin directory whilst any
+administration-related libraries should be placed in the admin/libs
+directory.
+
+An outline of the directory structure is shown below:
+
+	$site_root	contains the bulk of the scripts for the site
+    	|
+    	+-admin		contains configuration & administrator scripts
+    		+-libs	contains admin-only libraries
+    	+-doc		contains usage and design documentation
+    	+-libs		contains the actual script libraries
+    	+-sql		contains the fragments of SQL necessary to 
+    			 build the tables for the various modules
+    	+-tests		contains test scripts to test the modules
 
 7.1	HTML library
 
@@ -196,6 +226,8 @@ also required.
 * Version information for story is also stored
 * Writer profile available with story when published
 * System can handle multiple sites
+* Should allow users to select printable version of a document/story
+* Should allow long documents to be split over several pages
 
 7.5	User comments module
 
@@ -238,6 +270,7 @@ also required.
 * Links open in new window
 * Opening of link is stored in logging system as exit page
 * Administrators are notified of new link submission
+* Links not displayed in database unless admin has approved it
 * Number of visits to given link is stored
 * Users can look at the most popular links
 * System can handle multiple sites
@@ -260,16 +293,17 @@ also required.
 
 7.9	Templating module
 
-* templates can be edited, deleted or modified from web-browser
-* browser allows previewing of templates
-* templates stored in session file so that they can be called back out
-  without hitting the database
-* age of templates can be set
-* template system can cope with templates for multiple sites
-* templates can be created in HTML like language.  Common HTML creation
-  tools could be used
-
-<NOT COMPLETE>
+* Administrators can create/edit/delete templates
+* Templates are specific to different sites
+* Read-only admin and default templates
+* All modifications can be completed from a web-browser
+* Templates can be previewed before going live on site
+* Template definitions stored in session file to avoid MySQL queries
+  to retrieve them for every page load
+* Templates can be defined as permanent or time-decaying
+* Age of time-decaying templates can be set
+* Templates variables contained with HTML like tags so that WYSIWYG
+  HTML editors can create them
 
 7.10	User registration and authentication module
 
@@ -294,10 +328,13 @@ also required.
 * Administrator can enter questions and maximum of 5 possible answers.
 * Administrator can set when poll will be active and when it will close
 * Users can vote on each poll once per day only
-* Users IP address is stored to prevent multiple voting on same day
+* Multiple voting prevented by use of cookie - IP logging would not work
+  since IP addresses of ISP's would be forwarded onto database
 * Users can view current results of poll
 * Users can view results of previous polls
 * System can handle multiple sites
+* Results can be viewed as graphs or as tables of numbers
+* Once voter has voted (optionall) they can be shown the results so far
 
 7.12	Page caching module
 
@@ -320,21 +357,20 @@ also required.
   
 7.13	Download manager module
 
-* manages and allows downloads by registered users only
-* keep track of who requested what and when
-* permits logging of most popular download
+* Administrators can place files into a library area ready for download
+* Files can have a description associated with them
+* Files can be schedule for release on or after certain date
+* Registered users can download these files
+* Database keeps track of total downloads, time/date of last download
+* Reports most popular download
 * System can handle multiple sites
-
-<NOT COMPLETE>
 
 7.14	Site search module
 
-* allows searching of site by keywords
-* keyword database created on article/story/review/feature basis by
-  editor when approval granted for submission
+* Users can search site by keywords
+* Administrators generate keywords when article/story/review/
+  feature approved for publication
 * System can handle multiple sites
-
-<NOT COMPLETE>
 
 7.15	Events module
 
@@ -385,6 +421,17 @@ also required.
 * system can handle multiple sites
 * as clients approach number of purchased impressions they are sent
   email reminder to renew
+* banners can be stored locally or remotely
+* banners can be set to expire either within given perio (min 1 day) or
+  after certain number of impressions
+  
+7.18	User rating system
+
+* Allows users to rate a page on it's usefulness to them
+* Administrator can set scale (0->n)
+* Displays number of users that have rated the page and the average 
+  rating that they have given it
+* Graphical and textual summary
 
 8.0	PERFORMANCE
 
@@ -392,7 +439,12 @@ also required.
 * Overall site designed to minimise number of database hits
 * Almost all content is generated and stored statically unless it is
   needed on a regular basis
+  
+9.0	DOCUMENTATION
 
+All modules will be fully documented by a detailed design document, a
+README file and an INSTALL file.  MySQL table definitions will also be
+supplied as will interfaces to the libraries.
 
-APP A	TECHNICAL NOTES
+<ENDS>
 
