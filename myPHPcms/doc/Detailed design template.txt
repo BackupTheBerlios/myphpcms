@@ -1,8 +1,8 @@
 myPHPcms Detailed Design document - HTML Library
 =================================================
 
-Version 0.1
------------
+Version 0.11
+------------
 
 EXECUTIVE SUMMARY
 
@@ -23,6 +23,33 @@ myPHPcms High Level Design document
 
 Blah blah !
 
+3.1	Requirements
+
+3.1.1	General requirements and assumptions
+
+Put any general requirements here, eg this module must place minimal
+load on the database.
+
+3.1.2	Other detailed requirement
+
+
+3.2	Solution
+
+3.1.1	General requirements and assumptions
+
+Describe how the reauirements made above will be achieved.
+
+3.1.2	Other detailed requirements
+
+
+3.3	Usage
+
+Describe the module will be used by the user.
+
+3.4	Administration
+
+Describe how the module will be administered.
+
 
 4.0	DATABASE DESIGN
 
@@ -33,10 +60,6 @@ The module requires access to the following database tables:
 	Description of the database with columns information, types
 	and typical values.
 
-4.2	database_table_2
-
-	Description of the database with columns information, types
-	and typical values.
 
 5.0	SOFTWARE COMPONENTS
 
@@ -46,13 +69,11 @@ The BLAH BLAH system/module consists of X files:
 
 	Insert a brief description of the script or file here.
 	
-5.2	$SITE_ROOT/path/to/script2
-
-	Insert a brief description of the script or file here.
 
 6.0	DEPENDENCIES
 
-Blah blah !
+Describe any dependencies that the module may have.  For example it may
+need access to the user authentication module.
 
 
 7.0	REFERENCE
@@ -62,6 +83,7 @@ Blah blah !
 7.1.1	Function 1
 
 	Description of function purpose, usage, inputs and outputs.
+	Include any relevant SQL queries.
 
 
 8.0	EXAMPLE
