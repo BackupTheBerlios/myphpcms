@@ -26,7 +26,9 @@ Files
 				easier !
 * Release Schedule.txt		Details functionality on a release by
 				release basis.
-* README			this file.
+* User registration.txt		Detailed dsign document for the User
+				registration and authentication module
+* README			This file.
 				
 Directories
 
