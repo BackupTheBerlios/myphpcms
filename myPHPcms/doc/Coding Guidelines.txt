@@ -171,6 +171,10 @@ unless someone points out a better way of doing things !
    * All directories should have a README file that covers: purpose of
      directory, one line comment on each file and anything that might 
      be useful to people.
+   * Code libraries should be divided into two sections to indicate 
+     those functions that are called from outside of the library by
+     other scripts and those functions that are called only from within
+     the library.
 
 
 4.0	SECURITY ISSUES
