@@ -301,7 +301,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Should be able to determine platform
 * Should be able to determine the operating system
 * Should be usable from PHP and HTML pages (to allow caching)
-* Should be able to email unknown user agent strings to site admin
+* Should email unknown user agent strings to site admin
 * Users should not be aware of its presence
 * Administrator should be able to look at results over different time 
   periods eg today, yesterday, this week, last week, this month, last
@@ -325,7 +325,9 @@ database due to perhaps a server outage must be handled gracefully.
 	  began
 * Administrator should be able to see which pages are most popular, least
   popular, top referers, top exit pages, top search queries etc
-* System can handle multiple channel
+* System can handle multiple channels
+* Would be desireable for the logging system to record the amount of time
+  taken for a page to be accessed each time it is accessed
 
 7.8	Templating module
 
@@ -501,6 +503,9 @@ database due to perhaps a server outage must be handled gracefully.
 * System can handle multiple channels
 * List of common words (noise words) not included in database
 * Should also store all searches for analysis by channel admin
+* Results should be split up into manageable chunks of say 20 items.
+  Each item should have a short summary text with it to aid the user in
+  locating relevant results within the overall result set.
 
 7.17	Events module
 
