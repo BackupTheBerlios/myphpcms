@@ -122,7 +122,7 @@ Re-write explaing how these objectives are acheived.
 
 3.2.2	Browser and version
 
-Re-write explaing how these objecties are acheived.
+Re-write explaining how these objecties are acheived.
 
 3.2.3	Browser platform
 
@@ -132,13 +132,13 @@ Re-write explaing how these objecties are acheived.
 
 3.2.4	Operating system
 
-Re-write explaing how these objecties are acheived.
+Re-write explaing how these objectives are acheived.
 
 * Should be able to determine the operating system
 
 3.2.5	Page loading time
 
-Re-write explaing how these objecties are acheived.
+Re-write explaing how these objectives are acheived.
 
 * Would be desireable for the logging system to record the amount of time
   taken for a page to be accessed each time it is accessed
@@ -220,7 +220,7 @@ can be displayed on the page:
 
 SQL data is defined in logging.sql
 
-4.1	logging_log
+4.1	Table: myPHPcms_logging_log
 
 	+------------+--------------+------+-----+---------+
 	| Field      | Type         | Null | Key | Default |
@@ -241,7 +241,7 @@ SQL data is defined in logging.sql
 	| exit_page  | varchar(255) |      |     | unknown |
 	+------------+--------------+------+-----+---------+
 
-4.2	logging_cache
+4.2	Table: myPHPcms_logging_cache
 
 Host name and IP address data is stored in the following format in 
 MySQL in table logging_cache:
@@ -253,7 +253,7 @@ MySQL in table logging_cache:
 	| remote_host | varchar(255) |      |     | unresolved |
 	+-------------+--------------+------+-----+------------+
 	
-4.3	logging_unknown
+4.3	Table: myPHPcms_logging_unknown
 
 The user agent string is stored in the following format in the MySQL 
 table logging_unknown
@@ -392,7 +392,7 @@ administrators have access to.
 	period $timescale.  Results are limited to $max_num rows.  The 
 	returned values are presented as hyperlinks so that they may be 
 	clicked.
-
+	
 7.1.7	function top_hosts($link_id, $site_id, $timescale, $max_num)
 
 	Lists the most common hosts that request pages for site 
@@ -445,10 +445,17 @@ master site and channel administrators have access to it.
 	channel over the timescale provided.    Corrects the times
 	returned for the server time difference.
 
+	SELECT hour,count(*) as hourly_requests FROM logging_log WHERE 
+	site_id='$site_id' $sub_sql GROUP BY hour
+
 7.2.2	function browser_types($link_id, $site_id, $timescale)
 
 	Determines the page views by browser type for the channel
 	specified over the timescale provided.
+
+	SELECT browser, ver, platform, count(*) AS num_browsers FROM 
+	logging_log WHERE site_id='$site_id' $sub_sql GROUP BY browser,
+	ver, platform ORDER BY num_browsers DESC
 
 7.2.3	function browser_unknown($link_id, $site_id, $timescale)
 
@@ -464,6 +471,10 @@ master site and channel administrators have access to it.
 	descending order to show the most popular.  The maximum number
 	returned can be controlled.
 
+	SELECT page,count(*) AS top_pages FROM logging_log WHERE site_id
+	='$site_id' $sub_sql GROUP BY page ORDER BY top_pages DESC LIMIT 
+	$max_num
+
 7.2.5	function bottom_pages($link_id, $site_id, $timescale, $max_num)
 
 	Retrieves all of the requested URL's for the specified channel
@@ -471,10 +482,24 @@ master site and channel administrators have access to it.
 	ascending order to show the least popular.  The maximum number
 	returned can be controlled.
 
+	SELECT page,count(*) AS bot_pages FROM logging_log WHERE site_id
+	='$site_id' $sub_sql GROUP BY page ORDER BY bot_pages ASC LIMIT 
+	$max_num
+
 7.2.6	function total_page_views($link_id, $site_id)
 
 	Counts the total number of page views since logging began for
 	the specified channel.
+
+  	This function requires two calls to the database.  Firstly to 
+  	get the total number of pages:
+
+	SELECT COUNT(*) FROM logging_log WHERE site_id='$site_id';";
+	
+	and secondly to determine when logging for this site began:
+	
+	SELECT FROM_UNIXTIME(MIN(time),'%D %M %Y') FROM logging_log 
+	WHERE site_id='$site_id'
 
 7.2.7	function top_referrers($link_id, $site_id, $timescale, $max_num)
 
@@ -483,12 +508,22 @@ master site and channel administrators have access to it.
 	the most common.  The maximum number of values returned can be
 	controlled.
 
+	SELECT referrer,count(*) AS ref_count FROM logging_log WHERE 
+	referrer!='' AND referrer LIKE 'http://%' AND referrer!='unknown'
+	AND referrer NOT LIKE 'http://www.singletrack-mind.org.uk%' 
+	AND site_id='$site_id' $sub_sql GROUP BY referrer ORDER BY 
+	ref_count DESC LIMIT $max_num
+
 7.2.8	function top_hosts($link_id, $site_id, $timescale, $max_num)
 
 	Retrieves all referring IP addresses for the specified channel,
 	groups them together by IP address and lists them in descending
 	order so that the most common can be identified.  The maximum
 	number of values returned can be controlled.
+
+	SELECT ip_address,count(*) AS top_hosts FROM logging_log WHERE
+	ip_address!='unknown' AND site_id='$site_id' $sub_sql GROUP BY
+	ip_address ORDER BY top_hosts DESC LIMIT $max_num
 
 7.2.9	function searches($link_id, $site_id, $timescale, $max_num)
 
@@ -498,12 +533,30 @@ master site and channel administrators have access to it.
 	together these results to show the most common search requests.
 	The maximum number that is returned can be controlled.
 
+	SELECT referrer,count(*) AS top_searches FROM logging_log WHERE 
+	referrer LIKE '%search%' OR referrer LIKE '%query%' OR referrer 
+	LIKE '%keywords%' OR referrer LIKE '%q=%' $sub_sql GROUP BY 
+	referrer ORDER BY top_searches DESC LIMIT $max_num
+
 7.2.10	function operating_sys($link_id, $site_id, $timescale, $max_num)
 
 	Groups all requests for the specified channel over the time 
 	period specified by operating system in descending order so
 	that the most popular platform can be identified.  The maximum
 	number of results returned can be controlled.
+	
+	This function requires two database queries.  The first 
+	determines the number of requests for each platform type:
+	
+	SELECT platform, count(*) AS platform_count FROM logging_log 
+	WHERE site_id='$site_id' $sub_sql GROUP BY platform ORDER BY 
+	platform_count DESC LIMIT $max_num
+	
+	Whilst the second determines the total number of page requests
+	in the time specified.  The percentages can then be determined:
+	
+	SELECT COUNT(*) FROM logging_log WHERE site_id='$site_id' 
+	$sub_sql
 
 7.2.11	function top_entry($link_id, $site_id, $timescale, $max_num)
 
@@ -513,74 +566,112 @@ master site and channel administrators have access to it.
 	are then grouped and sorted in descending order.  The maximum
 	number of results returned can be controlled.
 
+	SELECT page,referrer,COUNT(*) AS top_entry FROM logging_log 
+	WHERE site_id='$site_id' AND referrer NOT LIKE 
+	'http://www.singletrack-mind.org.uk' $sub_sql GROUP BY page 
+	ORDER by top_entry DESC LIMIT $max_num
+
 7.2.12	function top_exit($link_id, $site_id, $timescale, $max_num)
 
 	Determines the most popular exit links reported by the exit
 	script.  These are grouped and are sorted in descending order.
 	The maximum number of results returned can be controlled.
 
+	SELECT exit_page,COUNT(*) AS totals FROM logging_log WHERE 
+	site_id='$site_id' AND exit_page LIKE 'http://%' $sub_sql 
+	GROUP BY exit_page ORDER BY totals DESC LIMIT $max_num
+
 7.2.13	function unique_visitors($link_id, $site_id, $timescale)
 
 	Determines the total number of unique session ID's for the
 	channel specified over the period specified.
 	
-	Not yet finished.
+	SELECT COUNT(DISTINCT session_id) FROM logging_log WHERE 
+	site_id='$site_id' $sub_sql
 
-7.2.14	function users_online()
+7.2.14	function fastest_pages($link_id, $site_id, $timescale, $max_num)
 
-	Determine the number of people on-line for the specified
-	channel.
+	Determine the fastest loading pages for the given channel_id
+	over the timescale specified.
 	
-	Not yet complete.
+	SELECT page, page_time FROM logging_log WHERE site_id='$site_id'
+	AND page_time!='0' GROUP BY page ORDER BY page_time ASC LIMIT
+	$max_num
 
-7.2.15	function session_length()
+7.2.15	function slowest_pages($link_id, $site_id, $timescale, $max_num)
 
-	Determines the length of each unique session.
+	Determine the fastest loading pages for the given channel_id
+	over the timescale specified.
 	
-	Not yet complete.
+	SELECT page, page_time FROM logging_log WHERE site_id='$site_id'
+	AND page_time!='0' $sub_sql GROUP BY page ORDER BY page_time 
+	DESC LIMIT $max_num
 
-7.2.16	function today()
+7.2.16	function cancelled_pages($link_id, $site_id, $timescale, $max_num)
+
+	SELECT page,count(*) AS result FROM logging_log WHERE site_id=
+	'$site_id' AND page_time='0' $sub_sql GROUP BY page ORDER BY 
+	result DESC LIMIT $max_num
+
+7.2.17	function session_rank($link_id, $site_id, $timescale, $max_num)
+
+	Determines the number of pages viewed by each unique visitor
+	over the specified timescale.
+	
+	SELECT session_id,count(*) AS result FROM logging_log WHERE
+	site_id='$site_id' AND page_time!='0' $sub_sql GROUP BY
+	session_id ORDER BY result DESC LIMIT $max_num
+
+7.2.18	function session_path($link_id, $site_id, $session_id)
+
+	List the pages viewed by the specified visitor in the order
+	that they viewed them complete with loading time.
+
+	SELECT page,page_time FROM logging_log WHERE session_id=
+	'$session_id' AND page_time!='0' $sub_sql
+	
+7.2.19	function today()
 
 	Returns SQL necessary to limit query to data for current day.
 
-7.2.17	function yesterday()
+7.2.20	function yesterday()
 
 	Returns SQL necessary to limit query to data for previous day.
 
-7.2.18	function thisweek()
+7.2.21	function thisweek()
 
 	Returns SQL necessary to limit query to data for current week.
 
-7.2.19	function thismonth()
+7.2.22	function thismonth()
 
 	Returns SQL necessary to limit query to data for current month.
 
-7.2.20	function thisquarter()
+7.2.23	function thisquarter()
 
 	Returns SQL necessary to limit query to data for current three
 	month period.
 
-7.2.21	function lastquarter()
+7.2.24	function lastquarter()
 
 	Not complete.
 
-7.2.22	function thisyear()
+7.2.25	function thisyear()
 
 	Returns SQL necessary to limit query to data for current year.
 
-7.2.23	function get_date($timescale)
+7.2.26	function get_date($timescale)
 
 	Based on the timescale specified for the query, calls the 
 	relevant function to create the SQL necessary to limit the 
 	scope of the query.
 
-7.2.24	function return_empty()
+7.2.27	function return_empty()
 
 	Error handler to fill the returned array from each function 
 	with "none" if the SQL query returns empty.  This might occur
 	if there were no data in the logging system.
 
-7.2.25	function gethostname($link_id, $ip_address)
+7.2.28	function gethostname($link_id, $ip_address)
 
 	Function to retrieve hostname from database if it's previously
 	been resolved otherwise obtains the hostname by reverse DNS 
