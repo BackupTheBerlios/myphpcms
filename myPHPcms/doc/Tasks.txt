@@ -31,6 +31,7 @@ PROJECT ADMIN
 <!-- BASE FUNCTIONALITY -->
 	
 TEMPLATE MODULE
+	Modify existing TEMPLATE_README document and turn it into the
 	Detailed Design document
 	Write administration interface
 	Modifiy existing code to conform with coding guidelines
@@ -38,9 +39,10 @@ TEMPLATE MODULE
 	templates only
 	
 HTML LIBRARY
-	Detailed Design document
+	Detailed Design document (base on HTML_README document in /docs)
 	Expand to allow usage of CSS tags
 	Modifiy existing code to conform with coding guidelines
+	Add function to format automatically generated code.
 	Create conv_html library.php
 	Create form to allow entry of raw HTML to conv_html.php
 	
@@ -56,6 +58,7 @@ CORE CMS MODULE
 	Implement version control system
 
 ACCESS LOGGING MODULE
+	Modify existing LOGGING_README file and turn it into the
 	Detailed Design document
 	Modifiy existing code to conform with coding guidelines
 	Expand capability to allow logging of robots

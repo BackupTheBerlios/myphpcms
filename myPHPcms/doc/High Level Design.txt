@@ -69,8 +69,19 @@ Blah blah !
 
 3.11	Polls module
 
-Blah blah !
-
+* Should comprise of the following:
+  polls.sql        - SQL code to create single table to store data
+  poll_vote.php    - shows latest current poll and allows voting
+  poll_show.php    - shows latest results
+  poll_results.php - allows results of old polls to be searched for
+                     and viewed
+  admin_poll.php   - administration script to create/modify/delete
+                     polls
+* Must prevent user from voting in the same poll multiple times.  Can
+  either be done using cookie or by logging their IP address (care !)
+* Should provide graphical results but not use complex PHP features 
+  like GD library as not all servers may support it.
+  
 3.12	Page caching module
 
 Blah blah !
