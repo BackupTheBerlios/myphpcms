@@ -7,22 +7,72 @@ PHP/MySQL based content management system.  It has been designed from
 the outset to make the best of the hardware that it runs on and to be
 easy to set-up and administer.
 
-The use a templating system and an HTML library the logical code and
-presentation code (HTML) are entirely separated.  Caching of the most 
-frequently requested pages will result in a speed increase through the
-reduction in database requests.
+myPHPcms has been designed to allow the easy creation of feature-rich
+dynamic websites.  It recognises that not all web-masters want all of
+the features that are available in the full package.  It does this by
+being split into core functionality and additional modules that extend
+the site capabilities.
 
-Modules to expand the site capabilities are planned so that the amount
-of functionality required can be extended beyond the basic level that
-is defined in this document.
+The core functionality consists of a templating system , an HTML 
+library for the generation of HTML on-the-fly, a caching module, a
+browser detection system, an automated installation procedure, a
+user sign-up and authentication module, and a news submission/display
+module.
+
+The use of a templating system and an HTML library means that the 
+logical code and presentation code (HTML) are entirely separated.  
+Caching of the most frequently requested pages will result in a 
+speed increase through the reduction in database requests.
+
+Additional modules will be available to allow the webmaster to offer
+forums, news and reviews, user comments, mailing lists and user
+management capabilities.
+
 
 1.0	SCOPE
 
-This document describes the myPHPcms Content Management System which is
-to be developed as an Open Source project under the GPL (GNU Public 
-License).  
+This document describes the myPHPcms Content Management System (CMS) 
+which is to be developed as an Open Source project under the GPL (GNU
+Public License).  
 
-Some CMS's mix the logical code with the presnetation code which makes
+myPHPcms allows the development of feature-rich dynamic database-driven
+websites by combining PHP with a MySQL back-end.  The core functionality
+offers:
+
+	* HTML library
+	* Caching module
+	* Template system
+	* Logging system
+	* User sign-up and authentication library
+	* News submission and display system
+	* Installation procedure
+
+Additional modules will allow the expansion of the sites capabilities to
+include (but not be limited to):
+
+	* Comprehensive admininstration and reporting functions
+	* Complete Content Management System functions (workflow, 
+	  sign-off etc)
+	* User comments on stories, articles, reviews etc
+	* Forums
+	* Links database
+	* Reviews system
+	* User Polls
+	* Download library
+	* Search function
+	* Calender system
+	* Mailing list manager
+	* Banner advert manager
+
+All of the above features will be available as a modules.  Most will
+require database access and will comprise several scripts, some of
+which will allow the administration of the module to a selected group
+of users.  The installation of the relavent database tables and the
+location of the scripts into the correct directories will all be taken
+care of automatically.
+
+Some Content Management Ssystems mix the logical code with the code
+that handles the presentation of the site to the user which makes
 modifying the default site design very difficult.  It also makes fixing
 software errors diifcult as the code is very convuluted.  Others have
 clearly been designed by software engineers and, as such, require a 
@@ -38,22 +88,12 @@ from a web interface.  Any HTML that needs to be generated on-the-fly
 can be created using an HTML generation library included and documented
 with this package.
 
->>> Add information on basic functionality.  Likely to be:
-
-* html library
-* caching
-* template system
-* logging system
-* installation procedure
-
->>> Outline basic site features necessary to engender a felling of '
-    community' amongst users
-    
->>>> Define workflow for CMS system
 
 2.0	REFERENCE DOCUMENTATION
 
-None (at this time).
+Any relevant web-based articles are listed in the individual module
+specifications contained in Section 6 of this document.
+
 
 3.0	HARDWARE REQUIREMENTS
 
@@ -62,11 +102,13 @@ Apache, MySQL and PHP should be able to run myPHPcms.  However, in
 order to improve the user experience, the fastest hardware available
 should be used.
 
+
 4.0	SOFTWARE REQUIREMENTS
 
 Any recent version of Linux (2.2.14 or higher) can be used.  Recent
 versions of Apache (1.3.17 or higher) and MySQL (3.23.27 or higher) are
 also required.
+
 
 5.0	GENERAL REQUIREMENTS AND ASSUMPTIONS
 
@@ -76,11 +118,8 @@ also required.
 * No detailed knowledge of MySQL or PHP is required to set-up the software
   as an INSTALL script is provided.
 
-6.0	SOFTWARE ENVIRONMENT
 
-* Define base modules
-* Define directory structure
-* INSTALL script to create SQL tables and set permissions
+6.0	SOFTWARE ENVIRONMENT
 
 6.1	HTML library
 
@@ -99,8 +138,15 @@ also required.
 
 * write script to create and setup default MySQL database.  Base it on
   the installation script used by phpWebSite
+* create tables using running the SQL queries with a mysql_query
+  statement
+* would still need the config.php file to be edited to point to the 
+  database
   
 6.4	CMS functions
+
+* complete work-flow and sign-off process
+* single editor, deputy editor and section editors can be defined
 
 6.5	User comment functions
 
@@ -133,7 +179,7 @@ also required.
 
 6.9	News system
 
-* must allow posting of news by registered users.
+* must allow posting of news by registered users
 * email notification to editors that story waiting
 * once approved story is posted
 * publication date can be set to automate posting
@@ -169,10 +215,10 @@ also required.
 6.14	Caching system
 
 * needs to generate static copies of as much of the website as possible
-* templating system does some of this by caching the non-chnging page layout
-  stuff and this could be extended
-* HOWEVER, caching everything into real files when requested by the server
-  would allow the indexing of the site by search engines
+* templating system does some of this by caching the non-changing page 
+  layout stuff and this could be extended
+* HOWEVER, caching everything into real files when requested by the 
+  server would allow the indexing of the site by search engines
   
 6.15	Download library
 
@@ -196,8 +242,8 @@ also required.
 * broadcast only mailing list manager
 * users can opt-in or out from web-page or via email
 * users can select whether to recieve HTML or text emails
-* newsletters created within web-browser, previewed and then scheduled for
-  sending
+* newsletters created within web-browser, previewed and then scheduled
+  for sending
 * must be capable of handling multiple lists
 * archive of sent messages should be made available via web page
 
@@ -207,7 +253,7 @@ also required.
 * tracks impressions and click-throughs
 * automatically emails client with their statistics
 * clients can buy and number of impressions.  When close to running out
-  sent email reminder
+  send email reminder
 
 
 7.0	PERFORMANCE
@@ -216,6 +262,7 @@ also required.
 * overall site esigned to minimise number of database hits
 * almost all content is generated and stored statically unless it is
   needed on a regular basis
+
 
 APP A	TECHNICAL NOTES
 
