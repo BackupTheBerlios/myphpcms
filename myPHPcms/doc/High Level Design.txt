@@ -241,19 +241,22 @@ session and then place that into the database.
 
 Knowing the the users are visiting the site and are navigating their 
 way around it is useful but the final piece in the jigsaw would to find
-out how long the pages take to load.  For the pure PHP pages this could 
-be carried out by a total of two database INSERTS - one at the very top 
-of the page and one at the very end.  By obtaining timestamps and 
-calculating the difference the overall page load time could be 
-determined.  The only drawback is that this would require two database
-INSERTS.  An additional benefit of this approach is that cancelled 
-pages could be detected because the second timestamp would not be 
-present.
+out how long the pages take to load.
 
-The same information should be available for HTML pages as well.  This
-may require the use of two separate GIF files linked together by a 
-common session identifier and page name.  This needs further 
-investigation.
+This could be done by using two PHP scripts or two GIF files, one at 
+the very top of the document and one at the bottom.  The downside to
+this approach is that it requires two database hits.  The first would
+identify the browser as before and would obtain a timestamp when the 
+page was first requested.  The browser data would be INSERT'ed into 
+the database but the page load time would be set to zero.  The second 
+database hit occurs at the end of the page loading process when the 
+MySQL data row is UPDATE'd with the overall page loading time.
+
+If the page load is cancelled or does not compete the page load time 
+value in the database will not be updated and these pages can then be
+identified by the fact that they have a zero page loading time.  This
+can be used to identify which are the most commonly cancelled or
+problematic web pages.
 
 Having determine the pages that the users view, their viewing habits 
 and amount of tolerance to slow loading pages, their preference for web
