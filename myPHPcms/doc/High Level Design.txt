@@ -84,7 +84,11 @@ Blah blah !
   
 3.12	Page caching module
 
-Blah blah !
+* Set options in each file whether to cache and if so where to put the
+  file afterwards.  Also et age of cached file.  When file loads, check
+  to see if should be cached, if so check for presnce of cached file.
+  If exists and not too old then use it else create more up to date
+  version.
 
 3.13	Download manager module
 

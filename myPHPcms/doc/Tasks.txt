@@ -27,6 +27,8 @@ DOCUMENTATION
 	
 PROJECT ADMIN
 	Define site directory structure
+	Replace all instances of site_id to channel_id
+	Prefix all MySQL tables with myPHPcms_
 
 <!-- BASE FUNCTIONALITY -->
 	
@@ -37,6 +39,9 @@ TEMPLATE MODULE
 	Modifiy existing code to conform with coding guidelines
 	Ensure that site_id=0 is used for top-level administration 
 	templates only
+	Change all references to site_id to channel_id
+	Define templates so that parent/child relationships between
+	templates can be tracked
 	
 HTML LIBRARY
 	Detailed Design document (base on HTML_README document in /docs)
@@ -51,6 +56,14 @@ SITE ADMINISTRATION MODULE
 	
 INSTALLATION SCRIPTS
 	Detailed Design document
+	Create script to get MySQL database server, username, password,
+	database name from user and write these to a configuration file
+	Create script to allow main administrator to set username and
+	password and to confirm this via email.  This is then written
+	to the .htaccess and .htpasswd files
+	Create script that then creates the default database and 
+	populates the tables so that the user can log in for the first
+	time
 	
 CORE CMS MODULE
 	Detailed Design document
@@ -73,6 +86,7 @@ PAGE CACHING MODULE
 
 USER SIGN-UP AND AUTHENTICATION MODULE
 	Detailed Design document
+	Define tables for users, groups and channels
 
 <!-- Additional modules -->
 
