@@ -98,6 +98,8 @@ PROJECT ADMIN
 	admin and Site admin modules
 	Check that modules defined on BerliOS match those required
 	Decide functionality for Alpha 1-3 and Beta 1-3 releases
+	Decide on whether to implement XHTML 1.1 in HTML library (or as
+	separate library)
 
 1.0	HTML LIBRARY
 	Create Detailed Design document (base on HTML_README document
@@ -107,7 +109,9 @@ PROJECT ADMIN
 	Add function to format automatically generated code
 	Create conv_html library.php
 	Create form to allow entry of raw HTML to conv_html.php
-	Extend to make lib_html XHTML compliant
+	Either extend to make lib_html XHTML compliant or create 
+	lib_xhtml
+	Create lib_CSS1.php
 	
 2.0	SITE ADMINISTRATION MODULE
 	Create Detailed Design document
