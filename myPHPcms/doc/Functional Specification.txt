@@ -8,10 +8,10 @@ Author: Phil Lee
 
 EXECUTIVE SUMMARY
 
-This Functional Specification defines the project myPHPcms which is a
-PHP/MySQL based content management system.  It has been designed from
-the outset to make the best of the hardware that it runs on and to be
-easy to set-up and administer.
+This Functional Specification specifies the functionality in the 
+project myPHPcms which is a PHP/MySQL based content management system.
+It has been designed from the outset to make the best of the hardware
+that it runs on and to be easy to set-up and administer.
 
 myPHPcms has been designed to allow the easy creation of feature-rich
 dynamic websites.  It recognises that not all web-masters want all of
@@ -53,7 +53,7 @@ offers:
 	* News publication module
 	* Installation scripts
 	* Site admininstration module
-	* Core Content Management System functions (workflow, sign-off)
+	* Core Content Management System functions
 
 Additional modules will allow the expansion of the sites capabilities to
 include (but not be limited to):
@@ -135,13 +135,19 @@ also required.
 
 7.1	HTML library
 
-* Create form to allow entry of HTML to convert
-* create form to display PHP required to create specified HTML
-* write library to convert HTML into PHP calls
-* include common CSS tags
-* write code formatting routine
-
-<NOT COMPLETE>
+* Separates HTML from PHP by replacing HTML with series of calls to a
+  library that creates the HTML (so no HTML appears anywhere in code).
+* Dynamically generated html can be applied to local templates so that
+  same template within webpage can have different contents according to
+  logic within site.
+* Site administrator needs simple tool to convert from raw HTML to the
+  calls necessary to contruct the HTML by the library
+* Form based HTML editor allows cut and paste of HTML from eg 
+  Dreamweaver which is then converted into PHP calls and is displayed
+  in another form page
+* Code is correctly indented
+* HTML library supports common HTML tags
+* HTML library will support Cascading Style Sheets
 
 7.2	Site administration module
 
@@ -151,6 +157,9 @@ also required.
   installation script
 * Administration scripts for each installed module are added to the
   admininsration screen automatically
+* Multiple sites can be handled
+* Each site administrator has limited control over their own site
+* Main administrator has total control
 
 7.3	Database installation script
 
@@ -183,6 +192,7 @@ also required.
 * Editor comments to writer are stored separately
 * Version information for story is also stored
 * Writer profile available with story when published
+* System can handle multiple sites
 
 7.5	User comments module
 
@@ -193,6 +203,7 @@ also required.
   next to comment heading
 * username and IP address of user that posted is stored in database
 * Administrators can deleted comments if required
+* System can handle multiple sites
 
 7.6	User forums module
 
@@ -211,6 +222,7 @@ also required.
 * Each thread shows the number of posts, number of views and date/time
   of last post
 * Forum threads can be searched by poster or keyword
+* System can handle multiple sites
 
 7.7	Links manager module
 
@@ -224,6 +236,7 @@ also required.
 * Administrators are notified of new link submission
 * Number of visits to given link is stored
 * Users can look at the most popular links
+* System can handle multiple sites
 
 7.8	Access logging module
 
@@ -239,6 +252,7 @@ also required.
   month, this quarter, this year, last year
 * Administrator should be able to see which pages are most popular, least
   popular, top referers, top exit pages, top search queries etc
+* System can handle multiple sites
 
 7.9	News publication module
 
@@ -247,6 +261,8 @@ also required.
 * once approved story is posted
 * publication date can be set to automate posting
 * links to comments section to allow comments to be posted by users
+* only safe HTML is allowed - unsafe HTML will be removed
+* System can handle multiple sites
 
 <NOT COMPLETE>
 
@@ -282,6 +298,7 @@ also required.
 * Users should be able to update their passwords.
 * Users should be able to reset or apply for new passwords if they
   forget their current one.
+* System can handle multiple sites
 
 7.13	Polls module
 
@@ -291,6 +308,7 @@ also required.
 * Users IP address is stored to prevent multiple voting on same day
 * Users can view current results of poll
 * Users can view results of previous polls
+* System can handle multiple sites
 
 7.14	Page caching module
 
@@ -308,12 +326,15 @@ also required.
   version
 * A folder directory structure should be used so that search engines can
   index the site as HTML pages
+* Caching system should be able to handle multiple sites
+* Individual sites are cached into different directories
   
 7.15	Download manager module
 
 * manages and allows downloads by registered users only
 * keep track of who requested what and when
 * permits logging of most popular download
+* System can handle multiple sites
 
 <NOT COMPLETE>
 
@@ -322,6 +343,7 @@ also required.
 * allows searching of site by keywords
 * keyword database created on article/story/review/feature basis by
   editor when approval granted for submission
+* System can handle multiple sites
 
 <NOT COMPLETE>
 
@@ -336,6 +358,7 @@ also required.
 * Once event is over poster should be automatically asked for report
 * What's On box should show upcoming events
 * Users can search based on categories or time period
+* System can handle multiple sites
 
 7.18	Mailing list manager module
 
@@ -357,6 +380,7 @@ also required.
   mailing lists
 * Past newsletters should be archived and should be viewable by users
   and administrators
+* System can handle multiple sites
 
 7.19	Banner advert manager module
 
@@ -365,6 +389,7 @@ also required.
 * automatically emails client with their statistics
 * clients can buy and number of impressions.  When close to running out
   send email reminder
+* System can handle multiple sites
 
 <NOT COMPLETE>
 
