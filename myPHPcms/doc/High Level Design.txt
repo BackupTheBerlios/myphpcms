@@ -39,8 +39,56 @@ be found in the 'doc' directory.
 
 3.0	SOFTWARE ARCHITECTURE
 
-Blah blah !
+The whole of myPHPcms is designed to be modular so that the web-site
+administrator can choose to install as much or as little functionality
+as is required.  This will be possible through the development of a 
+core of functionality that can have additional modules 'plugged in'
+either at installation time or later in the life of the web-site.
 
+The following is a list of software modules that are either included 
+within myPHPcms by default or which may be installed separately.
+
+CORE MODULES			OPTIONAL MODULES
+* HTML library			* User comments
+* Caching module		* User forums
+* Templating module		* Links management
+* Access logging module		* User polls
+* User sign-up and login	* Download manager
+* Site administration		* Site search module
+* Core CMS functions		* Mailing list manager
+				* Banner advert manager
+
+In general a module will consist of a number of files each of which 
+will carry out a specific task.  A module will also include files that
+allow the administrator of the channel or site to administer the module.
+
+An outline of the directory structure is shown below:
+
+	$site_root		contains the bulk of the scripts for the
+	|			site
+    	|
+    	+-admin			contains configuration & administrator
+				scripts
+    		+-libs		contains admin-only libraries
+    		+-templates	contains admin-only template definitions
+    	+-doc			contains usage and design documentation
+    	+-libs			contains the actual script libraries for
+				users
+    	+-sql			contains the fragments of SQL necessary to 
+				build the tables for the various modules
+    	+-tests			contains test scripts to test the modules
+
+It is antipcated that all scripts will be written in PHP.  There may be
+a few HTML files together with a number of plain text files containing
+configuration data for the site.
+
+Security of the scripts will be the responsbility of both the web server
+and also the scripts themselves.  All scripts will check that the user
+has the appropriate authority to execute them (in the case of the forum
+script only logged in users may post articles).  In addition the web
+server built-in permissions will be used to discriminate between the
+regular site visitors and the administrators through the use of the
+.htaccess file and .htpasswd files.
 
 3.1	HTML library
 
