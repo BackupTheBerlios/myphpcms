@@ -27,7 +27,7 @@
 	if (!empty($html)) $html=pretty_html($html);
 		
 	// Create local templates for the page
-	create_local_template("nav_bar","<a href='top_bugs.php'>Top bugs</a><br><a href='cumulative.php'>Cumulative bug count</a><br><a href='bugzilla.php'>Home</a><br>");
+	create_local_template("nav_bar","");
 	create_local_template("content_area",$html);
 	
 	// Define the content of the page and then display it to the browser
