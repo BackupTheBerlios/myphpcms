@@ -6,7 +6,10 @@ Version 0.1
 
 EXECUTIVE SUMMARY
 
-Blah blah !
+This document describes in detail the HTML Library.  It provides 
+information on the design of the module, the database design, the 
+individual scripts, any dependencies that these scripts may have and 
+provides detailed references for each function in each file or library.
 
 1.0	SCOPE
 
@@ -18,6 +21,14 @@ a series of functions.
 
 An alternative approach is to use PHP objects and classes to set the
 properties of HTML tags that are then returned to the calling script.
+
+Currently produces HTML 4.0 code.  Does not currently support CSS 
+although support for CSS level 1 is planned.  Support for XHTML 1.1 and
+CSS level 2 is planned for some time in the future.
+
+Task:	Could leave lib_html as is, create lib_css1 to add CCS 1 
+	support, could then develop lib_xhtml
+	
 
 
 2.0	REFERENCE DOCUMENTATION
@@ -51,46 +62,63 @@ The use of objects (and PHP classes) gets around this problem at the
 cost of slightly more complex code.  This is the approach that has
 been chosen for lib_html.php.  The tags have been divided as follows:
 
-   Basic tags
-         <HTML></HTML>
-   Header tags
-         <HEAD></HEAD>
-         <META>
-         <TITLE></TITLE>
-   Body tags
-         <BODY></BODY>
-         <!-- comment -->
-         <SCRIPT></SCRIPT>
-         <LINK>
-   Text tags
-         <H1-6></H1-6>
-         <PRE></PRE>
-         <B></B>
-         <I></I>
-         <TT></TT>
-         <CITE></CITE>
-         <EM></EM>
-         <STRONG></STRONG>
-         <FONT></FONT>
-   Links tags
-         <A HREF></A>
-   Formatting tags
-         <P></P>
-         <BR>
-         <BLOCKQUOTE></BLOCKQUOTE>
-         <OL></OL>
-         <LI>
-         <UL>
-         <DIV></DIV>
-   Graphical elements
-         <IMG>
-         <HR>
-   Table tags
-   	<TABLE></TABLE>
+3.1	Basic tags
+	
+	<HTML></HTML>
+
+3.2	Header tags
+	
+	<HEAD></HEAD>
+	<META>
+	<TITLE></TITLE>
+
+3.3	Body tags
+
+	<BODY></BODY>
+	<!-- comment -->
+	<SCRIPT></SCRIPT>
+	<LINK>
+
+3.4	Text tags
+
+	<H1-6></H1-6>
+	<PRE></PRE>
+	<B></B>
+	<I></I>
+	<TT></TT>
+	<CITE></CITE>
+	<EM></EM>
+	<STRONG></STRONG>
+	<FONT></FONT>
+
+3.5	Links tags
+
+	<A HREF></A>
+
+3.6	Formatting tags
+
+	<P></P>
+	<BR>
+	<BLOCKQUOTE></BLOCKQUOTE>
+	<OL></OL>
+	<LI>
+	<UL>
+	<DIV></DIV>
+
+3.7	Graphical elements
+	
+	<IMG>
+	<HR>
+
+3.8	Table tags
+
+	<TABLE></TABLE>
    	<TR></TR>
    	<TD></TD>
    	<TH></TH>
-   Forms
+   	
+3.9	Forms
+
         <FORM></FORM>
         <INPUT>
         <SELECT></SELECT>
@@ -105,10 +133,23 @@ Not applicable.
 
 5.0	SOFTWARE COMPONENTS
 
-The templating system consists of two files:
+The HTML library  consists of two files:
 
-$SITE_ROOT/libs/lib_html.php
-$SITE_ROOT/admin/libs/conv_html.php
+5.1	$SITE_ROOT/libs/lib_html.php
+
+	This is the library that contains the classes the return the
+	correctly formatted HTML tags.  It only returns the low-level
+	tags, it is not capable of returning the code to open a new
+	TABLE (yet !)
+
+5.2	$SITE_ROOT/admin/libs/conv_html.php
+
+	It is planned that this will allow valid HTML to pasted into a
+	form and , at the press of a button, this will be converted 
+	into the calls to lib_html necessary to construct the page.  It
+	is assumed that the HTML code provided is validated in some way
+	as the validation of the code is likely to fall outside of the
+	scope of this project.
 
 
 6.0	DEPENDENCIES
