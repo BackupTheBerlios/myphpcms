@@ -11,17 +11,12 @@
 	include("$site_root/logging/inc_logger.php");
 	
 	// Connect to database
-	$dbhost="192.168.7.24";
-	$dbusername="root";
-	$dbuserpassword="";
 	$links_id=db_connect("mtbwales");
 			
 	// ----------------------------------------------------------------
 	// Page code starts below
 	// ----------------------------------------------------------------
-	
-	
-	
+		
 	$html="";
 	
 	// ----------------------------------------------------------------
