@@ -123,6 +123,7 @@ also required.
 * No detailed knowledge of MySQL or PHP is required to set-up the software
   as an INSTALL script is provided.
 
+
 6.0	SECURITY ISSUES
 
 * All inputs and uploads from users will be checked and invalid inputs
@@ -183,13 +184,15 @@ also required.
 * Version information for story is also stored
 * Writer profile available with story when published
 
-7.5	User comment module
+7.5	User comments module
 
-* can be tied to review, news story or feature.
-* stores username, time amd comments posted.
-* also stores IP address
-
-<NOT COMPLETE>
+* Users can create comments against news items, stories, reviews etc
+* Only registered user can enter comments
+* Responses must be displayed in threaded manner
+* Number of posts, time/date of last post, number of views are displayed
+  next to comment heading
+* username and IP address of user that posted is stored in database
+* Administrators can deleted comments if required
 
 7.6	User forums module
 
@@ -198,7 +201,7 @@ also required.
 * Users can start new threads by posting a new article
 * Users can post articles in reply to existing articles
 * Users can view articles that have been posted
-* Users can view th threads of conversations in teh forum
+* Users can view th threads of conversations in the forum
 * Users can view the relationship between articles
 * Administrators can delete posts and threads (if required)
 * Administrators can create topica areas
@@ -224,15 +227,18 @@ also required.
 
 7.8	Access logging module
 
-* must be able to log all versions of IE and Netscape and most other
-  browsers
-* needs to be able to determine the version and platform
-* would be nice if it could get screen resolution as well
-* all date to be stored in database
-* must be usuable by both PHP and static HTML pages
-* must be able to store exit pages too
-
-<NOT COMPLETE>
+* Must be able to detect all common browsers
+* Must be able to detect search engine spiders
+* Should be able to determine platform
+* Should be able to determine the operating system
+* Should be usuable from PHP and html pages (to allow caching)
+* Should be able to email unknown user agent strings to site admin
+* Users should not be aware of its presence
+* Administrator should be able to look at results over different time 
+  periods eg today, yesterday, this week, last week, this month, last
+  month, this quarter, this year, last year
+* Administrator should be able to see which pages are most popular, least
+  popular, top referers, top exit pages, top search queries etc
 
 7.9	News publication module
 
@@ -279,11 +285,12 @@ also required.
 
 7.13	Polls module
 
-* web-based setup of questions and answers
-* historical results available
-* logs IP address to prevent multiple votes
-
-<NOT COMPLETE>
+* Administrator can enter questions and maximum of 5 possible answers.
+* Administrator can set when poll will be active and when it will close
+* Users can vote on each poll once per day only
+* Users IP address is stored to prevent multiple voting on same day
+* Users can view current results of poll
+* Users can view results of previous polls
 
 7.14	Page caching module
 
@@ -323,7 +330,8 @@ also required.
 * Registered users can post events into the calender
 * Events can be stored under pre-set categories
 * Users can create new categories if required (requires admin approval)
-* Calender is visible to all users
+* Calender is visible to all users.  Shown in 'desk calender' style.
+* Day with event is shown by hyperlinked day number
 * Users can click on event to get more information
 * Once event is over poster should be automatically asked for report
 * What's On box should show upcoming events
