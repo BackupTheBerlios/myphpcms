@@ -26,15 +26,29 @@ Blah blah !
 
 4.0	DATABASE DESIGN
 
-Blah blah !
+The module requires access to the following database tables:
 
+4.1	database_table_1
+
+	Description of the database with columns information, types
+	and typical values.
+
+4.2	database_table_2
+
+	Description of the database with columns information, types
+	and typical values.
 
 5.0	SOFTWARE COMPONENTS
 
-The templating system consists of two files:
+The BLAH BLAH system/module consists of X files:
 
-list files here relative to $site_root
+5.1	$SITE_ROOT/path/to/script1
 
+	Insert a brief description of the script or file here.
+	
+5.2	$SITE_ROOT/path/to/script2
+
+	Insert a brief description of the script or file here.
 
 6.0	DEPENDENCIES
 
@@ -43,7 +57,11 @@ Blah blah !
 
 7.0	REFERENCE
 
-Blah blah !
+7.1	Script_1
+
+7.1.1	Function 1
+
+	Description of function purpose, usage, inputs and outputs.
 
 
 8.0	EXAMPLE
