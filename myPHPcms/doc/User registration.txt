@@ -1,0 +1,151 @@
+myPHPcms Detailed Design document - HTML Library
+=================================================
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+Blah blah !
+
+1.0	SCOPE
+
+Blah blah !
+
+
+2.0	REFERENCE DOCUMENTATION
+
+myPHPcms Functional Specification
+myPHPcms High Level Design document
+
+
+3.0	OVERVIEW
+
+The Functional Specification and High Level Design documents detail the
+requirements and implementation solution for a database driven dynamic
+website.  This document describes in detail how the user registration 
+and authentication system will work.
+
+Before using the web-site users need to register to use the web-site 
+using a unique user-name.  Since it is likely that the users email 
+address will be required as part of the registration process it makes 
+sense to use this as the username.  In order to prevent malicious users
+from registering other peoples email addresses the registration process
+should send an email to the prospective new user so that they can verify
+their intention to sign-up.
+
+The user verifies their intention to register by clicking on a URL in 
+the email which returns them to the web-site.  This URL contains an 
+encoded variable that uniquely identifies the user.  However using, 
+for example, a hash of the email address would not be secure because 
+a hacker could guess that this might be the approach used.  Instead 
+the email address should be combined with a piece of text known only
+to the webmaster.  This would then be hashed and has the effect of 
+acting rather like a public-key/private-key system.  This should be 
+uncrackable, particularly if the private key is changed on a regular 
+basis.  Once this variable is compared against the known value stored 
+in the database the users account will then be activated and will be 
+ready for use.
+
+Relying upon the email address means that since users can periodically 
+change their email address then the module must allow users to modify 
+their account details.  They must be able to do this in a secure manner
+by being able to verify the new email address otherwise malicious users
+may change a users email address in order to hijack their account.  Any 
+changes to the users email address should be subject to the same 
+verification process as outlined above.
+
+One successfully logged in to the site, a cookie will be written to the 
+users browser which will prevent them from having to log in again.  If 
+detected, a customised welcome message could be displayed together with 
+a log-out option that will force the removal of the cookie from the 
+browser cache.  This is provided in case the web browser is on a shared
+computer.
+
+
+4.0	DATABASE DESIGN
+
+The module requires access to the following database tables:
+
+4.1	myPHPcms_users
+
+	TBD.
+
+
+5.0	SOFTWARE COMPONENTS
+
+The User registration and log-on system consists of four files:
+
+5.1	$SITE_ROOT/register.php
+
+	This script will handle the verification of the users email 
+	address and will confirm that the password that was entered 
+	twice (for verification purposes) is correct.  It will then 
+	combine the supplied email address with a text string and will 
+	perform an md5 hash of it.  This will be formated into a URL 
+	and will prefaced with some standard text asking the user to 
+	click on the link in order to verify their account details.  
+	This will then be sent to the user.
+	
+5.2	$SITE_ROOT/confirm.php
+
+	This is the script that is called by the URL clicked on by the 
+	user in their confirmation email.  It receives the encrypted 
+	variable from the URL and compares it against the database.  
+	If found then it shows that the email address used to register 
+	for an account actually received the email and clicked on it.  
+	A cookie is then written to the users browser to avoid them 
+	having to log in again.  The main welcome page is then 
+	displayed.
+	
+5.3	$SITE_ROOT/update.php
+
+	This script allows a previously logged in user to change their 
+	email address by entering a new address twice for verification 
+	purposes.  It then proceeds in the same manner as the 
+	registration script.
+	
+5.4	$SITE_ROOT/logout.php
+
+	TBD
+
+5.5	$SITE_ROOT/login.php
+
+	TBD
+
+
+6.0	DEPENDENCIES
+
+Blah blah !
+
+
+7.0	REFERENCE
+
+7.1	register.php
+
+7.1.1	Function 1
+
+	Description of function purpose, usage, inputs and outputs.
+
+7.2	confirm.php
+
+	Description of function purpose, usage, inputs and outputs.
+
+7.3	update.php
+
+	Description of function purpose, usage, inputs and outputs.
+
+7.4	login.php
+
+	Description of function purpose, usage, inputs and outputs.
+
+7.5	logout.php
+
+	Description of function purpose, usage, inputs and outputs.
+
+
+8.0	EXAMPLE
+
+Include an example of the module usage here if applicable.
+
+<ENDS>
