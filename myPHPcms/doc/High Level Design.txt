@@ -179,7 +179,7 @@ Needs:	access to the user sign-up and login functions
 
 4.4	CMS module
 
-4.4.1	Page display modules
+4.4.1	Main page display script
 
 When run this script checks for the presence of the cookie that 
 indicates the user is registered on the site.  If the cookie is found,
@@ -188,19 +188,41 @@ temporary template contain the users name and a short welcome message.
 Otherwise the temporary template contains a box for the user to log in 
 or register.  The module then connects to the database, pulls out the 
 latest story headlines and counts the number of comments for each 
-story within the database.  This data is then fed into the templating 
-system in order to create the final HTML.
-
-4.5	User comments module
+story within the database.  Hyperlinks to the news stories are 
+automatically embedded with the page HTML.  This data is then fed into 
+the templating system in order to create the final HTML.
 
 When the user clicks on the link to submit a news story the cookie that
 indicates that they are a registered user should be checked.  If it 
 cannot be found it would suggest that they are not a member or that the 
-cookie has been deleted so they should be offered the option to register
-or sign-up.  Once logged in they are shown a form into which they can 
-enter the story headline and the body of the story.  At any time they can
-preview the page as it will eventually appear.  Once submitted the story 
-content and information (date, time, author) are entered into the database.
+cookie has been deleted so they should be offered the option to 
+register or sign-up.  Once logged in they are shown a form into which 
+they can enter the story headline and the body of the story.  At any 
+time they can preview the page as it will eventually appear.  Once 
+submitted the story content and information (date, time, author) are 
+entered into the database.
+
+4.4.2	Story display script
+
+When the user clicks on a news headline on the front page the story 
+module connects to the database and pulls the headline and story 
+content from the database.  It also connects to the database to 
+retrieve the subjects of comments that users have posted.  The URL's 
+of the page with the comment expanded to show it's full text are 
+automatically embedded within the page.  All of this data is then 
+passed to the templating system so that the page can be displayed in 
+the users browser.
+
+4.5	User comments module
+
+When the user clicks on a link to add a comment the cookie that 
+indicates that are registered is checked.  If it cannot be found then 
+the user is invited to register otherwise the user is presented with a 
+form into which they can enter their comments.  At any time they can 
+preview their contribution.  When they press submit the information that 
+they have entered together with other information (date, time, author) 
+is entered into the database.  The page is then recreated from the 
+database and is displayed to the user.
 
 4.6	User forums module
 
