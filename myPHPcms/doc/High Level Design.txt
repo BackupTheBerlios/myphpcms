@@ -55,8 +55,9 @@ CORE MODULES			OPTIONAL MODULES
 * Access logging module		* User polls
 * User sign-up and login	* Download manager
 * Site administration		* Site search module
-* Core CMS functions		* Mailing list manager
-				* Banner advert manager
+* Channel administration	* Mailing list manager
+* Core CMS functions		* Banner advert manager
+* Diagnostics modules
 
 In general a module will consist of a number of files each of which 
 will carry out a specific task.  A module will also include files that
@@ -108,7 +109,15 @@ Blah blah !
 * Users can register themselves by only site admin can promote users to
   author, editor etc roles
 
-4.3	Installation script
+4.3	Site administration module
+
+Blah blah !
+
+4.4	Channel administration module
+
+Blah blah !
+
+4.5	Installation script
 
 The whole process of using myPHPcms should be as easy as possible.  
 This should start from the moment that the product is downloaded and
@@ -177,9 +186,9 @@ Files:	install.php	- script called by user to install myPHP.
 			  
 Needs:	access to the user sign-up and login functions
 
-4.4	CMS module
+4.6	CMS module
 
-4.4.1	Main page display script
+4.6.1	Main page display script
 
 When run this script checks for the presence of the cookie that 
 indicates the user is registered on the site.  If the cookie is found,
@@ -202,7 +211,7 @@ time they can preview the page as it will eventually appear.  Once
 submitted the story content and information (date, time, author) are 
 entered into the database.
 
-4.4.2	Story display script
+4.6.2	Story display script
 
 When the user clicks on a news headline on the front page the story 
 module connects to the database and pulls the headline and story 
@@ -213,30 +222,11 @@ automatically embedded within the page.  All of this data is then
 passed to the templating system so that the page can be displayed in 
 the users browser.
 
-4.5	User comments module
-
-When the user clicks on a link to add a comment the cookie that 
-indicates that are registered is checked.  If it cannot be found then 
-the user is invited to register otherwise the user is presented with a 
-form into which they can enter their comments.  At any time they can 
-preview their contribution.  When they press submit the information that 
-they have entered together with other information (date, time, author) 
-is entered into the database.  The page is then recreated from the 
-database and is displayed to the user.
-
-4.6	User forums module
+4.7	Access logging module
 
 Blah blah !
 
-4.7	Links manager module
-
-Blah blah !
-
-4.8	Access logging module
-
-Blah blah !
-
-4.9	Templating module
+4.8	Templating module
 
 To minimise the number of templates for a given number of pages any 
 template should be capable of being made up of other templates.  This 
@@ -249,7 +239,7 @@ comprise it.
 * Templates for admin engine have channel_id=0
 * All public channel_id start at 1
 
-4.10	User registration and authentication module
+4.9	User registration and authentication module
 
 Since the username is the users email address this will need to be
 validated.  This could be performed by a regular expression match on
@@ -264,7 +254,34 @@ thus activating the account.  The username and a unique id are then
 stored in the users browser as a cookie in order to prevent them from 
 having to log in again.
 
-4.11	Polls module
+4.10	Page caching module
+
+* Set options in each file whether to cache and if so where to put the
+  file afterwards.  Also et age of cached file.  When file loads, check
+  to see if should be cached, if so check for presnce of cached file.
+  If exists and not too old then use it else create more up to date
+  version.
+
+4.11	Comments module
+
+When the user clicks on a link to add a comment the cookie that 
+indicates that are registered is checked.  If it cannot be found then 
+the user is invited to register otherwise the user is presented with a 
+form into which they can enter their comments.  At any time they can 
+preview their contribution.  When they press submit the information that 
+they have entered together with other information (date, time, author) 
+is entered into the database.  The page is then recreated from the 
+database and is displayed to the user.
+
+4.12	Forums module
+
+Blah blah !
+
+4.13	Links manager module
+
+Blah blah !
+
+4.14	Polls module
 
 * Should comprise of the following:
   polls.sql        - SQL code to create single table to store data
@@ -279,35 +296,27 @@ having to log in again.
 * Should provide graphical results but not use complex PHP features 
   like GD library as not all servers may support it.
   
-4.12	Page caching module
-
-* Set options in each file whether to cache and if so where to put the
-  file afterwards.  Also et age of cached file.  When file loads, check
-  to see if should be cached, if so check for presnce of cached file.
-  If exists and not too old then use it else create more up to date
-  version.
-
-4.13	Download manager module
+4.15	Download manager module
 
 Blah blah !
 
-4.14	Site search module
+4.16	Site search module
 
 Blah blah !
 
-4.15	Events module
+4.17	Events module
 
 Blah blah !
 
-4.16	Mailing list manager module
+4.18	Mailing list manager module
 
 Blah blah !
 
-4.17	Banner advert manager module
+4.19	Banner advert manager module
 
 Blah blah !
 
-4.18	User rating system
+4.20	User rating system
 
 Blah blah !
 
