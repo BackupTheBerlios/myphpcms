@@ -1,0 +1,25 @@
+INSTALL
+
+This document will detail the steps necessary to install myPHPcms on a
+server running PHP, MySQL and Apache.
+
+The process will go something like this.
+
+1.  Unpack the tarball in the root directory of your webserver
+
+2.  From a web browser go to http://your.servername.com/admin/setup.php
+
+3.  Enter the MySQL database host name, the databa se username and 
+    password into the form fields.  When asked check that these are
+    correct.  These values will now be written to a configuration file.
+    
+4.  The connection to the database will be tested.  If it fails you will
+    will get the oppotunity to correct the values entered in step 3.  If
+    successful the database tables will be created.
+    
+5.  The administration directory will then be password protected using
+    Apaches .htaccess and .htpasswd files.  You will then be taken to
+    the main myPHPcms page where you can log in and set up your default
+    channel.
+
+To be completed . . . .
