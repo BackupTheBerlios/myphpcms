@@ -23,7 +23,7 @@ actual code can be found in the individual Module Detailed Design
 document.  Instead, a list of scripts, their relationship with other
 modules and justification for any decisions taken during the design 
 process are presented.  Additionally a list of database tables and
-their purposes ccan also be found within this document.
+their purposes can also be found within this document.
 
 This document is designed to be used in conjunction with the Functional
 Specification document when creating the Module Detailed Design 
@@ -121,12 +121,13 @@ at some point that an existing version of myPHPcms will be upgraded to
 a newer version.  In this instance an upgrade script should be run that
 will make the necessary modifications to the databases and scripts.
 
-This script should reside in the admin directory.  Since this script
-will be executed before any other components of myPHPcms is installed
-it will have to be entirely self-contained.  It cannot make calls to
-the templating system or the user authentication system.  It is 
-possible that it will be able to call a directly included setup library
-contained within a sub-directory of the admin directory.
+All of the setup scripts should reside in the admin directory.  Since 
+these scripts will be executed before any other components of myPHPcms
+is installed they will have to be entirely self-contained.  They cannot
+make calls to the templating system or the user authentication system.  
+It is possible, however, that they will be able to call a directly 
+included setup library contained within a sub-directory of the admin 
+directory.
 
 To prevent an upgrade being performed on a database that has not yet
 been installed the installation script should look for the presence of
@@ -134,15 +135,42 @@ a flag.  If found then this will be interpreted as a properly
 configured installation and so an upgrade will be assumed.  Otherwise a
 new installation will assumed.
 
+The steps that the installation script carries out are:
+
+1.  Check for presence of a flag indicating that myPHPcms has already
+    been installed.  If found call the upgrade script otherwise call
+    the setup.php.
+    
+2.  Setup.php will display a form to allow gather the database host 
+    name and the database username and password.  The password will
+    be requested twice for verification.  Once submitted these values
+    will be written to a text file called db.cfg
+    
+3.  The page will then reload and will attempt to connect to the
+    database server.  If no connection can be established the form
+    to gather the database username, hostname and address will be
+    redisplayed so that the user can correct them.
+    
+4.  If the connection can be established then the administrator
+    sign-up and login screen should be displayed so that the overall
+    site administrator can enter their username and password and have
+    their account activiated via email.
+    
+5.  Once the user is signed in the administration directory is 
+    protected via Apache's .htaccess and .htpasswd files.
+
 Files:	install.php	- script called by user to install myPHP.  
 			  Checks to see if an existing installation is
 			  present.  If so calls upgrade.php else calls
 			  setup.php
 	setup.php	- Sets up new installation from scratch.
 	upgrade.php	- Upgrades existing installation.
+	db.cfg		- Text file containing database settings.
 	lib_setup.php	- Setup library contained within the admin/libs
 			  directory.  This will provide all of the
 			  functionality for the setup library.
+			  
+Needs:	access to the user sign-up and login functions
 
 3.4	CMS module
 
