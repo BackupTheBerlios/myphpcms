@@ -1,0 +1,47 @@
+PHP-Templating system for use in dynamic websites
++-----------------------------------------------+
+
+CHANGELOG
+---------
+
+0.7   30/09/01   Added additional table to template SQL schema
+                 to store site_id (key) and site name, URL,
+                 contact email address etc.  In addition the
+                 template table were renamed to tpl_ in order
+                 to allow them to by identified from other tables
+                 in a site where lots of tables are being used.
+0.6   12/09/01   Worked around the bug that prevented the use of
+                 double quotes (") in local templates by using
+                 single quotes (').  Also removed code that was
+                 needed to fix problem with single quote (') in
+                 text eg this doesn't work.
+0.5   10/09/01   Fixed bug where template system would crash if no
+                 templates are found in the database and/or the
+                 session file is too old.  Modified default template
+                 site_id to be 1.  Site_id of 0 is that of base system
+                 and should not be deleted.
+0.4   07/09/01   Earlier versions of the templating system accessed
+                 the database in order to get the template names and
+                 to count the number of templates even though the
+                 actual values of templates were pulled from the
+                 database.  This has now been rectified by storing
+                 the global variable string in the session file.
+                 This means that the templates load 50% faster.
+                 In addition modifications have also been made to 
+                 the parse_template function to reduce the number 
+                 of database accesses that it required from 3 to 
+                 none.
+0.3   05/09/01   Modified database schema and lib_templates.php to
+                 allow the templating system to store multiple 
+                 templates for multiple sites.  This would allow
+                 the development of a new site-wide design whilst
+                 still allowing users to use the old site design or
+                 it would allow the virtual hosting of several sites
+                 on the same database.
+0.2   04/09/01   Added create_local_template, refresh_local_template,
+                 delete_local_template functions to manage local
+                 template variables
+0.1   01/098/01  Initial release.  Basic functionality includes the
+                 creation and editing static templates and the ability
+                 to store these in local session files in order to
+                 prevent excessive database requests

@@ -1,0 +1,39 @@
+inc_logger include for use in dynamic websites
++--------------------------------------------+
+
+Version 0.7 23 October 2001 - Philip Lee
+
+CHANGELOG
+---------
+0.7   23/10/01   Added table logging_cache to store host names
+                 and IP addresses in order to reduce number of
+                 reverse DNS lookups that are required when using
+                 the access statistics.
+0.6   22/10/01   Added redir.php script which takes the URL that
+                 the user clicks on and stores it in the database
+                 to allow us to see where the users are going when
+                 they leave the site.  Completed browser_types(),
+                 hourly_requests(), top_pages(), bottom_pages(),
+                 top_referrers(), top_hosts(), searches(),
+                 operating_sys(), top_entry() and top_exit() in
+                 lib_statistics.php.  Also added error handler to
+                 allow for when a SQL query returns no data.
+0.5   19/10/01   Created SQL sub-queries to allow the limitation
+                 of the scope of results returned to (1) today,
+                 (2) this week, (3) this month, (4) this quarter,
+                 (5) this year.  Added quite a few additional
+                 functions to allow the reporting of data logged.
+0.4   17/10/01   Brought database dump format in line with that
+                 on live system on apok.dreamhost.com in order
+                 to provide real data to develop lib_statistics.php
+                 against.  Created lib_statistics.php in admin/libs
+                 directory and added total_page_views() and
+                 browser_types() functions.  Also created 
+                 adm_statistics.php to get visitor information.
+0.3   16/10/01   Added correct header to inc_logging.php.  Added
+                 exit.php to record exit pages (not finished).
+0.2   27/09/01   Added extra fields to database scheme to store
+                 integer user ID (user_id) and also exit page string
+                 (exit_page).  Also added gif11.php and clear.php to
+                 allow logging of static HTML pages into loggign system.
+0.1   24/09/01   Inital version of inc_logging.php created

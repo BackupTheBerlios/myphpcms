@@ -1,0 +1,15 @@
+lib_browser library to detect web browser
++---------------------------------------+
+
+Version 0.2 05 November 2001 - Philip Lee
+
+CHANGELOG
+---------
+
+0.2   05/11/01   Completely rewrote browser_get_agent to detect all
+                 known browsers using defintions from BrowserHawk
+                 and latest version of browscap.ini together with the
+                 results of logging $HTTP_USER_AGENT for the 
+                 Singletrack Mind Website.
+0.1   23/10/01   Initial version created.  Very simply detection
+                 of common browsers (IE, Netscape, Opera and Konqueror).

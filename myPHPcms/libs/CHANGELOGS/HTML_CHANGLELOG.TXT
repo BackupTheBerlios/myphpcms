@@ -1,0 +1,40 @@
+lib_html class for use in dynamic websites
++----------------------------------------+
+
+Version 0.7 28 September 2001 - Philip Lee
+
+CHANGELOG
+---------
+
+0.7   28/09/01   Removed high level open_table as not required if conv_html
+                 is to be used to generate lib_html output from raw HTML
+                 input.  Added classes to open/close <HEAD> tag, write out
+                 <META> tag, <TITLE></TITLE> and to write <SCRIPT> tag out.
+                 Also added <link> tag for style sheets.  Updated README
+                 file to reflect addition of new tags and corrected some
+                 errors.
+0.6   27/09/01   Added classes to open and close HTML tags, to write out
+                 HTML comment <!-- blah blah --> to document and to open
+                 and close <BODY> tag
+0.5   26/09/01   Deleted class href_close and replaced href_open with new
+                 class href which opens the href tag, inserts the link,
+                 adds the text and then closes the tag.  Also replaced
+                 \r\n at line ends with <eol> which is then replaced in
+                 the newly added pretty_html function.
+0.4   18/09/01   Deleted comment demarking private functions.  Added comment
+                 to identify the location of the high level table writing
+                 routines - open_table, write_row, close_table.
+0.3   14/09/01   Added support for the <th></th> table tags, <font></font>
+                 tags, <a href=></a> tags,<img> tag.  Also added <hr>,
+                 <form></form>, <select></select>, <option></option> tags.
+                 Also added <textarea></textarea> tags.  Finally, the
+                 following tags have been introduced: <p></p>, <br>,
+                 <blockquote></blockquote>, <ol></ol>, <ul></ul> and <div>
+0.2   13/09/01   Added support for text tags <h1-6></h1-6>, <pre></pre>,
+                 <b></b>,<i></i>, <tt></tt>, <cite></cite>, <em></em>,
+                 and <strong></strong>.  Tags can be entered singularly
+                 eg <b> or in groups <b><i>.  All tags will be converted
+                 to uppercase and closing tags will be reversed so that
+                 <b><i> becomes </i></b>.                 
+0.1   12/09/01   Initial version of lib_html with basic support for
+                 tables only <table></table>,<td></td>,<tr></tr>

@@ -1,0 +1,15 @@
+Administration stuff to do
++------------------------+
+
+lib_templates
+-------------
+Add the ability to add/modify/delete templates into the database
+
+lib_logging
+-----------
+Finish session tracking functions
+Write pretty front end
+
+lib_user
+--------
+Add the ability to suspend and remove users, reset passwords

@@ -1,0 +1,32 @@
+Useful development resources
+============================
+
+An HTTP benchmarking program
+----------------------------
+
+eZ httpbench is a simple benchmark program written in PHP. It fetches a
+web page and measures the time elapsed and does some calculations based 
+on that.  
+
+eZ httpbench calculates: Total time alapsed, average time pr page, data
+throughput, maximum number of pages served pr minute, hour, day and month.
+
+eZ httpbench is very useful when optimizing your dynamic site or want to
+know how much traffic you can handle.
+
+It can be downloaded from:
+
+     http://developer.ez.no/filemanager/download/50/ezhttpbench-1.1.tar.gz
+
+txt2regex
+---------
+
+^txt2regex$ is a Regular Expression "wizard", all written with bash2 builtins,
+ that converts human sentences to RegExs. with a simple interface, you just 
+ answer to questions and build your own RegEx for a large variety of programs, 
+ like awk, ed, emacs, grep, perl, php, procmail, python, sed and vim. there are 
+ more than 20 supported programs. it's bash so download and run, no compilation 
+ needed. 
+ 
+ This can be downloaded from: http://txt2regex.sourceforge.net/text2regex-0.6.tgz
+ 

@@ -1,0 +1,248 @@
+OUTLINE STRUCTURE OF MTB-Wales.com
+==================================
+
+MTB-Wales.com will consist of a series of directories containing the
+libraries that give the site it's functionality.  All HTML code will
+be separate from the PHP code that runs the site.  This, in conjunction
+with the templating system, will make the site totally generic and easy
+to customise with relatively little effort.
+
+The directory structure is as follows:
+
+$site_root
+    |
+    +-admin      contains configuration & administrator scripts
+    +-doc        contains library design documents (incl this one)
+    +-libs       contains the actual script libraries
+    +-sql        contains the fragments of SQL necessary to build the 
+                 tables for the various sub-components
+    +-tools      contains tools to test scripts
+    
+Note that the site root directory holds the bulk of the scripts that
+call the libraries.  Only the scripts that allow the administration#
+of the site are located outside of this directory.
+
+HTML generation library
++---------------------+
+
+Library to create html code which is neatly formatted for output.  Consists
+of:
+
+lib_html.php       - base library of functions to create HTML on the fly
+conv_html.php      - html/php form to take cut and pasted html code and which
+                     outputs relevant library calls for lib_html.php
+
+Resource: http://hotwird.lycos.com/webmonkey/reference/html_cheatsheet/index.html
+          http://www.phpbuilder.com/columns/rod19990601.php3?print_mode=1
+          http://www.devshed.com/Server_Side/PHP/BackToClass/
+
+
+User administration library
++-------------------------+
+
+Library of functions to handle registration of new users.  Also implements
+a 'Who's online' box and a welcome to our latest member.
+
+lib_user.php       - base library of functions
+                   - various html forms to gather user information
+
+Resource: http://www.webmasterbase.com/printTemplate.php?aid=319
+          http://www.webtechniques.com/archives/2001/09/crotty_fraser/
+          http://www.phpbuilder.com/columns/tim200000505.php3?print_mode=1
+          http://www.webmasterbase.com/printTemplate.php?aid=538
+
+Visitor tracking system
++---------------------+
+
+Allows visitor information (browser, session id, time on site etc) to be logged
+and analysed in order to provide information to site administrators and 
+(potentially) advertisers.
+
+lib_browser.php    - functions to identify browser version and platform for
+                     each requested page
+inc_logging.php    - PHP code to log access to PHP files
+gif11.php          - fake gif to allow logging system to work with plain HTML
+                     pages
+lib_statistics.php - library of functions to allow administrator to analyse
+                     data gathered by the logging system.
+adm_statistics.php - front-end to lib_statistics.php to allow viewing of logged
+                     data
+
+Resource: http://www.zend.com/zend/tut/statistics.php
+          http://www.zend.com/zend/tut/gen-adv-web-stas.php?print=1
+          http://www.phpbuilder.com/columns/tim20000821.php3?print_mode=1
+
+
+Content Management System
++-----------------------+
+
+Complete workflow ystem that allows the submissions, review, editing and
+scheuling for publication of news, features, reviews etc.  It allows the
+uploading of images as well.  Certain nominated users can be set a section
+reviewers in order to spread the workload.  Documents can be schedule for
+publication on a certain date or can be held until there is a news drought
+
+lib_cms.php        - base library of functions to allow operation of CMS
+
+Resource: http://www.webmasterbase.com/printTemplate.php?aid=228
+          http://philip.greenspun.com/internet-application-workbook/content-management
+          http://www.pcworld.com/resource/printable/article/0,aid,50428,00.asp
+          http://www.evolt.org/article/You_need_a_Content_Management_System/20/1449/index.html
+          http://www.evolt.org/article/You_clients_need_a_Content_Management_System/20/5127/index.html
+          http://www.devshed.com/Server_Side/PHP/Stream1/
+          http://www.devshed.com/Server_Side/MySQL/PerfectJob/
+          http://www.devshed.com/Server_Side/MySQL/PerfectJob2/
+          
+
+Poll library
++----------+
+
+Library to allow the creation, management and presentation of polls.
+
+lib_polls.php      - base library of functions to allow operation of the polls
+
+Resource: http://www.devshed.com/Server_side/PHP/PHPDemocracy/print.html
+
+
+Download library
++--------------+
+
+Library to handle to the management of route PDF's both uploads by admin
+and downloads by registered users only.
+
+lib_download.php   - base library of functions to allow operation of the
+                     download library
+
+Resource: none identified
+
+
+Templating system
++----------------+
+
+Templating library that allows site-wide templates to be edited and 
+deployed.  Relies upon a MySQL backend to store templates and user 
+sessions files to act as local caches.  Allow the creation of static 
+(templates stored in database) and dynamic (templates created on the 
+fly) templates.
+
+lib_templates.php  - base library of functions that allow operation of the
+                     templating system
+adm_templates.php  - front-end that allows the creation/modification and
+                     deletion of templates
+
+Resource: http://www.phpbuilder.com/columns/tim20001010.php3?page=6&print_mode=1
+          http://www.zend.com/zend/tut/session.php
+          http://www.webmasterbase.com/printTemplate.php?aid=31
+
+
+Forums library
++------------+
+
+Library containing functions necessary to provide BIKEmagic 
+style forums.
+
+lib_forums.php     - base library of functions that allow operation of the 
+                     forums
+
+Resource: http://www.devshed.com/Server_Side/Administration/TalkToMe/
+          http://hotwired.lycos.com/webmonkey/99/31/index3a.html?tw=programming
+
+
+User comment system
++-----------------+
+
+Library that allows users to comment on any aspect of site eg
+comment on news stories, features etc.
+
+lib_comments.php   - base library that allows the operation of the comments
+                     system.
+
+Resource: http://www.devshed.com/Server_Side/Administration/TalkToMe/
+
+
+Mapping library
++--------------+
+
+Library which allows the user to locate a range of postcodes,
+towns or map referrences etc for nearby routes, accomodation.
+
+lib_mapping.php    - base library that allows the operation of the mapping system
+
+Resource: none identified
+
+
+Weather system
++------------+
+
+Library to get weather forecasts and actual conditions for a
+variety of locations throughout Wales and to present this 
+information as a series of maps.
+
+lib_weather.php    -
+
+Resource: none identified
+
+
+User search system
++----------------+
+
+Library to search the articles based on keywords.
+
+lib_search.php     - base library that allows the operation of the search system
+
+Resource: http://www.phpbuilder.com/colum,ns/clay19990421.php3?print_mode=1
+
+
+Links system
++----------+
+
+Categorised list of links to other sites, manufacturers with number of
+visits and a ratings by other members
+
+Resource: http://www.webreference.com/perl/xhoo/php1/
+
+
+lib_cache.php
++-----------+
+
+System to cache commonly used dynamically generated pages.
+
+Resource: http://dealnews.com/apachecon/apachecon.html
+
+
+lib_calender.php
++---------------+
+
+Take a look at http://www.webevent.com for some ideas.
+
+Resource: http://www.zend.com/zend/tut/calender-ver7f.php
+
+lib_mailer.php
++------------+
+
+Mailing list manager to send monthly emails to registered users of site.
+
+Resource: http://www.devshed.com/Server_Side/PHP/mailing
+
+lib_adverts.php
++-------------+
+
+System to allow the creation, modification and deletion of banner adverts
+
+http://www.webtechniques.com/archives/2001/11/argus/
+
+USEFUL WEBSITES
++-------------+
+
+Looked at:
+
+http://www.webmasterbase.com
+http://www.devshed.com/Server_Side/PHP/
+http://www.phpbuilder.com
+http://www.zend.com
+http://www.evolt.org
+
+Not yey (fully) looked at:
+
+http://www.webreview.com
+http://www.webdatabase.org
