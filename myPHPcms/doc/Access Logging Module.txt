@@ -35,6 +35,14 @@ myPHPcms High Level Design document
 
 3.0	OVERVIEW
 
+UPDATE	This section to include session logging to enable tracking of
+	visitors through site.
+	Considered timing script execution and logging but too complex
+	for early releases.  MySQL table created for it though.
+	Describe how might be done though through multi-GIFs or PHP 
+	scripts
+	Reports need to be created using lib_html.php
+
 Why use a database backed logging solution instead of log files ?
 Basically because of information availability and speed.  Data is 
 gathered on each hit that occurs on the site.  Analysis of this data
@@ -173,38 +181,42 @@ The access logging system consists of the following files:
 	This script allows the processing of the data gathered by the
 	logging system.  It is intended to be executed by the site or
 	channel administrators only.
+	
+5.2	$SITE_ROOT/admin/libs/lib_statistics.php
 
-5.2	$SITE_ROOT/logging/inc_logger.php
+	Add description here.
+
+5.3	$SITE_ROOT/logging/inc_logger.php
 
 	This is the code snippet that is required to log access to PHP
 	scripts.  It must be included into the script whose activity is
 	to be logged.
 	
-5.3	$SITE_ROOT/logging/gif11.php
+5.4	$SITE_ROOT/logging/gif11.php
 
 	This is a fake GIF file that static HTML pages can use to allow
 	their pages to be logged by the logging system.  It provides
 	exactly the same information as that provided by the PHP code
 	snippet described above.
 
-5.4 	$SITE_ROOT/logging/clear.gif
+5.5 	$SITE_ROOT/logging/clear.gif
 
 	This is a 1 pixel by 1 pixel transparent GIF file that is 
 	echoed back to the users browser by the giff1.php script after 
 	the logging information has been gathered.
 
-5.5	$SITE_ROOT/logging/redir.php
+5.6	$SITE_ROOT/logging/redir.php
 
 	This script is used to wrap up destination URL's in order that
 	user clicks onto hyperlinks can be tracked.  This script can
 	also be used to track banner advert clicks (if required).
 
-5.6	$SITE_ROOT/sql/logging.sql
+5.7	$SITE_ROOT/sql/logging.sql
 
 	This is the SQL that creates the tables necessary for the 
 	correct operation of the logging system.
 	
-5.7	$SITE_ROOT/lib_browser.php
+5.8	$SITE_ROOT/lib_browser.php
 
 	This is the library that identifies the browser type and 
 	version, the operating system and the hardware platform from
@@ -302,27 +314,32 @@ Logging module.  The functions are grouped together by script name.
 	perhaps an advert.  The number of rows returned is set by 
 	$max_num.
 
-7.2	inc_logger.php
+7.2	lib_statistics.php
+
+
+
+
+7.3	inc_logger.php
 
 	
 	
-7.3	gif11.php
+7.4	gif11.php
 
 	
 
-7.4 	clear.gif
+7.5 	clear.gif
 
 No functions.	
 
-7.5	redir.php
+7.6	redir.php
 
 	
 
-7.6	logging.sql
+7.7	logging.sql
 
 	
 	
-7.7	lib_browser.php
+7.8	lib_browser.php
 
 
 
