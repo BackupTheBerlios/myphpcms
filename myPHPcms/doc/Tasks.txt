@@ -99,7 +99,8 @@ PROJECT ADMIN
 	Check that modules defined on BerliOS match those required
 
 1.0	HTML LIBRARY
-	Detailed Design document (base on HTML_README document in /docs)
+	Create Detailed Design document (base on HTML_README document
+	in /docs)
 	Expand to allow usage of CSS tags
 	Modifiy existing code to conform with coding guidelines
 	Add function to format automatically generated code.
@@ -107,16 +108,18 @@ PROJECT ADMIN
 	Create form to allow entry of raw HTML to conv_html.php
 	
 2.0	SITE ADMINISTRATION MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 
 3.0	CHANNEL ADMINISTRATION MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 
 4.0	DIAGNOSTICS MODULE
-	Detailed Design document
+	Create Detailed Design document
 
 5.0	INSTALLATION SCRIPTS
-	Detailed Design document
+	Create Detailed Design document
 	Create script to get MySQL database server, username, password,
 	database name from user and write these to a configuration file
 	Create script to allow main administrator to set username and
@@ -127,11 +130,13 @@ PROJECT ADMIN
 	time
 	
 6.0	CORE CMS MODULE
-	Detailed Design document
-	Write UNIX diff-style function
+	Create Detailed Design document
+	Write UNIX diff-style function in PHP
 	Implement version control system
+	Design database structure
 
 7.0	ACCESS LOGGING MODULE
+	Create Detailed Design document
 	Change all references to site_id in documents and code to
 	channel_id
 	Modifiy existing code to conform with coding guidelines
@@ -141,7 +146,7 @@ PROJECT ADMIN
 
 8.0	TEMPLATE MODULE
 	Modify existing TEMPLATE_README document and turn it into the
-	Detailed Design document
+	Create Detailed Design document
 	Write administration interface
 	Modifiy existing code to conform with coding guidelines
 	Ensure that site_id=0 is used for top-level administration 
@@ -151,38 +156,50 @@ PROJECT ADMIN
 	templates can be tracked
 
 9.0	USER SIGN-UP AND LOG-IN MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	Define tables for users, groups and channels
 
 10.0	PAGE CACHING MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 
 11.0	COMMENT MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 12.0	FORUMS MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 13.0	LINKS MANAGER MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 14.0	POLLS MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 15.0	DOWNLOAD MANAGER MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 16.0	CHANNEL SEARCH MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 17.0	EVENTS MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 18.0	MAILING LIST MANAGER MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 19.0	BANNER ADVERT MANAGER MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
 	
 20.0	USER RATING MODULE
-	Detailed Design document
+	Create Detailed Design document
+	Design database structure
