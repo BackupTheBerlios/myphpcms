@@ -100,12 +100,49 @@ Blah blah !
   default
 * All user data stored in user table
 * User profiles eg editor etc stored in another table
-* Users can register themselves by only site admin can prmote users to
+* Users can register themselves by only site admin can promote users to
   author, editor etc roles
 
-3.3	Database installation script
+3.3	Installation script
 
-Blah blah !
+The whole process of using myPHPcms should be as easy as possible.  
+This should start from the moment that the product is downloaded and
+the component files are unpacked into the web server directory.  
+
+The complete archive file that is downloaded by the user should contain
+the directory structure defined in section 3.0 Software Architecture
+with the appropriate permissions on the files and directories.  However
+in this state neither the database will exist nor will the administrator
+scripts be protected from unauthorised users.
+
+To counter these problems a number of steps need to be taken and these
+should be automated through the use of an install script.  It is likely
+at some point that an existing version of myPHPcms will be upgraded to
+a newer version.  In this instance an upgrade script should be run that
+will make the necessary modifications to the databases and scripts.
+
+This script should reside in the admin directory.  Since this script
+will be executed before any other components of myPHPcms is installed
+it will have to be entirely self-contained.  It cannot make calls to
+the templating system or the user authentication system.  It is 
+possible that it will be able to call a directly included setup library
+contained within a sub-directory of the admin directory.
+
+To prevent an upgrade being performed on a database that has not yet
+been installed the installation script should look for the presence of
+a flag.  If found then this will be interpreted as a properly 
+configured installation and so an upgrade will be assumed.  Otherwise a
+new installation will assumed.
+
+Files:	install.php	- script called by user to install myPHP.  
+			  Checks to see if an existing installation is
+			  present.  If so calls upgrade.php else calls
+			  setup.php
+	setup.php	- Sets up new installation from scratch.
+	upgrade.php	- Upgrades existing installation.
+	lib_setup.php	- Setup library contained within the admin/libs
+			  directory.  This will provide all of the
+			  functionality for the setup library.
 
 3.4	CMS module
 
