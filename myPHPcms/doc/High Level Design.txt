@@ -238,7 +238,8 @@ Unknown UA emails to admin for identification and updating of libs
 
 Database queried by admin whenever statistics required to use latest results
 Comprehensive reporting options and timescales available
-Caching of reverse DNS lookups allows faster queries second time around
+Caching of reverse DNS lookups allows faster queries second time around.
+Creation of output should be through lib_html.php only
 
 4.7.3	Other administration tasks
 

@@ -195,10 +195,11 @@ database due to perhaps a server outage must be handled gracefully.
   Dreamweaver which is then converted into PHP calls and is displayed
   in another form page
 * Code is correctly indented (formatted)
-* HTML library supports common HTML tags
-* HTML library will support Cascading Style Sheets
+* HTML library supports common HTML 4.0 tags
+* HTML library will support Cascading Style Sheets level 1
+* Should be extensible to produce valid XHTML 1.0 code
 * Code produced should be browser neutral and should validate using any
-  commonly available HTML validator.
+  commonly available HTML validator eg Tidy
 
 7.2	Site administration module
 
