@@ -24,6 +24,8 @@ myPHPcms High Level Design document
 
 3.0	OVERVIEW
 
+Add:	Could develop browser dependent templates ie IE and Netscape
+
 Dynamic websites consist of several components.  At the lowest level is
 a database in which content for the website is contained.  The middle 
 layer is some kind of scripting language that queries the database and
