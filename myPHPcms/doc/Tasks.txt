@@ -29,7 +29,7 @@ DOCUMENTATION
 		Complete Channel administration module section
 		Complete Diagnostics module section
 		Complete CMS module section
-		Complete Access logging module section
+		Done - Complete Access logging module section
 		Complete Templating module section
 		Complete User sign-up and log-in module section
 		Complete Page caching module section
@@ -148,10 +148,14 @@ PROJECT ADMIN
 	Modify existing code to conform with coding guidelines
 	Expand capability to allow logging of robots
 	Write test scripts to test browser identification
+	Finish functions in lib_statistics.php
+	Remove user online capability from lib_statistics.php
+	Add capability to filter out own URL from statistics
 	Revise statistical output format and presentation
 	Add graphing capability
 	Add session tracking capability for PHP scripts based on 
 	session ID and based on referrer for HTML pages
+	Look at how to compact database by removing redundant values
 
 8.0	TEMPLATE MODULE
 	Modify existing TEMPLATE_README document and turn it into the
