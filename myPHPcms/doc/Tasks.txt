@@ -11,39 +11,94 @@ Version 0.1
 Author: Phil Lee
 
 This document is just a container for ideas related to the tasks that 
-need to be completed for myPHPcms.  It shows the major tasks (in 
-capitals) and the sub-tasks that belong to these (in lower case).  
-Eventually these will be defined within the BerliOS task manager 
-module.
+need to be completed for myPHPcms.  Eventually these tasks will be 
+defined within the BerliOS task manager module.
 
 The work items are ordered so that the base functionality which would
 be sufficient to run a basic website will be completed if the tasks
-were stepped through sequentially.
+are stepped through sequentially.
 
 DOCUMENTATION
 	Functional Specification document
+		Incorporate all changes from High Level Design document
+		Convert to HTML
+		Publish as version 1.0
 	High Level Design document
-	PHP coding standard
+		Complete HTML library module section
+		Complete Site administration module section
+		Complete Channel administration module section
+		Complete Diagnostics module section
+		Complete CMS module section
+		Complete Access logging module section
+		Complete Templating module section
+		Complete User sign-up and log-in module section
+		Complete Page caching module section
+		Complete Comments module section
+		Complete Forums module section
+		Complete Links manager module section
+		Complete Polls module section
+		Complete Download manager module section
+		Complete Site search module section
+		Complete Events module section
+		Complete Mailing list manager module section
+		Complete Banner advert manager module section
+		Complete User rating module section
+		Convert to HTML
+		Publish as version 1.0
+	Detailed Design documents
+		Complete HTML library module document
+		Complete Site administration module document
+		Complete Channel administration module document
+		Complete Diagnostics module document
+		Complete CMS module document
+		Complete Access logging module document
+		Complete Templating module document
+		Complete User sign-up and log-in module document
+		Complete Page caching module document
+		Complete Comments module document
+		Complete Forums module document
+		Complete Links manager module document
+		Complete Polls module document
+		Complete Download manager module document
+		Complete Site search module document
+		Complete Events module document
+		Complete Mailing list manager module document
+		Complete Banner advert manager module document
+		Complete User rating module document
+		Convert all to HTML and publish
+	Test Plan
+		Decide on modules to be tested and the scope of each
+		modules tests based on Functional Specification
+		Decide on document format based on Functional 
+		Specification format and numbering system
+		Complete document
+		Convert to HTML and publish		
+	Test Specification for each module
+		Decide on scope and extent of module tests based on 
+		HLD document
+		Devise framework for Test Specification based on HLD
+		document numbering and structure
+		Complete High Level Test Specification document
+		Convert to HTML and publish
+	Test Scripts
+		Decide on test steps for each module
+		Devise framework for Test Script document based on
+		Detailed Design document for each module to be tested
+		Complete documents
+		Convert to HTML and publish
 	
 PROJECT ADMIN
-	Define site directory structure
-	Replace all instances of site_id to channel_id
+	Replace all instances of site_id to channel_id across all files
 	Prefix all MySQL tables with myPHPcms_
+	Design logo for myPHPwebsite
+	Design website for myPHPcms
+	Upload website for myPHPcms
+	Create buttons for "Powered by myPHPcms"
+	Add modules into database for new modules: Diagnostics, Channel
+	admin and Site admin modules
+	Check that modules defined on BerliOS match those required
 
-<!-- BASE FUNCTIONALITY -->
-	
-TEMPLATE MODULE
-	Modify existing TEMPLATE_README document and turn it into the
-	Detailed Design document
-	Write administration interface
-	Modifiy existing code to conform with coding guidelines
-	Ensure that site_id=0 is used for top-level administration 
-	templates only
-	Change all references to site_id to channel_id
-	Define templates so that parent/child relationships between
-	templates can be tracked
-	
-HTML LIBRARY
+1.0	HTML LIBRARY
 	Detailed Design document (base on HTML_README document in /docs)
 	Expand to allow usage of CSS tags
 	Modifiy existing code to conform with coding guidelines
@@ -51,10 +106,16 @@ HTML LIBRARY
 	Create conv_html library.php
 	Create form to allow entry of raw HTML to conv_html.php
 	
-SITE ADMINISTRATION MODULE
+2.0	SITE ADMINISTRATION MODULE
 	Detailed Design document
-	
-INSTALLATION SCRIPTS
+
+3.0	CHANNEL ADMINISTRATION MODULE
+	Detailed Design document
+
+4.0	DIAGNOSTICS MODULE
+	Detailed Design document
+
+5.0	INSTALLATION SCRIPTS
 	Detailed Design document
 	Create script to get MySQL database server, username, password,
 	database name from user and write these to a configuration file
@@ -65,58 +126,63 @@ INSTALLATION SCRIPTS
 	populates the tables so that the user can log in for the first
 	time
 	
-CORE CMS MODULE
+6.0	CORE CMS MODULE
 	Detailed Design document
 	Write UNIX diff-style function
 	Implement version control system
 
-ACCESS LOGGING MODULE
-	Modify existing LOGGING_README file and turn it into the
-	Detailed Design document
+7.0	ACCESS LOGGING MODULE
+	Change all references to site_id in documents and code to
+	channel_id
 	Modifiy existing code to conform with coding guidelines
 	Expand capability to allow logging of robots
 	Write test scripts to test browser identification
-	Revise statitical output format and presentation
-	
-NEWS PUBLICATION MODULE
-	Detailed Design document	
+	Revise statistical output format and presentation
 
-PAGE CACHING MODULE
+8.0	TEMPLATE MODULE
+	Modify existing TEMPLATE_README document and turn it into the
 	Detailed Design document
+	Write administration interface
+	Modifiy existing code to conform with coding guidelines
+	Ensure that site_id=0 is used for top-level administration 
+	templates only
+	Change all references to site_id to channel_id
+	Define templates so that parent/child relationships between
+	templates can be tracked
 
-USER SIGN-UP AND AUTHENTICATION MODULE
+9.0	USER SIGN-UP AND LOG-IN MODULE
 	Detailed Design document
 	Define tables for users, groups and channels
 
-<!-- Additional modules -->
+10.0	PAGE CACHING MODULE
+	Detailed Design document
 
-USER COMMENT MODULE
+11.0	COMMENT MODULE
 	Detailed Design document
 	
-USER FORUMS MODULE
+12.0	FORUMS MODULE
 	Detailed Design document
 	
-LINK MANAGER MODULE
+13.0	LINKS MANAGER MODULE
 	Detailed Design document
 	
-REVIEW PUBLICATION MODULE
+14.0	POLLS MODULE
 	Detailed Design document
 	
-USER POLL MODULE
+15.0	DOWNLOAD MANAGER MODULE
 	Detailed Design document
 	
-DOWNLOAD MANAGER MODULE
+16.0	CHANNEL SEARCH MODULE
 	Detailed Design document
 	
-SITE SEARCH MODULE
+17.0	EVENTS MODULE
 	Detailed Design document
 	
-EVENTS MODULE
+18.0	MAILING LIST MANAGER MODULE
 	Detailed Design document
 	
-MAILING LIST MANAGER MODULE
+19.0	BANNER ADVERT MANAGER MODULE
 	Detailed Design document
 	
-BANNER ADVERT MANAGER MODULE
+20.0	USER RATING MODULE
 	Detailed Design document
-	
