@@ -199,6 +199,14 @@ Blah blah !
 
 4.9	Templating module
 
+To minimise the number of templates for a given number of pages any 
+template should be capable of being made up of other templates.  This 
+would allow the re-use of existing templates if small templates existed
+for common page elements such as headers or footers.  This could be 
+achieved by assigning each template a unique number and storing the 
+relationships between the parent template and child templates that 
+comprise it.
+
 * Templates for admin engine have channel_id=0
 * All public channel_id start at 1
 
