@@ -38,51 +38,56 @@ myPHPcms High Level Design document
 UPDATE	This section to include session logging to enable tracking of
 	visitors through site.
 	Considered timing script execution and logging but too complex
-	for early releases.  MySQL table created for it though.
+	for early releases.  MySQL table entry created for it though.
 	Describe how might be done though through multi-GIFs or PHP 
-	scripts
+	scripts using sessions
 	Reports need to be created using lib_html.php
 
-Why use a database backed logging solution instead of log files ?
-Basically because of information availability and speed.  Data is 
-gathered on each hit that occurs on the site.  Analysis of this data
-can be carried out at anytime and does not require the processing of 
-long log files - instead this task can be carried out by a graphcal 
-front-end which queries the logging database.  This means that any 
-query run will be run on the most up to date data available.
+3.1	Requirements
 
-The logging system can be applied to either PHP pages or HTML pages.  
-Any requests made to the webserver will result in the following 
-information being stored:
+Lifted straight from the Functional Specification:
 
-     * name of page requested
-     * date and time of request
-     * session id (if applicable)
-     * site id (allows multiple sites to be logged)
-     * browser type, version and platform
-     * name of script calling logging system
-     * ip of requesting host
-     * name of requesting server (if resolvable)
-     * referring web page or host
-     * name of page that user is going to (click-thru tracking)
+* Should be able to determine platform
+* Should be able to determine the operating system
+* Must be able to detect all common browsers
+* Must be able to detect search engine spiders
+* Should be usable from PHP and HTML pages (to allow caching)
+* Should email unknown user agent strings to site admin
+* Users should not be aware of its presence
+* Administrator should be able to look at results over different time 
+  periods eg today, yesterday, this week, last week, this month, last
+  month, this quarter, this year, last year
+* Reporting function should provide the following information:
+	* total files requested
+	* total hits on channel
+	* total pages served
+	* total visits to channel
+	* total unique sites that have visited
+	* total unique URL's served
+	* total unique referers
+	* total unique user agents
+	* hits per hour (average and maximum)
+	* hits per day (average and maximum)
+	* files per day (average and maximum)
+	* pages per day (average and maximum)
+	* visits per day (average and maximum)
+	* path through site (based on PHP session - dynamic sites only)
+	* all statistics displayed as top X of Y where X can be defined
+	  and Y is the total number in that category since logging 
+	  began
+* Administrator should be able to see which pages are most popular, least
+  popular, top referers, top exit pages, top search queries etc
+* System can handle multiple channels
+* Would be desireable for the logging system to record the amount of time
+  taken for a page to be accessed each time it is accessed
 
-All of this information is stored in a single database table called
-logging_log.  It is defined in logging.sql.
+3.2	Solution
 
-Any request made to the webserver can be made to generate an SQL query
-to log details of the request in the database.  If the file being 
-requested is a PHP script then this can be achieved by including the 
-following line somewhere in the script:
+TBD
 
-     include("$site_root/libs/inc_logger.php");
-     
-If, however, the page requested is purely an HTML page or it resides on
-a server that does not allow the use of PHP then the following 'GIF' 
-can be displayed on the page:
+3.2.1	Data gathering
 
-   <img src="gif11.php?site_id=0&page=index.html" width='1' height='1'>
-
-Note that there are additinal parameters that need to be specified for 
+Note that there are additional parameters that need to be specified for 
 the 'GIF' solution.  These are specified in the Reference section at 
 the end of this document.
 
@@ -91,22 +96,50 @@ calls a PHP file located on a server that can run PHP which parse the
 request, inserts the relevant data into the database and then passes 
 through a transparent 1x1 GIF image ('clear.gif').
 
+3.2.1.1	General considerations
+
+* Must be able to detect all common browsers
+* Must be able to detect search engine spiders
+* Should be usable from PHP and HTML pages (to allow caching)
+* Should email unknown user agent strings to site admin
+* System can handle multiple channels
+
+3.2.1.2	Browser version
+
+TBD
+
+3.2.2.3	Browser platform
+
+* Should be able to determine platform
+
+3.2.2.4	Operating system
+
+* Should be able to determine the operating system
+
+3.2.2.5	Page requests
+
+TBD
+
+3.2.2.6	Page loading time
+
+* Would be desireable for the logging system to record the amount of time
+  taken for a page to be accessed each time it is accessed
+
+3.2.2.7	Exit pages
+
 When the user leaves the site it can be desireable to know where they 
 are going.  This can be useful in the context of tracking whether users
 click on a banner or a link to another website.  To allow this is to be
 monitored the following script can be used:
 
-  <a href="logging/redir.php?e=http://www.phpbuilder.com">Link name</a>
+  <a href="logging/redir.php?e=http://www.phpbuilder.com">PHP Builder</a>
 
 This inserts the URL of the link that the user has clicked on together 
 with other data that can be gleaned from the execution of the script.  
 The target URL is then opened in the same window as the request was 
 made.
 
-All of these techniques rely upon the insertion of data into the SQL 
-database.  On a heavily used site this may result in some deterioration
-of performance so, in order to minimise this, the SQL INSERTS are 
-delayed until the table is free.
+3.2.2	Data processing and reporting
 
 Once the data is contained within the database it can be queried to 
 generate the following information:
@@ -134,7 +167,69 @@ be reported defined by setting the $timescale to one of the following:
 'today', 'yesterday', 'thisweek', 'thismonth', 'thisquarter', 
 'thisyear'.
 
+3.2.2.1	General considerations
+
+Why use a database backed logging solution instead of log files ?
+Basically because of information availability and speed.  Data is 
+gathered on each hit that occurs on the site.  Analysis of this data
+can be carried out at anytime and does not require the processing of 
+long log files - instead this task can be carried out by a graphcal 
+front-end which queries the logging database.  This means that any 
+query run will be run on the most up to date data available.
+
+3.2.2.2	Blah !
+
+* Administrator should be able to look at results over different time 
+  periods eg today, yesterday, this week, last week, this month, last
+  month, this quarter, this year, last year
+* Reporting function should provide the following information:
+	* total files requested
+	* total hits on channel
+	* total pages served
+	* total visits to channel
+	* total unique sites that have visited
+	* total unique URL's served
+	* total unique referers
+	* total unique user agents
+	* hits per hour (average and maximum)
+	* hits per day (average and maximum)
+	* files per day (average and maximum)
+	* pages per day (average and maximum)
+	* visits per day (average and maximum)
+	* path through site (based on PHP session - dynamic sites only)
+	* all statistics displayed as top X of Y where X can be defined
+	  and Y is the total number in that category since logging 
+	  began
+* Administrator should be able to see which pages are most popular, least
+  popular, top referers, top exit pages, top search queries etc
+
+3.3	Usage
+
+The logging system can be applied to either PHP pages or HTML pages.  
+Any requests made to the webserver will result in the following 
+information being stored.
+
+3.3.1	Dynamically generated PHP pages
+
+Any request made to the webserver can be made to generate an SQL query
+to log details of the request in the database.  If the file being 
+requested is a PHP script then this can be achieved by including the 
+following line somewhere in the script:
+
+     include("$site_root/libs/inc_logger.php");
+
+3.3.2	Static HTML pages
+
+If, however, the page requested is purely an HTML page or it resides on
+a server that does not allow the use of PHP then the following 'GIF' 
+can be displayed on the page:
+
+   <img src="gif11.php?site_id=0&page=index.html" width='1' height='1'>
+
+
 4.0	DATABASE DESIGN
+
+SQL data is defined in logging.sql
 
 4.1	logging_log
 
@@ -170,6 +265,14 @@ table logging_unknown
 
 	FIELD       DEFAULT      TYPICALLY
 	user_agent  None         Mozilla/4.0b2 (Win95; I)*
+	
+4.4	SQL query design
+
+All of these techniques rely upon the insertion of data into the SQL 
+database.  On a heavily used site this may result in some deterioration
+of performance so, in order to minimise this, the SQL INSERTS are 
+delayed until the table is free.
+
 
 
 5.0	SOFTWARE COMPONENTS
@@ -238,6 +341,10 @@ that are available in each of the scripts that make up the Access
 Logging module.  The functions are grouped together by script name.
 
 7.1	adm_statistics.php
+
+This is the administration module for the access logging system.  It is
+located in a direcotry to which only the master site and channel 
+administrators have access to.
 
 7.1.1	function hourly_requests($link_id, $site_id, $timescale)
 
@@ -316,31 +423,213 @@ Logging module.  The functions are grouped together by script name.
 
 7.2	lib_statistics.php
 
+This is the query library for the administration module for the access
+logging system.  It is placed in the admin/lib directory where only the
+master site and channel administrators have access to it.
 
+7.2.1	function hourly_requests($link_id, $site_id, $timescale)
 
+	Determines the total number of hits per hour for the specified
+	channel over the timescale provided.    Corrects the times
+	returned for the server time difference.
+
+7.2.2	function browser_types($link_id, $site_id, $timescale)
+
+	Determines the page views by browser type for the channel
+	specified over the timescale provided.
+
+7.2.3	function browser_unknown($link_id, $site_id, $timescale)
+
+	Determine and list any unidentified browsers for the specified
+	channel over the timescale specified.
+	
+	NOT YET COMPLETE.
+
+7.2.4	function top_pages($link_id, $site_id, $timescale, $max_num)
+
+	Retrieves all of the requested URL's for the specified channel
+	over the time period specified and groups them by URL in 
+	descending order to show the most popular.  The maximum number
+	returned can be controlled.
+
+7.2.5	function bottom_pages($link_id, $site_id, $timescale, $max_num)
+
+	Retrieves all of the requested URL's for the specified channel
+	over the time period specified and groups them by URL in 
+	ascending order to show the least popular.  The maximum number
+	returned can be controlled.
+
+7.2.6	function total_page_views($link_id, $site_id)
+
+	Counts the total number of page views since logging began for
+	the specified channel.
+
+7.2.7	function top_referrers($link_id, $site_id, $timescale, $max_num)
+
+	Retrieves all referrers (where known) for the specified channel,
+	groups them together and lists them in descending order to show
+	the most common.  The maximum number of values returned can be
+	controlled.
+
+7.2.8	function top_hosts($link_id, $site_id, $timescale, $max_num)
+
+	Retrieves all referring IP addresses for the specified channel,
+	groups them together by IP address and lists them in descending
+	order so that the most common can be identified.  The maximum
+	number of values returned can be controlled.
+
+7.2.9	function searches($link_id, $site_id, $timescale, $max_num)
+
+	Searches all referrers to identify query strings for the 
+	channel specified over the time period specified.  Looks for
+	the words "query", "keywords", "q=" or "search".  Groups
+	together these results to show the most common search requests.
+	The maximum number that is returned can be controlled.
+
+7.2.10	function operating_sys($link_id, $site_id, $timescale, $max_num)
+
+	Groups all requests for the specified channel over the time 
+	period specified by operating system in descending order so
+	that the most popular platform can be identified.  The maximum
+	number of results returned can be controlled.
+
+7.2.11	function top_entry($link_id, $site_id, $timescale, $max_num)
+
+	Determines the most common pages through which users enter the
+	site.  Currently this is determined by finding all pages where
+	the referrer does not contain the URL of the website.  These 
+	are then grouped and sorted in descending order.  The maximum
+	number of results returned can be controlled.
+
+7.2.12	function top_exit($link_id, $site_id, $timescale, $max_num)
+
+	Determines the most popular exit links reported by the exit
+	script.  These are grouped and are sorted in descending order.
+	The maximum number of results returned can be controlled.
+
+7.2.13	function unique_visitors($link_id, $site_id, $timescale)
+
+	Determines the total number of unique session ID's for the
+	channel specified over the period specified.
+	
+	Not yet finished.
+
+7.2.14	function users_online()
+
+	Determine the number of people on-line for the specified
+	channel.
+	
+	Not yet complete.
+
+7.2.15	function session_length()
+
+	Determines the length of each unique session.
+	
+	Not yet complete.
+
+7.2.16	function today()
+
+	Returns SQL necessary to limit query to data for current day.
+
+7.2.17	function yesterday()
+
+	Returns SQL necessary to limit query to data for previous day.
+
+7.2.18	function thisweek()
+
+	Returns SQL necessary to limit query to data for current week.
+
+7.2.19	function thismonth()
+
+	Returns SQL necessary to limit query to data for current month.
+
+7.2.20	function thisquarter()
+
+	Returns SQL necessary to limit query to data for current three
+	month period.
+
+7.2.21	function lastquarter()
+
+	Not complete.
+
+7.2.22	function thisyear()
+
+	Returns SQL necessary to limit query to data for current year.
+
+7.2.23	function get_date($timescale)
+
+	Based on the timescale specified for the query, calls the 
+	relevant function to create the SQL necessary to limit the 
+	scope of the query.
+
+7.2.24	function return_empty()
+
+	Error handler to fill the returned array from each function 
+	with "none" if the SQL query returns empty.  This might occur
+	if there were no data in the logging system.
+
+7.2.25	function gethostname($link_id, $ip_address)
+
+	Function to retrieve hostname from database if it's previously
+	been resolved otherwise obtains the hostname by reverse DNS 
+	lookup.  Results are stored in a table (logging_cache) for use
+	in subsequent queries.
 
 7.3	inc_logger.php
 
-	
+This is the PHP script that captures the logging information from PHP
+pages.  It contains no functions.
 	
 7.4	gif11.php
 
-	
+This is the fake 'GIF' image that captures the logging information from
+static HTML files.  It contains no functions.
 
 7.5 	clear.gif
 
-No functions.	
+This is the GIF image that is returned to the browser after the 
+execution of gif11.php.  It contains no functions.
 
 7.6	redir.php
 
-	
+This is the script that allows hyperlinks on pages to be logged in 
+order to determine where visitors are going when they leave the 
+website.  It contains no functions.
 
 7.7	logging.sql
 
-	
+This is the fragment of SQL code that builds the tables for the logging
+system.
 	
 7.8	lib_browser.php
 
+This is the browser detection library.
 
+7.8.1	function detect_browser($link_id,$UA="") {
+	
+	Master function that controls the detection of the platform, 
+	browser name and version.
+	
+7.8.2	function store_unknown($link_id,$UA) {
+	
+	Stores any unidentified user agent strings in the database and
+	optionally emails them to the master site administrator.
+		
+7.8.3	function is_win($UA) {
+	
+	Determines the specific version of Windows.
+	
+7.8.4	function is_mac($UA) {
+	
+	Determines if this is a Mac of some kind.
+	
+7.8.5	function is_other($UA) {
+	
+	Check for various flavours of Linux/UNIX/other platforms.
+	
+7.8.6	function get_version($UA,$match,$field) {
+	
+	Having identified the browser, this function extracts the 
+	version number from the supplied user agent string.
 
 <ENDS>
