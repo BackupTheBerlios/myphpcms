@@ -1,12 +1,16 @@
 myPHPcms task breakdown
 =======================
 
-Version 1.0
+* add breadcrumb navigation
+* define standard CVS file header
+
+
+Version 0.1
 -----------
 
 Author: Phil Lee
 
-This document is just a container for ideas related to the task that 
+This document is just a container for ideas related to the tasks that 
 need to be completed for myPHPcms.  It shows the major tasks (in 
 capitals) and the sub-tasks that belong to these (in lower case).  
 Eventually these will be defined within the BerliOS task manager 
@@ -29,10 +33,14 @@ PROJECT ADMIN
 TEMPLATE MODULE
 	Detailed Design document
 	Write administration interface
+	Modifiy existing code to conform with coding guidelines
+	Ensure that site_id=0 is used for top-level administration 
+	templates only
 	
 HTML LIBRARY
 	Detailed Design document
 	Expand to allow usage of CSS tags
+	Modifiy existing code to conform with coding guidelines
 	Create conv_html library.php
 	Create form to allow entry of raw HTML to conv_html.php
 	
@@ -44,10 +52,16 @@ INSTALLATION SCRIPTS
 	
 CORE CMS MODULE
 	Detailed Design document
+	Write UNIX diff-style function
+	Implement version control system
 
 ACCESS LOGGING MODULE
 	Detailed Design document
-
+	Modifiy existing code to conform with coding guidelines
+	Expand capability to allow logging of robots
+	Write test scripts to test browser identification
+	Revise statitical output format and presentation
+	
 NEWS PUBLICATION MODULE
 	Detailed Design document	
 
@@ -80,7 +94,7 @@ DOWNLOAD MANAGER MODULE
 SITE SEARCH MODULE
 	Detailed Design document
 	
-EVSNTS MODULE
+EVENTS MODULE
 	Detailed Design document
 	
 MAILING LIST MANAGER MODULE
