@@ -9,6 +9,7 @@ Files
 			configuration.
 * adm_statistics.php	Provides summary of statistics for site.
 * config.php		Configuration information for the site.
+* setup.php		Script to walk user through setup of site.
 * README		This file
 
 Directories
