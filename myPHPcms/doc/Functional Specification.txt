@@ -118,10 +118,16 @@ also required.
 * No detailed knowledge of MySQL or PHP is required to set-up the software
   as an INSTALL script is provided.
 
+6.0	SECURITY ISSUES
 
-6.0	SOFTWARE ENVIRONMENT
+* All inputs and uploads from users will be checked and invalid inputs
+  will be rejected.  Any suspicious activity will be logged and the
+  site administrator will be notified.
 
-6.1	HTML library
+
+7.0	SOFTWARE ENVIRONMENT
+
+7.1	HTML library
 
 * create form to allow entry of HTML to convert
 * create form to display PHP required to create specified HTML
@@ -129,12 +135,12 @@ also required.
 * include common CSS tags
 * write code formatting routine
 
-6.2	Admin functions
+7.2	Admin functions
 
 * create script to search through admin directory looking for adm_*.php
   files.  Add these to the admin menu when displayed.
 
-6.3	Database installation script
+7.3	Database installation script
 
 * write script to create and setup default MySQL database.  Base it on
   the installation script used by phpWebSite
@@ -143,31 +149,31 @@ also required.
 * would still need the config.php file to be edited to point to the 
   database
   
-6.4	CMS functions
+7.4	CMS functions
 
 * complete work-flow and sign-off process
 * single editor, deputy editor and section editors can be defined
 
-6.5	User comment functions
+7.5	User comment functions
 
 * can be tied to review, news story or feature.
 * stores username, time amd comments posted.
 * also stores IP address
 
-6.6	Forums
+7.6	Forums
 
 * registered users only can start threads
 * registered users only can reply to these threads
 * thread can searched by poster, date, time, or keyword
 * threads show author, title, replies, views, 
 
-6.7	Links manager
+7.7	Links manager
 
 * use similar database schema to that used by PHPNuke
 * stores number of times that link has been visited
 * links to logging system to store exit pages
 
-6.8	Logging system
+7.8	Logging system
 
 * must be able to log all versions of IE and Netscape and most other
   browsers
@@ -177,7 +183,7 @@ also required.
 * must be usuable by both PHP and static HTML pages
 * must be able to store exit pages too
 
-6.9	News system
+7.9	News system
 
 * must allow posting of news by registered users
 * email notification to editors that story waiting
@@ -185,11 +191,11 @@ also required.
 * publication date can be set to automate posting
 * links to comments section to allow comments to be posted by users
 
-6.10	Reviews system
+7.10	Reviews system
 
 * as for the news system
 
-6.11	Templating system
+7.11	Templating system
 
 * templates can be edited, deleted or modified from web-browser
 * browser allows previewing of templates
@@ -198,21 +204,29 @@ also required.
 * age of templates can be set
 * template system can cope with templates for multiple sites
 
-6.12	User authentication library
+7.12	User authentication library
 
-* allows user to sign up
-* allows users to recover lost passwords
-* allows users to chnage passwords
-* collects basica information about the users
-* simple method of checking whether user logged in required on each page
+* Users should be able to register a username and password
+* Restrictions on username and password should be enforced
+* Passwords will be stored in the database in an encrypted form for 
+  security
+* User should be able to log with the details that they registered with
+* Users should be able to log out when they have inished using the 
+  site.  If possible users should be automatically logged out after a
+  pre-defined period of inactivity.
+* Site needs to check if user is logged in and restrict access to parts
+  of the site for authorised users only.
+* Users should be able to update their passwords.
+* Users should be able to reset or apply for new passwords if they
+  forget their current one.
 
-6.13	Polls
+7.13	Polls
 
 * web-based setup of questions and answers
 * historical results available
 * logs IP address to prevent multiple votes
 
-6.14	Caching system
+7.14	Caching system
 
 * needs to generate static copies of as much of the website as possible
 * templating system does some of this by caching the non-changing page 
@@ -220,24 +234,24 @@ also required.
 * HOWEVER, caching everything into real files when requested by the 
   server would allow the indexing of the site by search engines
   
-6.15	Download library
+7.15	Download library
 
 * manages and allows downloads by registered users only
 * keep track of who requested what and when
 * permits logging of most popular download
 
-6.16	Search library
+7.16	Search library
 
 * allows searching of site by keywords
 * keyword database created on article/story/review/feature basis by
   editor when approval granted for submission
   
-6.17	Calender system
+7.17	Calender system
 
 * allows addition/deletion/modification of events by registered users
 * these are listed in a what's on box on main screen
 
-6.18	Mailing list manager
+7.18	Mailing list manager
 
 * broadcast only mailing list manager
 * users can opt-in or out from web-page or via email
@@ -247,7 +261,7 @@ also required.
 * must be capable of handling multiple lists
 * archive of sent messages should be made available via web page
 
-6.19	Banner advert manager
+7.19	Banner advert manager
 
 * system to allow scheduling of banner adds
 * tracks impressions and click-throughs
