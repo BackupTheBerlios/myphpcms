@@ -1,0 +1,6 @@
+The following links might be useful when considering the safety of PHP
+code written as part of myPHPcms:
+
+* http://softwaredev.earthweb.com/script/article/0,,12063_918141,00.html
+* http://softwaredev.earthweb.com/script/article/0,,12063_922871,00.html
+* http://zez.org/article/articleview/69/
