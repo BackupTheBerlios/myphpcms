@@ -1,0 +1,24 @@
+This directory contains the documentation for myPHPcms including design
+documents, coding guidelines and any other useful information.
+
+This directory contains the following files and directories:
+
+Files
+
+* Functional specification.txt	Document that specifies the overall
+				functionality of the site at a high level.
+* High level design.txt		Document that defines at a high level how
+				the functionality outlined in the
+				Functional Specification is to be achieved
+* Tasks.txt			List of project tasks that need to be
+				completed and an indication of the order
+				that these tasks need to be achieved in.
+* Coding guidelines.txt		Document that specifies how code for
+				myPHPcms is to be written
+* README			this file.
+				
+Directories
+
+None
+
+<ENDS>

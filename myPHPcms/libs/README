@@ -1,0 +1,22 @@
+This directory contains all of the libraries that are needed to support
+the scripts that run myPHPcms.  In theory this directory should be 
+protected in some way perhaps using .htaccess files to prevent hackers
+looking at the contents.
+
+This directory contains the following files and directories:
+
+Files
+
+* lib_browser.php	Browser, operating system and platform detection
+			library used by logging system.
+* lib_db.php		Functions to connect to MySQL database
+* lib_html.php		HTML library functions and classes
+* lib_templates.php	Template management library
+* lib_user.php		Sourceforge-sourced user management library
+* lib_utils.php		Useful functions not implemented in PHP that are
+			needed by more than one script.
+* README		This file.
+
+Directories
+
+* None

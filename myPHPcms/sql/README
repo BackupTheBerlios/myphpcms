@@ -1,0 +1,17 @@
+This directory should contain all SQL snippets to create the
+individual tables necessary for the sub-components of the
+dynamic website together with the larger SQL script that
+creates all tables (currently called mtbales.sql)
+
+This directory contains the following files and directories:
+
+Files
+
+* logging.sql	SQL commands to create logging tables.
+* myPHPcms.sql	SQL commands to create complete site tables.
+* template.sql	SQL commands to create template tables.
+* README	This file.
+
+Directories
+
+* None

@@ -1,0 +1,44 @@
+This directory contains scripts that are used for testing and debugging
+the scripts that comprise myPHPcms.  These scripts are not called as
+part of the day to day running of the site.
+
+This directory contains the following files and directories:
+
+Files
+
+* conv_html.html		Sample HTML page to convert with
+				conv_html.php (when it works).
+* conv_html.php			Start of library to convert raw html in
+				to calls to the lib_html in order to
+				aid in the conversion and creation of
+				templates.
+* db_test.php			Useless script to test connection to
+				database.
+* delete_templates.php		Script to delete all templates within
+				the templating system.
+* index-timing.php		Sample illustrate the usage of the
+				timing library (lib_timing.php).
+* lib_debugging.php		Crude library that allows the logging
+				of script actions to a text file.
+				Useful for debugging.
+* lib_email.php			Script to validate email address.  In
+				development but not really needed just
+				yet so that's why it's not in the libs
+				directory.
+* lib_html_test.php		Script to test the basic functions of
+				lib_html.
+* lib_timing.php		Library to measure execution time of
+				a script.  Useful for doing performance
+				testing in order to optimise design.
+* phpinfo.php			Prints out the configuration of PHP
+				on the server that it is running on.	
+* populate_templates.php	Script to build set template values.
+				Probably a copy of the file in the
+				admin directory.
+* test_browser.php		Script to present all known User Agent
+				strings to the logging system for 
+				testing	purposes.
+
+Directories
+
+* None

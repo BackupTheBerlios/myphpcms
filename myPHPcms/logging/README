@@ -1,0 +1,20 @@
+This directory contains the scripts for the logging system to collect
+and store the data that we need.
+
+This directory contains the following files and directories:
+
+Files
+
+* gif11.php		Fake GIF file that logs browser data into 
+			database.  (Used for static HTML pages).
+* clear.gif		GIf file that it served to browser after logging
+			has taken place.
+* inc_logger.php	PHP script that logs browser data into database.
+			(Used for PHP files).
+* redir.php		Wrapper to redirect user to another URL and log
+			this into the database.
+* README		This file.
+
+Directories
+
+* None

@@ -1,0 +1,17 @@
+This directory (and it's sub-directories) should contain libraries
+that provide functionality to the site administrator only.
+
+This directory contains the following files and directories:
+
+Files
+
+* admin.php		Builds list of installed modules to allow their
+			configuration.
+* adm_statistics.php	Provides summary of statistics for site.
+* config.php		Configuration information for the site.
+* README		This file
+
+Directories
+
+* libs			Libraries for administration functions.
+* templates		Templates for administration functions.
