@@ -316,6 +316,23 @@ database due to perhaps a server outage must be handled gracefully.
 * Administrator should be able to look at results over different time 
   periods eg today, yesterday, this week, last week, this month, last
   month, this quarter, this year, last year
+* Reporting function should provide the following information:
+	* total files requested
+	* total hits on site
+	* total pages served
+	* total visits to site
+	* total unique sites that have visited
+	* total unique URL's served
+	* total unique referers
+	* total unique user agents
+	* hits per hour (average and maximum)
+	* hits per day (average and maximum)
+	* files per day (average and maximum)
+	* pages per day (average and maximum)
+	* visits per day (average and maximum)
+	* all statistics displayed as top X of Y where X can be defined
+	  and Y is the total number in that category since logging 
+	  began
 * Administrator should be able to see which pages are most popular, least
   popular, top referers, top exit pages, top search queries etc
 * System can handle multiple sites
