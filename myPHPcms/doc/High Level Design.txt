@@ -149,6 +149,9 @@ a flag.  If found then this will be interpreted as a properly
 configured installation and so an upgrade will be assumed.  Otherwise a
 new installation will assumed.
 
+Add:	Tasks that script must perform (1) define master admin (2) enter
+	details into MySQL database (3) add to .htaccess and .htpasswd
+	files in $SITE_ROOT/admin/master (4) invites user to log back in
 
 4.6	CMS module
 
@@ -219,7 +222,8 @@ variables which can then be logged in the database by the PHP script.
 Once the data has been collected a transparent 1 pixel wide by 1 pixel 
 high GIF image is returned to the browser.  To prevent caching of the
 image which would defeat this technique a random value is attached to a
-variable which is sent in the URL that requests the GIF.
+variable which is sent in the URL that requests the GIF.  This will be 
+carried by using Javascript.
 
 GIF or script placed at top of file shows that file was accessed but no
 way of knowing if user waited for page to load or if they clicked cancel.
@@ -268,6 +272,8 @@ email address which will open a custom URL when the user clicks on it
 thus activating the account.  The username and a unique id are then 
 stored in the users browser as a cookie in order to prevent them from 
 having to log in again.
+
+Task:	Look at PHPBuilder article
 
 4.10	Page caching module
 
