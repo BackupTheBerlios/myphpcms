@@ -1,0 +1,53 @@
+myPHPcms Detailed Design document - HTML Library
+=================================================
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+Blah blah !
+
+1.0	SCOPE
+
+Blah blah !
+
+
+2.0	REFERENCE DOCUMENTATION
+
+myPHPcms Functional Specification
+myPHPcms High Level Design document
+
+
+3.0	OVERVIEW
+
+Blah blah !
+
+
+4.0	DATABASE DESIGN
+
+Blah blah !
+
+
+5.0	SOFTWARE COMPONENTS
+
+The templating system consists of two files:
+
+list files here relative to $site_root
+
+
+6.0	DEPENDENCIES
+
+Blah blah !
+
+
+7.0	REFERENCE
+
+Blah blah !
+
+
+8.0	EXAMPLE
+
+Include an example of the module usage here if applicable.
+
+<ENDS>
