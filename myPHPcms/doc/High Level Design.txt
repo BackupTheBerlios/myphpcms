@@ -90,11 +90,16 @@ server built-in permissions will be used to discriminate between the
 regular site visitors and the administrators through the use of the
 .htaccess file and .htpasswd files.
 
-3.1	HTML library
+
+4.0	Software Modules
 
 Blah blah !
 
-3.2	Site administration module
+4.1	HTML library
+
+Blah blah !
+
+4.2	Site administration module
 
 * Default user is overall site admin called 'god'.  No password by
   default
@@ -103,7 +108,7 @@ Blah blah !
 * Users can register themselves by only site admin can promote users to
   author, editor etc roles
 
-3.3	Installation script
+4.3	Installation script
 
 The whole process of using myPHPcms should be as easy as possible.  
 This should start from the moment that the product is downloaded and
@@ -172,36 +177,47 @@ Files:	install.php	- script called by user to install myPHP.
 			  
 Needs:	access to the user sign-up and login functions
 
-3.4	CMS module
+4.4	CMS module
 
 Blah blah !
 
-3.5	User comments module
+4.5	User comments module
 
 Blah blah !
 
-3.6	User forums module
+4.6	User forums module
 
 Blah blah !
 
-3.7	Links manager module
+4.7	Links manager module
 
 Blah blah !
 
-3.8	Access logging module
+4.8	Access logging module
 
 Blah blah !
 
-3.9	Templating module
+4.9	Templating module
 
-* Templates for admin engine have site-id=0
-* All public site-ids start at 1
+* Templates for admin engine have channel_id=0
+* All public channel_id start at 1
 
-3.10	User registration and authentication module
+4.10	User registration and authentication module
 
-Blah blah !
+Since the username is the users email address this will need to be
+validated.  This could be performed by a regular expression match on
+the supplied email address.  If it fails then the user will be asked to
+re-enter their email address.  If successful their choice of password
+will be asked for again for confirmation - it will then be checked to 
+see that it contains enough characters.  If it does not then it will 
+requested again.  If successful the user will be added to the database
+but marked as inactive.  An email will then be sent to the supplied 
+email address which will open a custom URL when the user clicks on it 
+thus activating the account.  The username and a unique id are then 
+stored in the users browser as a cookie in order to prevent them from 
+having to log in again.
 
-3.11	Polls module
+4.11	Polls module
 
 * Should comprise of the following:
   polls.sql        - SQL code to create single table to store data
@@ -216,7 +232,7 @@ Blah blah !
 * Should provide graphical results but not use complex PHP features 
   like GD library as not all servers may support it.
   
-3.12	Page caching module
+4.12	Page caching module
 
 * Set options in each file whether to cache and if so where to put the
   file afterwards.  Also et age of cached file.  When file loads, check
@@ -224,37 +240,37 @@ Blah blah !
   If exists and not too old then use it else create more up to date
   version.
 
-3.13	Download manager module
+4.13	Download manager module
 
 Blah blah !
 
-3.14	Site search module
+4.14	Site search module
 
 Blah blah !
 
-3.15	Events module
+4.15	Events module
 
 Blah blah !
 
-3.16	Mailing list manager module
+4.16	Mailing list manager module
 
 Blah blah !
 
-3.17	Banner advert manager module
+4.17	Banner advert manager module
 
 Blah blah !
 
-3.18	User rating system
-
-Blah blah !
-
-
-4.0	DESIGN AND CODING
+4.18	User rating system
 
 Blah blah !
 
 
-5.0	SECURITY ISSUES
+5.0	DESIGN AND CODING
+
+Blah blah !
+
+
+6.0	SECURITY ISSUES
 
 Insert brief bullet point summary of points contained in the Coding
 Guidelines in this section.   
