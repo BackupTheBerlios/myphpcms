@@ -1,0 +1,81 @@
+myPHPcms Coding Guidelines
+==========================
+
+Version 0.1
+-----------
+
+Author: Phil Lee
+
+EXECUTIVE SUMMARY
+
+Blah blah !
+
+1.0	SCOPE
+
+Blah blah !
+
+2.0	REFERENCE DOCUMENTATION
+
+Blah blah !
+
+3.0	CODING GUIDELINES
+
+Blah blah !
+
+4.0	SECURITY ISSUES
+
+The following principles will be adhered to AT ALL TIMES:
+
+   * For each module consider the input, output, behaviour, files used,
+     and arguments recognised.  List all potential errors that might 
+     arise and how the scripts will deal with them.
+   
+   * All values from the user must be checked.  In particular input
+     strings should be checked for the '/' to detect a potential file
+     system attack.  The length of each input argument must also be 
+     checked as should the value selected from any HTML input lists
+     (it should be an option in the list displayed to the user).
+     
+   * Check arguments passed to operating system functions especially
+     those that talk to the filesystem.  In theory the use of such
+     functions should be avoided.
+     
+   * Check all return codes from system calls.  If an unexpected value
+     is returned it should be logged and the site administrator should
+     be notified.
+     
+   * Write consistency checkign code.  If a variable _should_ only have
+     values in the range 0 . . 2 check that it does.  If it doesn't then
+     log this and display an appropriate error message.
+   
+   * Include lots of logging and write this data to a dedicated logging
+     file.  Specific information that should be logged includes: time 
+     of execution, values provided to the program, invalid arguments or
+     failures in consistency checking, host or IP address from which the
+     error arose.
+     
+   * Make the critical portion of the code as small and simple as 
+     possible.
+     
+   * Read through your code and consider how you might attack it 
+     yourself.  Consider what will happen if the scripts get passed
+     unexpected inputs.
+   
+   * Always use full pathnames for any filename argument, for both
+     commands and data files.
+   
+   * Rather than depending on the current directory, set it yourself.
+   
+   * Test your scripts thoroughly.
+   
+   * Do not create files in world-writeable directories.
+   
+   * Don't place too much faith in the source IP address in the packets
+     that are received since these can be easily faked.
+   
+   * Include some form of load shedding or load limiting in your server
+     to handle cases of excessive load.  This will help to prevent a 
+     "denial of dervice" attack if the server (gracefully) refuses
+     additional requests once a threshold is reached.
+
+<ENDS>
