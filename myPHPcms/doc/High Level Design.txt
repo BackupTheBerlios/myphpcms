@@ -103,6 +103,10 @@ Blah blah !
 
 Blah blah !
 
+5.0	SECURITY ISSUES
+
+Insert brief bullet point summary of points contained in the Coding
+Guidelines in this section.   
 
 App A	Technical notes
 
