@@ -103,7 +103,6 @@ comprise myPHPcms at quite a high level.  The database design and the
 view of each module as seen by the administrators and the users are also
 described.
 
-
 4.1	HTML library
 
 This library allows the creation of properly formatted HTML code on the
@@ -117,7 +116,15 @@ Insert description here.
 
 4.1.2	Database Design
 
-No database access required.
+Not applicable
+
+4.1.2.1	Database tables created by this module
+
+Not applicable
+
+4.1.2.2	Database tables required by this module
+
+Not applicable
 
 4.1.3	Module dependencies
 
@@ -152,11 +159,15 @@ change email addresses and passwords of themselves only.
 
 4.2.2	Database Design
 
+4.2.2.1	Database tables created by this module
+
 myPHPcms_channels:	channel_id's, administrator name, administrator
 			email address, site name, site abbreviation (for
 			cache and file images)
-myPHPcms_modules:	list of modules installed including name, 
-			purpose, author, version
+
+4.2.2.2	Database tables required by this module
+
+myPHPcms_modules
 
 4.2.3	Module dependencies
 
@@ -179,25 +190,15 @@ users.
 This module allows the channel administrators to administer their
 channel.  This includes suspending users, approving postings etc.
 
-
-
 4.3.1	Overview
-
-
-
-
 
 4.3.2	Database Design
 
+4.3.2.1	Database tables created by this module
 
-
-
+4.3.2.2	Database tables required by this module
 
 4.3.3	Module dependencies
-
-
-
-
 
 4.3.4	Administrator View
 
@@ -206,44 +207,22 @@ channel.  This includes suspending users, approving postings etc.
 
 4.3.5	User View
 
-Blah blah !
-
 
 4.4	Diagnostics module
 
-
-
-
-
 4.4.1	Overview
-
-
-
-
-
 
 4.4.2	Database Design
 
+4.4.2.1	Database tables created by this module
 
-
-
+4.4.2.2	Database tables required by this module
 
 4.4.3	Module dependencies
 
-
-
-
-
 4.4.4	Administrator View
 
-
-
-
-
-
 4.4.5	User View
-
-Blah blah !
 
 
 4.5	Installation script
@@ -281,41 +260,26 @@ and get_loaded_extensions() functions.
 
 4.5.2	Database Design
 
-Databases:	needs access to myPHPcms_users table
-		needs access to myPHPcms_groups table
+4.5.2.1	Database tables created by this module
+
+myPHPcms_modules:	list of modules installed including name, 
+			purpose, author, version
+
+4.5.2.2	Database tables required by this module
+
+myPHPcms_users
+myPHPcms_groups
 
 4.5.3	Module dependencies
 
-
-
-
-
-
 4.5.4	Administrator View
-
-
-
-
-
 
 4.5.5	User View
 
 
-
-
-
-
 4.6	CMS module
 
-
-
-
-
 4.6.1	Overview
-
-
-
-
 
 4.6.1.1	Main page display script
 
@@ -353,38 +317,18 @@ the users browser.
 
 4.6.2	Database Design
 
+4.6.2.1	Database tables created by this module
 
-
-
+4.6.2.2	Database tables required by this module
 
 4.6.3	Module dependencies
 
-
-
-
-
-
 4.6.4	Administrator View
-
-
-
-
-
-
 
 4.6.5	User View
 
 
-
-
-
-
-
 4.7	Access logging module
-
-
-
-
 
 4.7.1	Overview
 
@@ -495,39 +439,22 @@ template in the templating system through the use of the HTML library.
 
 4.7.2	Database Design
 
+4.7.2.1	Database tables created by this module
 
+myPHPcms_logging_log:
+myPHPcms_logging_cache:
+myPHPcms_logging_unknown:
 
-
+4.7.2.2	Database tables required by this module
 
 4.7.3	Module dependencies
 
-
-
-
-
-
-
 4.7.4	Administrator View
-
-
-
-
-
 
 4.7.5	User View
 
 
-
-
-
-
-
 4.8	Templating module
-
-
-
-
-
 
 4.8.1	Overview
 
@@ -541,24 +468,13 @@ comprise it.
 
 4.8.2	Database Design
 
+4.8.2.1	Database tables created by this module
 
-
-
-
+4.8.2.2	Database tables required by this module
 
 4.8.3	Module dependencies
 
-
-
-
-
-
 4.8.4	Administrator View
-
-
-
-
-
 
 4.8.5	User View
 
@@ -566,14 +482,7 @@ comprise it.
 * All public channel_id start at 1
 
 
-
-
-
 4.9	User sign-up and log-in module
-
-
-
-
 
 4.9.1	Overview
 
@@ -592,37 +501,21 @@ having to log in again.
 
 4.9.2	Database Design
 
-Database:	table myPHPcms_users
-		table myPHPcms_groups
+4.2.2.1	Database tables created by this module
+
+myPHPcms_users:
+myPHPcms_groups:
+
+4.2.2.2	Database tables required by this module
 
 4.9.3	Module dependencies
 
-
-
-
-
-
 4.9.4	Administrator View
-
-
-
-
-
 
 4.9.5	User View
 
 
-
-
-
-
-
 4.10	Page caching module
-
-
-
-
-
 
 4.10.1	Overview
 
@@ -634,38 +527,18 @@ Database:	table myPHPcms_users
 
 4.10.2	Database Design
 
+4.10.2.1Database tables created by this module
 
-
-
-
+4.10.2.2Database tables required by this module
 
 4.10.3	Modules dependencies
 
-
-
-
-
-
 4.10.4	Administrator View
-
-
-
-
-
 
 4.10.5	User View
 
 
-
-
-
-
-
 4.11	Comments module
-
-
-
-
 
 4.11.1	Overview
 
@@ -678,134 +551,54 @@ they have entered together with other information (date, time, author)
 is entered into the database.  The page is then recreated from the 
 database and is displayed to the user.
 
-
-
-
-
 4.11.2	Database Design
 
+4.11.2.1Database tables created by this module
 
-
-
-
-
+4.11.2.2Database tables required by this module
 
 4.11.3	Module dependencies
 
-
-
-
-
-
 4.11.4	Administrator View
-
-
-
-
-
 
 4.11.5	User View
 
 
-
-
-
-
-
 4.12	Forums module
-
-
-
-
-
 
 4.12.1	Overview
 
-
-
-
-
-
 4.12.2	Database Design
 
+4.12.2.1Database tables created by this module
 
-
-
-
+4.12.2.2Database tables required by this module
 
 4.12.3	Module dependencies
 
-
-
-
-
-
 4.12.4	Administrator View
-
-
-
-
-
 
 4.12.5	User View
 
 
-
-
-
-
-
-
 4.13	Links manager module
-
-
-
-
-
 
 4.13.1	Overview
 
-
-
-
-
-
 4.13.2	Database Design
 
+4.13.2.1Database tables created by this module
 
-
-
-
+4.13.2.2Database tables required by this module
 
 4.13.3	Module dependencies
 
-
-
-
-
-
 4.13.4	Administrator View
-
-
-
-
-
 
 4.13.5	User View
 
 
-
-
-
-
-
-
 4.14	Polls module
-
-
-
-
-
 
 4.14.1	Overview
 
@@ -822,304 +615,124 @@ database and is displayed to the user.
 * Should provide graphical results but not use complex PHP features 
   like GD library as not all servers may support it.
 
-
-
-
-
-
 4.14.2	Database Design
 
+4.14.2.1Database tables created by this module
 
-
-
-
+4.14.2.2Database tables required by this module
 
 4.14.3	Module dependencies
 
-
-
-
-
-
 4.14.4	Administrator View
-
-
-
-
-
 
 4.14.5	User View
 
 
-
-
-
-
- 
 4.15	Download manager module
-
-
-
-
-
 
 4.15.1	Overview
 
-
-
-
-
-
 4.15.2	Database Design
 
+4.15.2.1Database tables created by this module
 
-
-
-
+4.15.2.2Database tables required by this module
 
 4.15.3	Module dependencies
 
-
-
-
-
-
 4.15.4	Administrator View
-
-
-
-
-
 
 4.15.5	User View
 
 
-
-
-
-
-
 4.16	Site search module
-
-
-
-
-
 
 4.16.1	Overview
 
-
-
-
-
-
 4.16.2	Database Design
 
+4.16.2.1Database tables created by this module
 
-
-
-
+4.16.2.2Database tables required by this module
 
 4.16.3	Module dependencies
 
-
-
-
-
-
 4.16.4	Administrator View
-
-
-
-
-
 
 4.16.5	User View
 
 
-
-
-
-
-
 4.17	Eventlogging module
-
-
-
-
-
 
 4.17.1	Overview
 
-
-
-
-
-
 4.17.2	Database Design
 
+4.17.2.1Database tables created by this module
 
-
-
-
+4.17.2.2Database tables required by this module
 
 4.17.3	Module dependencies
 
-
-
-
-
-
 4.17.4	Administrator View
-
-
-
-
-
 
 4.17.5	User View
 
 
-
-
-
-
-
 4.18	Mailing list manager module
-
-
-
-
-
 
 4.18.1	Overview
 
-
-
-
-
-
 4.18.2	Database Design
 
+4.18.2.1Database tables created by this module
 
-
-
-
+4.18.2.2Database tables required by this module
 
 4.18.3	Module dependencies
 
-
-
-
-
-
 4.18.4	Administrator View
-
-
-
-
-
 
 4.18.5	User View
 
 
-
-
-
-
-
 4.19	Banner advert manager module
-
-
-
-
-
 
 4.19.1	Overview
 
-
-
-
-
-
 4.19.2	Database Design
 
+4.19.2.1Database tables created by this module
 
-
-
-
+4.19.2.2Database tables required by this module
 
 4.19.3	Module dependencies
 
-
-
-
-
-
 4.19.4	Administrator View
-
-
-
-
-
 
 4.19.5	User View
 
 
-
-
-
-
-
 4.20	User rating system
-
-
-
-
-
 
 4.20.1	Overview
 
-
-
-
-
-
 4.20.2	Database Design
 
+4.20.2.1Database tables created by this module
 
-
-
-
+4.20.2.2Database tables required by this module
 
 4.20.3	Module dependencies
 
-
-
-
-
-
 4.20.4	Administrator View
 
-
-
-
-
-
 4.20.5	User View
-
-
-
-
-
-
-
 
 
 5.0	DESIGN AND CODING
 
 Blah blah !
-
 
 6.0	SECURITY ISSUES
 
