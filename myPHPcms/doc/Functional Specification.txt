@@ -378,6 +378,8 @@ database due to perhaps a server outage must be handled gracefully.
 * Process should be register-> confirm via email -> login -> logout
 * Username should be email address
 * Username (email address) should be checked or correct format
+* Usernames that have not been verified should be deleted from the
+  database after an elaspsed period eg one month
 * Restrictions on password should be enforced
 * Passwords will be stored in the database in an encrypted form for 
   security
