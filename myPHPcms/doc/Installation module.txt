@@ -25,6 +25,9 @@ myPHPcms High Level Design document
 
 3.0	OVERVIEW
 
+Add:	that this is likely to be designed as a state machine.  List
+	permitted states.
+
 The steps that the installation script carries out are:
 
 1.  Check for presence of a flag indicating that myPHPcms has already
@@ -52,32 +55,32 @@ The steps that the installation script carries out are:
 
 4.0	DATABASE DESIGN
 
-Blah blah !
+None identified at the moment but will need to talk to user module.
 
 
 5.0	SOFTWARE COMPONENTS
 
 The installation script consists of three files:
 
-$SITE_ROOT/admin/install.php
+5.1	$SITE_ROOT/admin/install.php
 
 	Script called by user to install myPHP.  Checks to see if an 
 	existing installation is present.  If so calls upgrade.php 
 	else calls setup.php
 
-$SITE_ROOT/admin/setup.php
+5.2	$SITE_ROOT/admin/setup.php
 
 	Sets up new installation from scratch.
 
-$SITE_ROOT/admin/upgrade.php
+5.3	$SITE_ROOT/admin/upgrade.php
 
 	Upgrades existing installation.
 	
-$SITE_ROOT/admin/db.cfg
+5.4	$SITE_ROOT/admin/db.cfg
 
 	Text file containing database settings.
 
-$SITE_ROOT/admin/libs/lib_setup.php
+5.5	$SITE_ROOT/admin/libs/lib_setup.php
 	
 	Setup library contained within the admin/libs directory.  This
 	will provide all of the functionality for the setup library.
