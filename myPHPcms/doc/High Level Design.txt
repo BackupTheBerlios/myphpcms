@@ -8,18 +8,39 @@ Author: Phil Lee
 
 EXECUTIVE SUMMARY
 
+Blah blah !
+
+
 1.0	SCOPE
 
-Blah blah !
+The document details the design of the myPHPcms at the highest level.
+The Functional Specification document is a list of 'must-have'
+features or behaviours organised into modules and this document 
+outlines how these features will actually be implemented.
+
+No code descriptions can be found in this document.  Details of the
+actual code can be found in the individual Module Detailed Design
+document.  Instead, a list of scripts, their relationship with other
+modules and justification for any decisions taken during the design 
+process are presented.  Additionally a list of database tables and
+their purposes ccan also be found within this document.
+
+This document is designed to be used in conjunction with the Functional
+Specification document when creating the Module Detailed Design 
+documents.  It can also be used as the basis of the technical 
+documentation.
 
 
 2.0	REFERENCE DOCUMENTATION
 
-Blah blah !
+The latest version of the myPHPcms Functional Specification which can
+be found in the 'doc' directory.
+
 
 3.0	SOFTWARE ARCHITECTURE
 
 Blah blah !
+
 
 3.1	HTML library
 
@@ -114,14 +135,17 @@ Blah blah !
 
 Blah blah !
 
+
 4.0	DESIGN AND CODING
 
 Blah blah !
+
 
 5.0	SECURITY ISSUES
 
 Insert brief bullet point summary of points contained in the Coding
 Guidelines in this section.   
+
 
 App A	Technical notes
 
