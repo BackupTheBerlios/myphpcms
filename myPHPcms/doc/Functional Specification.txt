@@ -41,28 +41,27 @@ offers:
 
 	* HTML library
 	* Caching module
-	* Template system
-	* Logging system
-	* User sign-up and authentication library
-	* News submission and display system
-	* Installation procedure
+	* Template module
+	* Access logging module
+	* User sign-up and authentication module
+	* News publication module
+	* Installation scripts
+	* Site admininstration module
+	* Core Content Management System functions (workflow, sign-off)
 
 Additional modules will allow the expansion of the sites capabilities to
 include (but not be limited to):
-
-	* Comprehensive admininstration and reporting functions
-	* Complete Content Management System functions (workflow, 
-	  sign-off etc)
+	
 	* User comments on stories, articles, reviews etc
-	* Forums
-	* Links database
-	* Reviews system
-	* User Polls
-	* Download library
-	* Search function
-	* Calender system
-	* Mailing list manager
-	* Banner advert manager
+	* User forums
+	* Links management module
+	* Reviews module
+	* User Polls module
+	* Download manager module
+	* Site search module
+	* Calender module
+	* Mailing list manager module
+	* Banner advert manager module
 
 All of the above features will be available as a modules.  Most will
 require database access and will comprise several scripts, some of
@@ -135,7 +134,7 @@ also required.
 * include common CSS tags
 * write code formatting routine
 
-7.2	Admin functions
+7.2	Site administration module
 
 * create script to search through admin directory looking for adm_*.php
   files.  Add these to the admin menu when displayed.
@@ -149,31 +148,45 @@ also required.
 * would still need the config.php file to be edited to point to the 
   database
   
-7.4	CMS functions
+7.4	Core CMS module
 
-* complete work-flow and sign-off process
-* single editor, deputy editor and section editors can be defined
+* Registered site users can opt-in as writers
+* Story commissions can be listed to writers only
+* Commissioned stories can marked as taken
+* Writers can work on story on-line using web-form.  Images can be
+  uploaded and are kept with the story.
+* Editor can review stories once writer has released it
+* Editor can preview story as it would appear when published
+* Writer profiles available to editor
+* If a story needs further work, writer should be notified via email
+* If approved by editor story can be scheduled for publication
+* Multiple stories can be queued for publication 
+* Multiple editors can be defined: editor, deputy editor and section
+  editors
+* Editor comments to writer are stored separately
+* Version information for story is also stored
+* Writer profile available with story when published
 
-7.5	User comment functions
+7.5	User comment module
 
 * can be tied to review, news story or feature.
 * stores username, time amd comments posted.
 * also stores IP address
 
-7.6	Forums
+7.6	User forums module
 
 * registered users only can start threads
 * registered users only can reply to these threads
 * thread can searched by poster, date, time, or keyword
 * threads show author, title, replies, views, 
 
-7.7	Links manager
+7.7	Links manager module
 
 * use similar database schema to that used by PHPNuke
 * stores number of times that link has been visited
 * links to logging system to store exit pages
 
-7.8	Logging system
+7.8	Access logging module
 
 * must be able to log all versions of IE and Netscape and most other
   browsers
@@ -183,7 +196,7 @@ also required.
 * must be usuable by both PHP and static HTML pages
 * must be able to store exit pages too
 
-7.9	News system
+7.9	News publication module
 
 * must allow posting of news by registered users
 * email notification to editors that story waiting
@@ -191,11 +204,11 @@ also required.
 * publication date can be set to automate posting
 * links to comments section to allow comments to be posted by users
 
-7.10	Reviews system
+7.10	Reviews publication module
 
 * as for the news system
 
-7.11	Templating system
+7.11	Templating module
 
 * templates can be edited, deleted or modified from web-browser
 * browser allows previewing of templates
@@ -204,7 +217,7 @@ also required.
 * age of templates can be set
 * template system can cope with templates for multiple sites
 
-7.12	User authentication library
+7.12	User authentication module
 
 * Users should be able to register a username and password
 * Restrictions on username and password should be enforced
@@ -220,13 +233,13 @@ also required.
 * Users should be able to reset or apply for new passwords if they
   forget their current one.
 
-7.13	Polls
+7.13	Polls module
 
 * web-based setup of questions and answers
 * historical results available
 * logs IP address to prevent multiple votes
 
-7.14	Caching system
+7.14	Page caching module
 
 * needs to generate static copies of as much of the website as possible
 * templating system does some of this by caching the non-changing page 
@@ -234,24 +247,24 @@ also required.
 * HOWEVER, caching everything into real files when requested by the 
   server would allow the indexing of the site by search engines
   
-7.15	Download library
+7.15	Download manager module
 
 * manages and allows downloads by registered users only
 * keep track of who requested what and when
 * permits logging of most popular download
 
-7.16	Search library
+7.16	Site search module
 
 * allows searching of site by keywords
 * keyword database created on article/story/review/feature basis by
   editor when approval granted for submission
   
-7.17	Calender system
+7.17	Calender module
 
 * allows addition/deletion/modification of events by registered users
 * these are listed in a what's on box on main screen
 
-7.18	Mailing list manager
+7.18	Mailing list manager module
 
 * broadcast only mailing list manager
 * users can opt-in or out from web-page or via email
@@ -261,7 +274,7 @@ also required.
 * must be capable of handling multiple lists
 * archive of sent messages should be made available via web page
 
-7.19	Banner advert manager
+7.19	Banner advert manager module
 
 * system to allow scheduling of banner adds
 * tracks impressions and click-throughs
