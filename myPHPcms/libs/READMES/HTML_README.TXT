@@ -137,16 +137,16 @@ $html=pretty_html($html,$offset);
 
 This will produce the sentance "Here is some text" in a one row by one 
 column table.  Offset specifies the number of tab characters to use to
-indent the text in order to blend it in with other HTML source code when
-viewed on screen.
+indent the text in order to blend it in with other HTML source code 
+when viewed on screen.
 
 
 Notes
 +---+
 
 Although the example above could be coded by hand, large complex pages
-can be very tedious to create.  An alternative is to use the conv_html.php
-tool to convert from HTML to lib_html calls.
+can be very tedious to create.  An alternative is to use the 
+conv_html.php tool to convert from HTML to lib_html calls.
 
 Reference
 +-------+
@@ -155,7 +155,8 @@ Reference
          
          open_html
          ---------
-         Writes the opening HTML tag to signify the start of the document.
+         Writes the opening HTML tag to signify the start of the 
+         document.
          
          EXAMPLE
          
@@ -175,7 +176,8 @@ Reference
    
          open_head
          ---------
-         Writes the <HEAD> tag to indicate the start of the document header.
+         Writes the <HEAD> tag to indicate the start of the document
+         header.
          
          EXAMPLE
          
@@ -184,7 +186,8 @@ Reference
          
          close_head
          ----------
-         Writes the </HEAD> tag to indicate the end of the document header.
+         Writes the </HEAD> tag to indicate the end of the document
+         header.
          
          EXAMPLE
          
@@ -193,17 +196,21 @@ Reference
          
          meta
          ----
-         Writes out the meta tags contained within the head of the document.
-         These have carefully prescribed values and, as such, do not offer as
-         much control as some of the other tags.  Permitted options are:
+         Writes out the meta tags contained within the head of the 
+         document.  These have carefully prescribed values and, as 
+         such, do not offer as much control as some of the other 
+         tags.  Permitted options are:
          
          author       (default="")    "authors name"
 	 description  (default="")    "site description"
-	 expires      (default="")    "expiry date eg Wed, 26 Feb 1997 08:21:57 GMT"
+	 expires      (default="")    "expiry date eg Wed, 26 Feb 
+	                               1997 08:21:57 GMT"
 	 keywords     (default="")    "keywords for search engines"
-	 nocache      (default="")    "anything to make variable non-null"
-	 refresh      (default="")    "time period over which to refresh site content 
-	                               AND site/page URL"
+	 nocache      (default="")    "anything to make variable 
+	                               non-null"
+	 refresh      (default="")    "time period over which to 
+	                               refresh site content AND 
+	                               site/page URL"
 	 robots       (default="all") ""
 	 setcookie    (default="")    ""
 	 target       (default="")    ""
@@ -215,14 +222,15 @@ Reference
          $meta->set('description','Test site');
          $meta->set('nocache','anything');
          $meta->set('refresh','0;URL='http://www.mtb-wales.com'');
-         $meta->set('setcookie','cookievalue=xxx;expires=Wednesday, 21-Oct-98 16:14:21 GMT; path=/');
+         $meta->set('setcookie','cookievalue=xxx;expires=Wednesday,
+                                  21-Oct-98 16:14:21 GMT; path=/');
          $meta->set('target','=_top');
          $html .=$meta->write();
          
          title
          -----
-         Write the page title supplied between the tags.  Must be in the head
-         of the document
+         Write the page title supplied between the tags.  Must be in 
+         the head of the document
                   
          EXAMPLE
          
@@ -234,8 +242,8 @@ Reference
    
          open_body
          ---------
-         Opens the body tag and allows the setting of various parameters.  Typical
-         values are:
+         Opens the body tag and allows the setting of various 
+         parameters.  Typical values are:
          
          alink      (default="")
 	 background (default="")
@@ -288,8 +296,8 @@ Reference
          
          link
          ----
-         Allows the linking of a page to stylesheets or other external resources.
-         Writes out the <LINK> tag.  Only paramater is:
+         Allows the linking of a page to stylesheets or other external 
+         resources.  Writes out the <LINK> tag.  Only paramater is:
          
          css      (default="")
          
@@ -304,8 +312,8 @@ Reference
         text
         ----
         Supplies the closing the tag(s) in the reverse order that they 
-        were supplied to the class.  All tags are returned in upper case.
-        Allowed tags are:
+        were supplied to the class.  All tags are returned in upper 
+        case.  Allowed tags are:
         
         <H1></H1>
 	<H2></H2>
@@ -332,8 +340,8 @@ Reference
 	
 	font_open
 	---------
-	Opens the <font> tag with the appropriate optional parameters.  Allowed
-	parameters are:
+	Opens the <font> tag with the appropriate optional parameters.  
+	Allowed parameters are:
 	
 	color       (default "")
 	bgcolor     (default "")
@@ -358,9 +366,9 @@ Reference
    
         href
         ----
-        Opens the <A HREF=> tag and completes with the supplied link name.
-        The tag is then closed, the link name ($text) is set and then the
-        full tag is closed off.  Parameters:
+        Opens the <A HREF=> tag and completes with the supplied link 
+        name.  The tag is then closed, the link name ($text) is set 
+        and then the full tag is closed off.  Parameters:
         
         link      (default "")
         text      (default "")
@@ -376,8 +384,8 @@ Reference
    
          p
          -
-         Writes out the specified text surrounded by <p> and </p>.  It has
-         two properties:
+         Writes out the specified text surrounded by <p> and </p>.  It
+         has two properties:
          
          align    (default="")
          text     (default="")
@@ -400,8 +408,8 @@ Reference
          
          blockquote
          ----------
-         Writes out a section of text but indents to make it look like a
-         quotation.  Has just one property:
+         Writes out a section of text but indents to make it look like 
+         a quotation.  Has just one property:
          
          text    (default="")
          
@@ -431,8 +439,8 @@ Reference
              
          li
          --
-         Add a text item to the list.  Returns the supplied text surrounded
-         by the <li> and </li> tags
+         Add a text item to the list.  Returns the supplied text 
+         surrounded by the <li> and </li> tags
          
          EXAMPLE
          
@@ -442,8 +450,8 @@ Reference
          
          ul
          --
-         Add a text item to the list.  Returns the supplied text surrounded
-         by the <ul> and </ul> tags
+         Add a text item to the list.  Returns the supplied text 
+         surrounded by the <ul> and </ul> tags
          
          EXAMPLE
          
@@ -476,8 +484,8 @@ Reference
    
         image
         -----
-        Open a complete <IMG> tag with the appropriate attributes.  Allowed
-        attributes are:
+        Open a complete <IMG> tag with the appropriate attributes.  
+        Allowed attributes are:
         
         align
 	alt
@@ -501,8 +509,8 @@ Reference
 	
 	hr
 	--
-	Insert completed <HR> tag complete with attributes.  Permitted attributes
-	are:
+	Insert completed <HR> tag complete with attributes.  Permitted 
+	attributes are:
 	
 	align;
 	noshade;
@@ -680,9 +688,9 @@ Reference
 	type
 	value
 	
-	Not all of these attributes are relevant for all types of input.  In
-	fact, it is the value of the 'input' variable that governs which ones
-	are set and are thus written out.
+	Not all of these attributes are relevant for all types of input.
+	In fact, it is the value of the 'input' variable that governs 
+	which ones are set and are thus written out.
    	
    	EXAMPLE
    	
@@ -718,8 +726,8 @@ Reference
    	
    	option
    	------
-   	Returns the <OPTION></OPTION> tag with the name set and the provided
-   	text included in the tag.  Allowable attributes are:
+   	Returns the <OPTION></OPTION> tag with the name set and the 
+   	provided text included in the tag.  Allowable attributes are:
    	
    	selected
 	text        (default "")
@@ -734,8 +742,8 @@ Reference
    	
    	textarea
    	--------
-   	Creates a text area on a form and displays the optional text when the
-   	control first loads.  Allowable attirbutes:
+   	Creates a text area on a form and displays the optional text 
+   	when the control first loads.  Allowable attributes:
    	
    	cols
 	name
