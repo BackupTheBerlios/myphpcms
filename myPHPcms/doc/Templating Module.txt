@@ -6,7 +6,10 @@ Version 0.1
 
 EXECUTIVE SUMMARY
 
-Blah blah !
+This document describes in detail the Template Module.  It provides 
+information on the design of the module, the database design, the 
+individual scripts, any dependencies that these scripts may have and 
+provides detailed references for each function in each file or library.
 
 1.0	SCOPE
 
@@ -141,6 +144,12 @@ Access to the database.
 
 
 7.0	REFERENCE
+
+This section describes in detail the internal and external functions
+that are available in each of the scripts that make up the Access 
+Logging module.  The functions are grouped together by script name.
+
+7.1	
 
 There are eight main functions in the templating system.  These are:
 

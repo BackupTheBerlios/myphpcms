@@ -6,11 +6,25 @@ Version 0.1
 
 EXECUTIVE SUMMARY
 
-Blah blah !
+This document describes in detail the Access Logging Module.  It
+provides information on the design of the module, the database design,
+the individual scripts, any dependencies that these scripts may have 
+and provides detailed references for each function in each file or 
+library.
 
 1.0	SCOPE
 
-Blah blah !
+This document describes the design and operation of the Access Logging
+module that allows page accesses to the website or channels to logged 
+to a database.  This database can be interogated at any time by the 
+site or channel administrators to determine the numbers and frequncies
+of users, the most popular pages and the most frequently sought web
+pages.
+
+The system is applicable to both PHP scripts and static HTML pages 
+allowing this system to be used to track both dynamic and static web
+sites together with those that mix the two together through the use
+of a static cache of dynamically generated web pages.
 
 
 2.0	REFERENCE DOCUMENTATION
@@ -114,128 +128,202 @@ be reported defined by setting the $timescale to one of the following:
 
 4.0	DATABASE DESIGN
 
-logging_log:
+4.1	logging_log
 
-FIELD       DEFAULT      TYPICALLY
-day         '0'          20010924
-hour        '0'          18
-session_id  'unknown'    e11a0c6e30e09b9f67273fcd75949e51
-user_id     '0'          4
-site_id     '0'          0
-browser     'OTHER'      IE
-ver         '0'          5.5
-platform    'OTHER'      Win
-time        '0'          1001351949
-page        NULL         /dev/bugzilla.php
-ip_address  'unknown'    192.168.7.44
-remote_host 'unresolved' bimble.eurologic.com
-referrer    'unknown'
-exit_page   'unknown'    http://www.phpbuilder.com
+	FIELD       DEFAULT      TYPICALLY
+	day         '0'          20010924
+	hour        '0'          18
+	session_id  'unknown'    e11a0c6e30e09b9f67273fcd75949e51
+	user_id     '0'          4
+	site_id     '0'          0
+	browser     'OTHER'      IE
+	ver         '0'          5.5
+	platform    'OTHER'      Win
+	time        '0'          1001351949
+	page        NULL         /dev/bugzilla.php
+	ip_address  'unknown'    192.168.7.44
+	remote_host 'unresolved' bimble.eurologic.com
+	referrer    'unknown'
+	exit_page   'unknown'    http://www.phpbuilder.com
+
+4.2	logging_cache
 
 Host name and IP address data is stored in the following format in 
 MySQL in table logging_cache:
 
-FIELD       DEFAULT      TYPICALLY
-ip_address  none         192.168.7.24
-host_name   null         diamond.eurologic.com
+	FIELD       DEFAULT      TYPICALLY
+	ip_address  none         192.168.7.24
+	host_name   null         diamond.eurologic.com
+
+4.3	logging_unknown
 
 The user agent string is stored in the following format in the MySQL 
 table logging_unknown
 
-FIELD       DEFAULT      TYPICALLY
-user_agent  None         Mozilla/4.0b2 (Win95; I)*
+	FIELD       DEFAULT      TYPICALLY
+	user_agent  None         Mozilla/4.0b2 (Win95; I)*
 
 
 5.0	SOFTWARE COMPONENTS
 
-The access logging system consists of six files:
+The access logging system consists of the following files:
 
-$SITE_ROOT/admin/adm_statistics.php
-$SITE_ROOT/logging/inc_logger.php
-$SITE_ROOT/logging/gif11.php
-$SITE_ROOT/logging/clear.gif
-$SITE_ROOT/logging/redir.php
-$SITE_ROOT/sql/logging.sql
+5.1	$SITE_ROOT/admin/adm_statistics.php
+
+	This script allows the processing of the data gathered by the
+	logging system.  It is intended to be executed by the site or
+	channel administrators only.
+
+5.2	$SITE_ROOT/logging/inc_logger.php
+
+	This is the code snippet that is required to log access to PHP
+	scripts.  It must be included into the script whose activity is
+	to be logged.
+	
+5.3	$SITE_ROOT/logging/gif11.php
+
+	This is a fake GIF file that static HTML pages can use to allow
+	their pages to be logged by the logging system.  It provides
+	exactly the same information as that provided by the PHP code
+	snippet described above.
+
+5.4 	$SITE_ROOT/logging/clear.gif
+
+	This is a 1 pixel by 1 pixel transparent GIF file that is 
+	echoed back to the users browser by the giff1.php script after 
+	the logging information has been gathered.
+
+5.5	$SITE_ROOT/logging/redir.php
+
+	This script is used to wrap up destination URL's in order that
+	user clicks onto hyperlinks can be tracked.  This script can
+	also be used to track banner advert clicks (if required).
+
+5.6	$SITE_ROOT/sql/logging.sql
+
+	This is the SQL that creates the tables necessary for the 
+	correct operation of the logging system.
+	
+5.7	$SITE_ROOT/lib_browser.php
+
+	This is the library that identifies the browser type and 
+	version, the operating system and the hardware platform from
+	the User Agent string reported by the browser.
 
 
 6.0	DEPENDENCIES
 
-Blah blah !
+This module requires access to the database in order to store the data
+that it collects about the users browser.  In order to identify the 
+users browser this module requires the browser identification library
+lib_browser.php.
 
 
 7.0	REFERENCE
 
-function hourly_requests($link_id, $site_id, $timescale)
+This section describes in detail the internal and external functions
+that are available in each of the scripts that make up the Access 
+Logging module.  The functions are grouped together by script name.
 
-     Lists the number of hits per hour for the given $site_id and 
-     $timescale.
+7.1	adm_statistics.php
 
-function browser_types($link_id, $site_id, $timescale)
+7.1.1	function hourly_requests($link_id, $site_id, $timescale)
 
-     Lists the browser name, vesion, platform and percentage share of 
-     all requests for the specfied $site_id over the specified 
-     $timescale in descending order of popularity.
+	Lists the number of hits per hour for the given $site_id and 
+	$timescale.
 
-function top_pages($link_id, $site_id, $timescale, $max_num)
+7.1.2	function browser_types($link_id, $site_id, $timescale)
 
-     Lists the most frequently requested pages for the site with the 
-     matching $site_id over the time period $timescale in descending
-     order.  Results are limited to $max_num rows of data.
+	Lists the browser name, vesion, platform and percentage share 
+	of all requests for the specfied $site_id over the specified 
+	$timescale in descending order of popularity.
 
-function bottom_pages($link_id, $site_id, $timescale, $max_num)
+7.1.3	function top_pages($link_id, $site_id, $timescale, $max_num)
 
-     Lists the least popular pages for the site matching $site_id over 
-     the time period $timescale.  Results are limited to the $max_num 
-     rows.
+	Lists the most frequently requested pages for the site with the 
+	matching $site_id over the time period $timescale in descending
+	order.  Results are limited to $max_num rows of data.
 
-function total_page_views($link_id, $site_id)
+7.1.4	function bottom_pages($link_id, $site_id, $timescale, $max_num)
 
-     Determines the total number of page requests since the site began
-     logging.
+	Lists the least popular pages for the site matching $site_id 
+	over the time period $timescale.  Results are limited to the 
+	$max_num rows.
 
-function top_referrers($link_id, $site_id, $timescale, $max_num)
+7.1.5	function total_page_views($link_id, $site_id)
 
-     Lists the most common referers for site $site_id over the time 
-     period $timescale.  Results are limited to $max_num rows.  The 
-     returned values are presented as hyperlinks so that they may be 
-     clicked.
+	Determines the total number of page requests since the site 
+	began logging.
 
-function top_hosts($link_id, $site_id, $timescale, $max_num)
+7.1.6	function top_referrers($link_id, $site_id, $timescale, $max_num)
 
-     Lists the most common hosts that request pages for site $site_id 
-     over the time period $timescale.  Results are limited to $max_num 
-     rows.  Where possible the host IP addresses are resolved via a 
-     reverse DNS lookup.  To speed subsequent runs of this query the 
-     host IP addresses and names are cached in the database table 
-     logging_cache.  The returned values are presented as hyperlinks 
-     so that they may be clicked for investigation.
+	Lists the most common referers for site $site_id over the time 
+	period $timescale.  Results are limited to $max_num rows.  The 
+	returned values are presented as hyperlinks so that they may be 
+	clicked.
 
-function searches($link_id, $site_id, $timescale, $max_num)
+7.1.7	function top_hosts($link_id, $site_id, $timescale, $max_num)
 
-     Lists the most common queries that have been executed to find the
-     site.  This information is obtained by searching all referring URLs 
-     for the words 'search' and 'query'.  Results are limited to 
-     $max_num rows.
+	Lists the most common hosts that request pages for site 
+	$site_id over the time period $timescale.  Results are 
+	limited to $max_num rows.  Where possible the host IP 
+	addresses are resolved via a reverse DNS lookup.  To speed 
+	subsequent runs of this query the host IP addresses and names 
+	are cached in the database table logging_cache.  The returned
+	values are presented as hyperlinks so that they may be clicked
+	for investigation.
+
+7.1.8	function searches($link_id, $site_id, $timescale, $max_num)
+
+	Lists the most common queries that have been executed to find 
+	the site.  This information is obtained by searching all 
+	referring URLs for the words 'search' and 'query'.  Results are
+	limited to $max_num rows.
      
-function operating_sys($link_id, $site_id, $timescale, $max_num)
+7.1.8	function operating_sys($link_id, $site_id, $timescale, $max_num)
 
-     Lists the most common operating systems used to access the site 
-     $site_id over the specified time scale $timeperiod.  The number of
-     rows returned is limited to $max_num.
+	Lists the most common operating systems used to access the site
+	$site_id over the specified time scale $timeperiod.  The number
+	of rows returned is limited to $max_num.
 
-function top_entry($link_id, $site_id, $timescale, $max_num)
+7.1.9	function top_entry($link_id, $site_id, $timescale, $max_num)
 
-     Lists the most commonly seen page by visitors when they enter the 
-     site $site_id.  In theory this will be the home page but if enough
-     traffic comes in from a link then it may be the page that has been
-     linked to.  The time period over which the query runs can be set 
-     from the $timescale variable.  The number of rows returned is 
-     defined by the value of the $max_num variable.
+	Lists the most commonly seen page by visitors when they enter 
+	the site $site_id.  In theory this will be the home page but if
+	enough traffic comes in from a link then it may be the page 
+	that has been linked to.  The time period over which the query 
+	runs can be set from the $timescale variable.  The number of 
+	rows returned is defined by the value of the $max_num variable.
 
-function top_exit($link_id, $site_id, $timescale, $max_num)
+7.1.10	function top_exit($link_id, $site_id, $timescale, $max_num)
 
-     Lists the most commonly departed pages from site $site_id to allow
-     the estimation of traffic flows to another site or perhaps an 
-     advert.  The number of rows returned is set by $max_num.
+	Lists the most commonly departed pages from site $site_id to 
+	allow the estimation of traffic flows to another site or 
+	perhaps an advert.  The number of rows returned is set by 
+	$max_num.
+
+7.2	inc_logger.php
+
+	
+	
+7.3	gif11.php
+
+	
+
+7.4 	clear.gif
+
+No functions.	
+
+7.5	redir.php
+
+	
+
+7.6	logging.sql
+
+	
+	
+7.7	lib_browser.php
+
+
 
 <ENDS>
