@@ -1,0 +1,119 @@
+myPHPcms Roadmap
+================
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+This document describes the proposed release schedule for myPHPcms 
+which is a MySQL/PHP based Content Management System.  It details
+the functionality that can be found in each release.  The overall
+functionality of the package is outlined in the myPHPcms Functional
+Specification document.
+
+This schedule is subject to change, particularly in the case of the 
+later releases.
+
+
+1.0	SCOPE
+
+This document describes the release schedule for myPHPcms which is 
+a MySQL/PHP based Content Management System.  It details the 
+functionality that can be found in each release.  The overall
+functionality of the package is outlined in the myPHPcms Functional
+Specification document.
+
+It is anticipated that the initial release of the software will have
+minimal functionality, much less than the 'core' functionality defined
+in the Functional Specification document.  This will be a demonstrator 
+to show that the basic modules will integrate together.
+
+The release schedule will involve the development of 'Alpha' releases
+which contain progressively more functionality and bug fixes for the
+major bugs.  Once all of the functionaility has been incorporated the
+releases will be considered to have moved to 'Beta' status.  This
+phase will be solely concerned with bug fixing.
+
+The 'Beta' release should be stable enough for production use but in
+practice the later Alpha releases could also be used.  Their use in a
+production environment will allow bugs to be identified that have not
+been identified as a result of testing.
+
+It is anticapated that 3 Alpha releases and 3 Beta releases will be
+produced.
+
+
+2.0	REFERENCE DOCUMENTATION
+
+myPHPcms Functional Specification
+myPHPcms High Level Design document
+
+
+3.0	ROADMAP
+
+This section should be read in conjunction with the myPHPcms Functional
+Specfication document.
+
+3.1	Alpha 1 functionality
+
+3.1.1	Templating system
+
+* Templates should be created by hand
+* Templates should be inserted into the database by hand or by a simple 
+  PHP script
+* Dynamically generated HTML should be usuable through the use of the
+  HTML library
+* Multi-site capability is NOT required
+
+3.1.2	HTML library
+
+* The HTML library should support Cascading Style Sheets to level 1 only
+* The code prettier feature is NOT required
+
+3.1.3	Diagnostics module
+
+* All significant events should be logged
+* Basic reporting tools should be available
+
+3.1.3	Access logging module
+
+* The access logging module should support the tracking of page requests,
+  page loading times, exit pages and referrers
+* Basic reporting capability should be included
+
+3.1.4	Installation scripts
+
+* A basic PHP script should create and populate the tables necessary for
+  the correct operation of myPHPcms
+
+3.1.5	User sign-up and login module
+
+* Unregistered users should be able to browse the site
+* Users should be able to register their email address and their choice of 
+  password
+* Duplicate email addresses should be detected
+* Registered users should be recognised when they log back in
+* Rights should be assignable to different groups of users which allow
+  them access to different parts of the website
+
+3.1.6	Content management module
+
+* Permitted users should be able to submit stories for publication
+* Editor should be advised on submission via email that there is story
+  waiting
+* Editor should be able to edit story
+* Editor should be able to reject story
+* Editor should be able to place story in category for publication
+* Editor should be able to specify publication date
+* Story categories should be definable
+
+3.1.5	Caching module
+
+* Static pages should be created once published
+
+
+3.2	Alpha 2 functionality
+
+3.3	Alpha 3 functionality
+

@@ -1,0 +1,36 @@
+myPHPcms TODO
+=============
+
+Version 0.1
+-----------
+
+EXECUTIVE SUMMARY
+
+This document outlines the work that must be undertaken to pull
+together a working basic backend to the MTB-Wales.com site in
+time for it to launch on June 1st.
+
+It is concerned only with the backend of the site, not the HTML
+or graphic design aspects.
+
+1.0	SCOPE
+
+2.0	REFERENCE DOCUMENTS
+
+myPHPcms Roadmap document
+
+3.0	Work to be completed
+
+3.1	Template system
+
+3.2	HTML library
+
+3.3	Diagnostics module
+
+3.4	Installation scripts
+
+3.5	User sign up and log-in
+
+3.6	Content management
+
+3.7	Caching module
