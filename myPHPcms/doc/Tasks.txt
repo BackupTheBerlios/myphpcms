@@ -155,6 +155,9 @@ PROJECT ADMIN
 	Add graphing capability
 	Add session tracking capability for PHP scripts based on 
 	session ID and based on referrer for HTML pages
+	Revise database structure to reflect that used on STM logging
+	Introduce code modifications made to STM logging
+	Use lib_browser from STM logging as is much more verbose
 	Look at how to compact database by removing redundant values
 
 8.0	TEMPLATE MODULE
