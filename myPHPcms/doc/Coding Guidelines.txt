@@ -8,19 +8,151 @@ Author: Phil Lee
 
 EXECUTIVE SUMMARY
 
-Blah blah !
+This document details the coding and formatting conventions that are to
+be followed when writing code for myPHPcms.  The conventions have been
+designed in order to maximise the readability of the code and to make
+it easier to maintain.
+
+The standards have been gleaned from a number of reference documents.
+Sources are detailed in Section 2.0 - Reference Documentation.
+
 
 1.0	SCOPE
 
-Blah blah !
+This is the myPHPcms coding conventions document.  This should assist
+anyone who wants to modify the code or work on active development.
+Anyone who wishes to contribute code must adhere to these guidelines or
+their code will be rejected.
+
+These guidelines will only be modified if the project requirements
+suugest that they should be changed.  They will not be changed 
+arbitrarily.
+
 
 2.0	REFERENCE DOCUMENTATION
 
-Blah blah !
+http://www.phpbuilder.com/columns/nair20011003.php3
+http://mantisbt.sourceforge.net/guidelines.php3
+
 
 3.0	CODING GUIDELINES
 
-Blah blah !
+The following sections detail the coding and formatting requirements for
+the myPHPcms product.  These have been derived from other coding guide-
+lines and have been modified based on experience.  They are set in stone
+unless someone points out a better way of doing things !
+
+3.1	Naming variables
+
+   * Use all lower case
+   * Use _ to separate words eg template_loaded
+   * Use descriptive names including loop variables
+   * Count variables should be prefixed with $count_
+   * Global variables should be prefixed with $global_
+   * Temporary variables should be prefixed with $temp_
+   * Variables passed from forms should be prefixed with $form_
+   * Function parameter variables should be prefixed with $func_
+   * SQL related variables (query strings or result sets) should be
+     prefixed with $sql_
+   
+3.2	Naming functions
+
+   * Use all lower case
+   * Use _ to separate words eg setup_page
+   * Keep function names to 5 words or less
+   * Use prefixes to group like functions eg email_ or output_
+
+3.3	Naming classes
+
+   * Use FirstLetterOfEveryWordIsCapitalised style
+   * Variables that are class objects should be prefixed $class_
+   
+3.4	Naming files
+
+   * Use all lower case
+   * Use _ to separate words eg view_new_bugs.php
+   * Use .php file extensions
+   * Filenames must be less than 32 characters in length
+   * Library files must be prefixed with lib_
+   * SQL creation scripts must be prefixed with sql_
+   * Administration library files must be prefixed with adlib_
+   * Administration modules must be prefxied with admin_
+   * Admin-related library must be prefixed with lib_admin_
+
+3.5	SQL formatting
+
+   * All SQL keywords should be in uppercase
+   * Always assign a query string to a variable eg $sql_query.  Do not
+     create the string in the function call.
+   * Break up SQL queries over multiple lines where it will improve
+     readability of the code.
+   
+3.6	General formatting
+
+   * Use TABS to indent the code.  The size of the TABS doesn't really
+     matter.  Spaces should not be used.
+   * When opening PHP code use the <?php tag.
+   * When cloding PHP code use the ?> tag.
+   * Avoid echo'ing or print'ing HTML to the screen - wherever possible
+     make use of local templates within the templating system unless its
+     absolutely unavoidable.
+
+3.7	Page guidelines
+
+   * The first item should be the standard header containing copyright,
+     license and versioning information
+   * The next iterm should be a comment which describes what the file
+     does.  If it is dependent on other files then these should be
+     mentioned too.
+   * The next item should be the set of standard includes for each file
+   * If access to this page should be logged then the next item should
+     be 'include($site_root/logging/inc_logger.php")'
+   * The next item should then be a call to connect to the database.
+     Database usernames, hosts and passwords should NOT be present in 
+     this file.  All such information should be present in the 
+     admin/config.php file
+   * Logical code for the page should be placed between the markers 
+     limited by "Page code starts here" and "Page code ends here"
+   * Local templates should be created towards the end of the page before
+     they are displayed by the templating system
+
+3.8	Code formatting
+
+   * Paranthesis should be right after a function name eg fred() not
+     fred ()
+   * Paranthesis should have a space after a keyword eg if () not if()
+   * Braces formatting is as illustrated below:
+   
+	for (...) {
+		some PHP code
+	}
+   
+   * if . . . else constructs should be in this format:
+   
+	if (...) {
+		some PHP code
+	} else {
+		some other PHP code
+	}
+
+3.9	Comments
+
+   * The block of text at the top of the page that describes the file
+     function shuold be in this format:
+     
+	// **************************************************
+	// * This file is the main file that calls all other
+	// * files in order to construct the front page
+	// **************************************************
+   * Line comments should be started with //
+   * Line comments should be placed directly above the line in question
+   * The purpose of functions should be described immediately below the
+     function declaration
+
+3.10	Miscellaneous
+
+Nothing to add here yet !
+
 
 4.0	SECURITY ISSUES
 
