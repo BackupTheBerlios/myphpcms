@@ -96,15 +96,15 @@ with this package.
 2.0	REFERENCE DOCUMENTATION
 
 Any relevant web-based articles are listed in the individual module
-specifications contained in Section 6 of this document.
+specifications contained in Section 7 of this document.
 
 
 3.0	HARDWARE REQUIREMENTS
 
 The hardware requirements are modest - any server capable of running
-Apache, MySQL and PHP should be able to run myPHPcms.  However, in 
-order to improve the user experience, the fastest hardware available
-should be used.
+Apache, MySQL and PHP simultaneously should be able to run myPHPcms.  
+However, in order to improve the user experience, the fastest hardware
+available should be used.
 
 
 4.0	SOFTWARE REQUIREMENTS
@@ -113,21 +113,41 @@ Any recent version of Linux (2.2.14 or higher) can be used.  Recent
 versions of Apache (1.3.17 or higher) and MySQL (3.23.27 or higher) are
 also required.
 
+All code will be developed on a machine that has been compiled with a
+standard installation of Apache, PHP and MySQL - no additional modules
+or extra compilation switches will be used.  This will allow myPHPcms 
+to be installed on as many machines as possible.
+
 
 5.0	GENERAL REQUIREMENTS AND ASSUMPTIONS
 
-* Access to database server running MySQL
-* Permission to allow the creation and access to a database on this server
-* Adequate disk space to install the scripts that comprise myPHPcms
-* No detailed knowledge of MySQL or PHP is required to set-up the software
-  as an INSTALL script is provided.
+myPHPcms requires the following:
+
+   * Access to database server running MySQL (either the same machine
+     or on another accessible networked machine)
+   * Permission to allow creation and access a database and tables on
+     this machine
+   * Adequate disk space to install the scripts that comprise myPHPcms
+   * No detailed knowledge of MySQL or PHP is required to set-up myPHPcms
+     the software as an INSTALL script is provided.
 
 
 6.0	SECURITY ISSUES
 
-* All inputs and uploads from users will be checked and invalid inputs
-  will be rejected.  Any suspicious activity will be logged and the
-  site administrator will be notified.
+myPHPcms will be written to be as secure as possible without requiring 
+special configuration to be carried out on the server.  This will 
+allow it to be implemented on as many servers as possible.
+
+In order to achieve this level all known exploits must be prevented.  
+This will require knowledge of the various exploits and the means to 
+their prevention.  A list of measures that must be taken to avoid 
+introducing potential exploits into the code can be found in the High 
+Level Design document.  A more detailed list can be found in the Coding
+Standards document.
+
+Any code that is written by external authors MUST adhere to the coding
+standards otherwise the contributed code will not be accepted into the
+main development tree.
 
 
 7.0	SOFTWARE ENVIRONMENT
