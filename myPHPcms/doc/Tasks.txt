@@ -1,0 +1,91 @@
+myPHPcms task breakdown
+=======================
+
+Version 1.0
+-----------
+
+Author: Phil Lee
+
+This document is just a container for ideas related to the task that 
+need to be completed for myPHPcms.  It shows the major tasks (in 
+capitals) and the sub-tasks that belong to these (in lower case).  
+Eventually these will be defined within the BerliOS task manager 
+module.
+
+The work items are ordered so that the base functionality which would
+be sufficient to run a basic website will be completed if the tasks
+were stepped through sequentially.
+
+DOCUMENTATION
+	Functional Specification document
+	High Level Design document
+	PHP coding standard
+	
+PROJECT ADMIN
+	Define site directory structure
+
+<!-- BASE FUNCTIONALITY -->
+	
+TEMPLATE MODULE
+	Detailed Design document
+	Write administration interface
+	
+HTML LIBRARY
+	Detailed Design document
+	Expand to allow usage of CSS tags
+	Create conv_html library.php
+	Create form to allow entry of raw HTML to conv_html.php
+	
+SITE ADMINISTRATION MODULE
+	Detailed Design document
+	
+INSTALLATION SCRIPTS
+	Detailed Design document
+	
+CORE CMS MODULE
+	Detailed Design document
+
+ACCESS LOGGING MODULE
+	Detailed Design document
+
+NEWS PUBLICATION MODULE
+	Detailed Design document	
+
+PAGE CACHING MODULE
+	Detailed Design document
+
+USER SIGN-UP AND AUTHENTICATION MODULE
+	Detailed Design document
+
+<!-- Additional modules -->
+
+USER COMMENT MODULE
+	Detailed Design document
+	
+USER FORUMS MODULE
+	Detailed Design document
+	
+LINK MANAGER MODULE
+	Detailed Design document
+	
+REVIEW PUBLICATION MODULE
+	Detailed Design document
+	
+USER POLL MODULE
+	Detailed Design document
+	
+DOWNLOAD MANAGER MODULE
+	Detailed Design document
+	
+SITE SEARCH MODULE
+	Detailed Design document
+	
+CALENDER MODULE
+	Detailed Design document
+	
+MAILING LIST MANAGER MODULE
+	Detailed Design document
+	
+BANNER ADVERT MANAGER MODULE
+	Detailed Design document
+	
