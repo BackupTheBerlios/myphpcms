@@ -17,6 +17,13 @@ Files
 				myPHPcms is to be written
 * Templating Module.txt		Detailed design document for Templating
 				module
+* HTML Library.txt		Detailed design document for the HTML
+				library.
+* Access Logging Module.txt	Detailed design document for the Access
+				logging module.
+* Detailed Design template.txt	Template to make the production of 20
+				detailed design documents a little bit
+				easier !
 * README			this file.
 				
 Directories
