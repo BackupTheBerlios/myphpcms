@@ -87,7 +87,8 @@ unless someone points out a better way of doing things !
      create the string in the function call.
    * Break up SQL queries over multiple lines where it will improve
      readability of the code.
-   
+   * All SQL tables should be prefixed with myPHPcms_
+
 3.6	General formatting
 
    * Use TABS to indent the code.  The size of the TABS doesn't really
