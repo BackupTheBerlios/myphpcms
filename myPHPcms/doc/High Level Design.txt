@@ -1,0 +1,103 @@
+myPHPcms High Level Design
+==========================
+
+Version 0.1
+-----------
+
+Author: Phil Lee
+
+EXECUTIVE SUMMARY
+
+1.0	SCOPE
+
+Blah blah !
+
+
+2.0	REFERENCE DOCUMENTATION
+
+Blah blah !
+
+3.0	SOFTWARE ARCHITECTURE
+
+Blah blah !
+
+3.1	HTML library
+
+Blah blah !
+
+3.2	Site administration module
+
+Blah blah !
+
+3.3	Database installation script
+
+Blah blah !
+
+3.4	CMS module
+
+Blah blah !
+
+3.5	User comments module
+
+Blah blah !
+
+3.6	User forums module
+
+Blah blah !
+
+3.7	Links manager module
+
+Blah blah !
+
+3.8	Access logging module
+
+Blah blah !
+
+3.9	Templating module
+
+Blah blah !
+
+3.10	User registration and authentication module
+
+Blah blah !
+
+3.11	Polls module
+
+Blah blah !
+
+3.12	Page caching module
+
+Blah blah !
+
+3.13	Download manager module
+
+Blah blah !
+
+3.14	Site search module
+
+Blah blah !
+
+3.15	Events module
+
+Blah blah !
+
+3.16	Mailing list manager module
+
+Blah blah !
+
+3.17	Banner advert manager module
+
+Blah blah !
+
+3.18	User rating system
+
+Blah blah !
+
+4.0	DESIGN AND CODING
+
+Blah blah !
+
+
+App A	Technical notes
+
+Blah blah (if required)
