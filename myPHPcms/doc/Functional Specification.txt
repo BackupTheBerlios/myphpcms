@@ -230,14 +230,13 @@ database due to perhaps a server outage must be handled gracefully.
 * Channel administrator can disable certain users if required on their
   channel only
 
-
 7.4	Diagnostics module
 
 * Logs all channel activity to individual log files
 * Logs error messages
 * Channel administrators can view error messages
 
-7.5	Overall installation script
+7.5	Installation script
 
 * Installation procedure requires unpacking of archive into a suitable
   directory on the web-server
@@ -295,52 +294,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Whenever registered user logs in who has a role eg editor, moderator etc
   their outstanding tasks are listed
 
-7.7	User comments module
-
-* Users can create comments against news items, stories, reviews etc
-* Only registered user can enter comments
-* Responses must be displayed in threaded manner
-* Number of posts, time/date of last post, number of views are displayed
-  next to comment heading
-* Username and IP address of user that posted is stored in database
-* Administrators can delete comments if required
-* System can handle multiple channels
-
-7.8	User forums module
-
-* Anyone can read the contents of the forum but only registered users
-  can contribute to the disucssion
-* Users can start new threads by posting a new article
-* Users can post articles in reply to existing articles
-* Users can view articles that have been posted
-* Users can view the threads of conversations in the forum
-* Users can view the relationship between articles
-* Administrators can delete posts and threads (if required)
-* Administrators can move posts to different forums
-* Administrators can create topic areas
-* Users are notified by email when replies to there posts are posted
-* Users can use the small images of themselves to accompany their posts
-* Each thread shows the number of posts, number of views and date/time
-  of last post
-* Forum threads can be searched by poster or keyword
-* System can handle multiple channels
-
-7.9	Links manager module
-
-* Users can search for URL's by category
-* Users can search for URL descriptions by keyword
-* Users can submit new URL's into directory
-* Administrators can delete old or broken links
-* Users can report broken links
-* Links open in new window
-* Opening of link is stored in logging system as exit page
-* Administrators are notified of new link submission
-* Links not displayed in database unless admin has approved it
-* Number of visits to given link is stored
-* Users can look at the most popular links
-* System can handle multiple channels
-
-7.10	Access logging module
+7.7	Access logging module
 
 * Must be able to detect all common browsers
 * Must be able to detect search engine spiders
@@ -373,7 +327,7 @@ database due to perhaps a server outage must be handled gracefully.
   popular, top referers, top exit pages, top search queries etc
 * System can handle multiple channel
 
-7.11	Templating module
+7.8	Templating module
 
 * Administrators can create/edit/delete templates
 * Templates are specific to different channels
@@ -390,7 +344,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Templates variables contained with HTML like tags so that WYSIWYG
   HTML editors can create them
 
-7.12	User sign-up and login module
+7.9	User sign-up and login module
 
 * Users should be able to register a username and password
 * Process should be register-> confirm via email -> login -> logout
@@ -423,32 +377,7 @@ database due to perhaps a server outage must be handled gracefully.
 * Users fall into 1 of 3 groups: visitor, contributor, editor.  Appointed
   by overall channel admin.
 
-7.13	Polls module
-
-* Channel administrator can enter single question and up to 5 possible 
-  answers.
-* Channel administrator can set when poll will be active and when it 
-  will close
-* Only registered users can vote in the polls
-* If unregistered user attempts to vote they are directed to login page
-* Users can vote on each poll once per day only - user_id and timestamp
-  is stored.
-* All users can view current results of poll
-* All users can view results of previous polls
-* Results can be viewed as graphs or as tables of numbers
-* Graphical representation should be through use of multiple instances
-  of a small GIF image rather than using the PHP GD library as not all
-  servers may support this.
-* Once voter has voted (optional) they can be shown the results so far
-* Results should present total number of votes cast and breakdown by 
-  number of votes together with precentages rounded to 2 decimal places.
-  Should also state when poll was opened and how much time remains 
-  before the poll closes.
-* Script should not be tripped up by "divison by zero" errors as a 
-  result of no votes being cast.
-* System can handle multiple channels
-
-7.14	Page caching module
+7.10	Page caching module
 
 * The page caching system should be an integral part of the templating
   system and should not be created as a standalone feature although it
@@ -483,6 +412,76 @@ database due to perhaps a server outage must be handled gracefully.
   <BASE HREF="http://www.mtb-wales.com"> tag in cached file.
 * To prevent two visitors reusing the same cached file at the same 
   time use flock().
+
+7.11	User comments module
+
+* Users can create comments against news items, stories, reviews etc
+* Only registered user can enter comments
+* Responses must be displayed in threaded manner
+* Number of posts, time/date of last post, number of views are displayed
+  next to comment heading
+* Username and IP address of user that posted is stored in database
+* Administrators can delete comments if required
+* System can handle multiple channels
+
+7.12	Forums module
+
+* Anyone can read the contents of the forum but only registered users
+  can contribute to the disucssion
+* Users can start new threads by posting a new article
+* Users can post articles in reply to existing articles
+* Users can view articles that have been posted
+* Users can view the threads of conversations in the forum
+* Users can view the relationship between articles
+* Administrators can delete posts and threads (if required)
+* Administrators can move posts to different forums
+* Administrators can create topic areas
+* Users are notified by email when replies to there posts are posted
+* Users can use the small images of themselves to accompany their posts
+* Each thread shows the number of posts, number of views and date/time
+  of last post
+* Forum threads can be searched by poster or keyword
+* System can handle multiple channels
+
+7.13	Links manager module
+
+* Users can search for URL's by category
+* Users can search for URL descriptions by keyword
+* Users can submit new URL's into directory
+* Administrators can delete old or broken links
+* Users can report broken links
+* Links open in new window
+* Opening of link is stored in logging system as exit page
+* Administrators are notified of new link submission
+* Links not displayed in database unless admin has approved it
+* Number of visits to given link is stored
+* Users can look at the most popular links
+* System can handle multiple channels
+
+7.14	Polls module
+
+* Channel administrator can enter single question and up to 5 possible 
+  answers.
+* Channel administrator can set when poll will be active and when it 
+  will close
+* Only registered users can vote in the polls
+* If unregistered user attempts to vote they are directed to login page
+* Users can vote on each poll once per day only - user_id and timestamp
+  is stored.
+* All users can view current results of poll
+* All users can view results of previous polls
+* Results can be viewed as graphs or as tables of numbers
+* Graphical representation should be through use of multiple instances
+  of a small GIF image rather than using the PHP GD library as not all
+  servers may support this.
+* Once voter has voted (optional) they can be shown the results so far
+* Results should present total number of votes cast and breakdown by 
+  number of votes together with precentages rounded to 2 decimal places.
+  Should also state when poll was opened and how much time remains 
+  before the poll closes.
+* Script should not be tripped up by "divison by zero" errors as a 
+  result of no votes being cast.
+* System can handle multiple channels
   
 7.15	Download manager module
 
