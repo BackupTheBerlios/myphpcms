@@ -38,7 +38,18 @@ from a web interface.  Any HTML that needs to be generated on-the-fly
 can be created using an HTML generation library included and documented
 with this package.
 
-Add information on basic functionality.
+>>> Add information on basic functionality.  Likely to be:
+
+* html library
+* caching
+* template system
+* logging system
+* installation procedure
+
+>>> Outline basic site features necessary to engender a felling of '
+    community' amongst users
+    
+>>>> Define workflow for CMS system
 
 2.0	REFERENCE DOCUMENTATION
 
@@ -53,17 +64,17 @@ should be used.
 
 4.0	SOFTWARE REQUIREMENTS
 
-Any recent version of Linux (2.2.14 or higher) can be used.  A recent
-vesion of Apache (1.3.17 or higher) and MySQL (3.23.27 or higher) are
+Any recent version of Linux (2.2.14 or higher) can be used.  Recent
+versions of Apache (1.3.17 or higher) and MySQL (3.23.27 or higher) are
 also required.
 
 5.0	GENERAL REQUIREMENTS AND ASSUMPTIONS
 
-Access to database server running MySQL
-Permission to allow the creation and access to a database on this server
-Adequate disk space to install the scripts that comprise myPHPcms
-No detailed knowledge of MySQL or PHP is required to set-up the software
-as an INSTALL script is provided.
+* Access to database server running MySQL
+* Permission to allow the creation and access to a database on this server
+* Adequate disk space to install the scripts that comprise myPHPcms
+* No detailed knowledge of MySQL or PHP is required to set-up the software
+  as an INSTALL script is provided.
 
 6.0	SOFTWARE ENVIRONMENT
 
@@ -71,9 +82,140 @@ as an INSTALL script is provided.
 * Define directory structure
 * INSTALL script to create SQL tables and set permissions
 
+6.1	HTML library
+
+* create form to allow entry of HTML to convert
+* create form to display PHP required to create specified HTML
+* write library to convert HTML into PHP calls
+* include common CSS tags
+* write code formatting routine
+
+6.2	Admin functions
+
+* create script to search through admin directory looking for adm_*.php
+  files.  Add these to the admin menu when displayed.
+
+6.3	Database installation script
+
+* write script to create and setup default MySQL database.  Base it on
+  the installation script used by phpWebSite
+  
+6.4	CMS functions
+
+6.5	User comment functions
+
+* can be tied to review, news story or feature.
+* stores username, time amd comments posted.
+* also stores IP address
+
+6.6	Forums
+
+* registered users only can start threads
+* registered users only can reply to these threads
+* thread can searched by poster, date, time, or keyword
+* threads show author, title, replies, views, 
+
+6.7	Links manager
+
+* use similar database schema to that used by PHPNuke
+* stores number of times that link has been visited
+* links to logging system to store exit pages
+
+6.8	Logging system
+
+* must be able to log all versions of IE and Netscape and most other
+  browsers
+* needs to be able to determine the version and platform
+* would be nice if it could get screen resolution as well
+* all date to be stored in database
+* must be usuable by both PHP and static HTML pages
+* must be able to store exit pages too
+
+6.9	News system
+
+* must allow posting of news by registered users.
+* email notification to editors that story waiting
+* once approved story is posted
+* publication date can be set to automate posting
+* links to comments section to allow comments to be posted by users
+
+6.10	Reviews system
+
+* as for the news system
+
+6.11	Templating system
+
+* templates can be edited, deleted or modified from web-browser
+* browser allows previewing of templates
+* templates stored in session file so that they can be called back out
+  without hitting the database
+* age of templates can be set
+* template system can cope with templates for multiple sites
+
+6.12	User authentication library
+
+* allows user to sign up
+* allows users to recover lost passwords
+* allows users to chnage passwords
+* collects basica information about the users
+* simple method of checking whether user logged in required on each page
+
+6.13	Polls
+
+* web-based setup of questions and answers
+* historical results available
+* logs IP address to prevent multiple votes
+
+6.14	Caching system
+
+* needs to generate static copies of as much of the website as possible
+* templating system does some of this by caching the non-chnging page layout
+  stuff and this could be extended
+* HOWEVER, caching everything into real files when requested by the server
+  would allow the indexing of the site by search engines
+  
+6.15	Download library
+
+* manages and allows downloads by registered users only
+* keep track of who requested what and when
+* permits logging of most popular download
+
+6.16	Search library
+
+* allows searching of site by keywords
+* keyword database created on article/story/review/feature basis by
+  editor when approval granted for submission
+  
+6.17	Calender system
+
+* allows addition/deletion/modification of events by registered users
+* these are listed in a what's on box on main screen
+
+6.18	Mailing list manager
+
+* broadcast only mailing list manager
+* users can opt-in or out from web-page or via email
+* users can select whether to recieve HTML or text emails
+* newsletters created within web-browser, previewed and then scheduled for
+  sending
+* must be capable of handling multiple lists
+* archive of sent messages should be made available via web page
+
+6.19	Banner advert manager
+
+* system to allow scheduling of banner adds
+* tracks impressions and click-throughs
+* automatically emails client with their statistics
+* clients can buy and number of impressions.  When close to running out
+  sent email reminder
+
+
 7.0	PERFORMANCE
 
 * Moderately detailed description of templating and caching system
+* overall site esigned to minimise number of database hits
+* almost all content is generated and stored statically unless it is
+  needed on a regular basis
 
 APP A	TECHNICAL NOTES
 
