@@ -179,7 +179,17 @@ Needs:	access to the user sign-up and login functions
 
 4.4	CMS module
 
-Blah blah !
+4.4.1	Page display modules
+
+When run this script checks for the presence of the cookie that 
+indicates the user is registered on the site.  If the cookie is found,
+then it retrieves the users name from the database and creates a 
+temporary template contain the users name and a short welcome message.
+Otherwise the temporary template contains a box for the user to log in 
+or register.  The module then connects to the database, pulls out the 
+latest story headlines and counts the number of comments for each 
+story within the database.  This data is then fed into the templating 
+system in order to create the final HTML.
 
 4.5	User comments module
 
