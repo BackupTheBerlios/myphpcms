@@ -1,0 +1,23 @@
+myPHPcms Release Schedule
+=========================
+
+This document details the stages in the release cycle of myPHPcms and
+defines the amount of functionality that each release will have.
+
+In order to move from one release to the next all defects relating to
+that release must be closed.  There is no time pressure on the release
+schedule so obvious defects will not shipped with the software.
+
+Release	Module			Functionality
+-------	------			-------------
+Alpha 1
+
+Alpha 2
+
+Alpha 3
+
+Beta 1
+
+Beta 2
+
+Beta 3
