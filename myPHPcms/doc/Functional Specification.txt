@@ -72,7 +72,6 @@ include (but not be limited to):
 	* Events module
 	* Mailing list manager module
 	* Banner advert manager module
-	* User article reviews
 
 All of the above features will be available as a modules.  Most will
 require database access and will comprise several scripts, some of
@@ -81,7 +80,7 @@ of users.  The installation of the relavent database tables and the
 location of the scripts into the correct directories will all be taken
 care of automatically by an install script.
 
-Some Content Management Ssystems mix the logical code with the code
+Some Content Management Systems mix the logical code with the code
 that handles the presentation of the site to the user which makes
 modifying the default site design very difficult.  It also makes fixing
 software errors diifcult as the code is very convuluted.  Others have
